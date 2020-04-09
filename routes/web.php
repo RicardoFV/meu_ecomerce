@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+// rota de cadastro de parceiro
+Route::get('/parceiro','ParceiroController@index');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
