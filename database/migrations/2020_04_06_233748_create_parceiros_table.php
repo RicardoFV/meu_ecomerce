@@ -24,6 +24,8 @@ class CreateParceirosTable extends Migration
             $table->string('localidade');
             $table->string('uf');
             $table->string('email');
+            $table->string('telefone');
+            $table->string('celular');
             // tipo de parceiro
             $table->string('tipo');
             // nesse tipo documento sera armazenado (CPF ou CNPJ)
