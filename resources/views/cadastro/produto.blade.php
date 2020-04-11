@@ -38,7 +38,7 @@
             </div>
 
             <div class="col-auto">
-                <label for="imagem">IMAGEM:</label>
+                <label for="imagem" class="pb-3">IMAGEM:</label>
                 <input type="file" id="imagem" name="imagem" class="form-control-file">
             </div>
 

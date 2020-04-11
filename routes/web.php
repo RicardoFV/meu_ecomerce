@@ -19,6 +19,8 @@ Route::get('/', function () {
 
 // rota de cadastro de parceiro
 Route::get('/parceiro','ParceiroController@index');
+// rota de cadastro de parceiro
+Route::post('/parceiro/cadastrar','ParceiroController@cadastrar')->name('parceiro.cadastrar');
 
 // rota de cadastro do produto
 Route::get('/produto','ProdutoController@index');

@@ -18,7 +18,8 @@
 
     <hr>
 
-    <form>
+    <form method="post" action="{{route('parceiro.cadastrar')}}">
+        @Csrf
         <div class="form-row">
 
             <div class="col-3">
@@ -32,8 +33,8 @@
             <div class="col-3">
                 <label for="tipo">TIPO:</label>
                 <select name="tipo" id="tipo" class="form-control">
-                    <option value="">Fisica</option>
-                    <option value="">Juridica</option>
+                    <option value="1">Fisica</option>
+                    <option value="2">Juridica</option>
                 </select>
             </div>
 
@@ -44,7 +45,7 @@
 
             <div class="col-auto">
                 <label for="cep">CEP:</label>
-                <input type="text" class="form-control" id="meu_cep" name="meu_cep" placeholder="Cep">
+                <input type="text" class="form-control" id="cep" name="cep" placeholder="Cep">
             </div>
 
             <div class="col-auto">
@@ -91,22 +92,22 @@
     // inicio do codigo jquery
     $(document).ready(function(){
        // no momento que sai do campo 
-        $('body').on('blur','#meu_cep', function(){
-            let meu_cep = $('#meu_cep').val()
+        $('body').on('blur','#cep', function(){
+            let cep = $('#cep').val()
 
             // verifica se o que esta dentro esta vazio, e outras verificações
-            if(meu_cep == ''){
+            if(cep == ''){
                 // coloca a mensagem 
                 alert('não pode ser vazio')
-            }if(meu_cep.length <8){
+            }if(cep.length <8){
                 alert('dados insuficientes ')
-            }if(meu_cep.length >8){
+            }if(cep.length >8){
                 alert('Cep incorreto ')
             }else{
                 // faz a requisição 
                 $.ajax({
                 type:'get',
-                url:'https://viacep.com.br/ws/'+meu_cep+'/json/',
+                url:'https://viacep.com.br/ws/'+cep+'/json/',
                 dataType:'json', 
                 success:function(resposta){
                     if(resposta.erro == true){
