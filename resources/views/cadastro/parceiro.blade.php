@@ -15,14 +15,6 @@
         </div>
     </div>
 
-    <form action="">
-        <div class="form-row">
-            <div class="col-sn-3">
-                <label for="meu_cep">Digite o cep:</label>
-                <input type="text" class="form-control" name="meu_cep" id="meu_cep" placeholder="Digite o cep">     
-            </div>   
-        </div>
-    </form>
 
     <hr>
 
@@ -52,7 +44,7 @@
 
             <div class="col-auto">
                 <label for="cep">CEP:</label>
-                <input type="text" class="form-control" id="cep" name="cep" placeholder="Cep">
+                <input type="text" class="form-control" id="meu_cep" name="meu_cep" placeholder="Cep">
             </div>
 
             <div class="col-auto">
@@ -98,23 +90,43 @@
 <script>
     // inicio do codigo jquery
     $(document).ready(function(){
-       
+       // no momento que sai do campo 
         $('body').on('blur','#meu_cep', function(){
             let meu_cep = $('#meu_cep').val()
 
-            
-
-            $.ajax({
+            // verifica se o que esta dentro esta vazio, e outras verificações
+            if(meu_cep == ''){
+                // coloca a mensagem 
+                alert('não pode ser vazio')
+            }if(meu_cep.length <8){
+                alert('dados insuficientes ')
+            }if(meu_cep.length >8){
+                alert('Cep incorreto ')
+            }else{
+                // faz a requisição 
+                $.ajax({
                 type:'get',
                 url:'https://viacep.com.br/ws/'+meu_cep+'/json/',
                 dataType:'json', 
                 success:function(resposta){
-                    console.log(resposta)
+                    if(resposta.erro == true){
+                        alert('Cep incorreto ')
+                    }else {
+                        // coloca os dados nas variaveis 
+                        //$('#meu_cep').val(resposta.cep)
+                        $('#logradouro').val(resposta.logradouro)
+                        $('#complemento').val(resposta.complemento)
+                        $('#bairro').val(resposta.bairro)
+                        $('#localidade').val(resposta.localidade)
+                        $('#uf').val(resposta.uf)
+                    }
+                   
                 },
                 error:function(erro){
                     console.log(erro)
                 }
             })
+            } 
            
         })
 
