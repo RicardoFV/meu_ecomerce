@@ -17,10 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// rota de cadastro de parceiro
+// rota de tela cadastro de parceiro
 Route::get('/parceiro','ParceiroController@index');
+// rota de tela cadastro de parceiro
+Route::get('/parceiro/listar','ParceiroController@listar')->name('parceiro.listar');
+
 // rota de cadastro de parceiro
 Route::post('/parceiro/cadastrar','ParceiroController@cadastrar')->name('parceiro.cadastrar');
+
 
 // rota de cadastro do produto
 Route::get('/produto','ProdutoController@index');
