@@ -5,10 +5,10 @@
 <div class="container">
     <div class="jumbotron jumbotron-fluid text-center">
         <div class="container">
-            <h1 class="display-4">Produto</h1>
+            <h2 class="display-6">Produto</h2>
         </div>
     </div>
-
+    <hr>
     <form>
         <div class="form-row">
 
@@ -43,7 +43,7 @@
             </div>
 
         </div>
-        <hr>
+        
 
         <button class="btn btn-success btn-block mt-3">Cadastrar</button>
     </form>

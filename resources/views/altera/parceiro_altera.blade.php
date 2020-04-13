@@ -25,70 +25,70 @@
     @endif
     <hr>
 
-    <form method="post" action="{{route('parceiro.cadastrar')}}">
+    <form method="post" action="{{ action('ParceiroController@atualizar', $parceiro->id) }}" method="POST">
         @Csrf
         <div class="form-row">
 
             <div class="col-3">
                 <label for="nome">NOME:</label>
-                <input type="text" class="form-control" id="nome" value="{{old('nome')}}" name="nome" placeholder="Nome">
+                <input type="text" class="form-control" id="nome" value="{{$parceiro->nome}}" name="nome" placeholder="Nome">
             </div>
             <div class="col-3">
                 <label for="email">E-MAIL:</label>
-                <input type="email" class="form-control" id="email" value="{{old('email')}}" name="email" placeholder="E-mail">
+                <input type="email" class="form-control" id="email" value="{{$parceiro->email}}" name="email" placeholder="E-mail">
             </div>
             <div class="col-3">
                 <label for="tipo">TIPO:</label>
                 <select name="tipo" id="tipo" class="form-control">
-                    <option value="fisica">Fisica</option>
-                    <option value="juridica">Juridica</option>
+                    <option value="fisica" <?=($parceiro->tipo =='fisica')?'selected':''?> >Fisica</option>
+                    <option value="juridica" <?=($parceiro->tipo =='juridica')?'selected':''?> >Juridica</option>
                 </select>
             </div>
 
             <div class="col-3">
                 <label for="tipo_documento">CPF/CNPJ:</label>
-                <input type="text" class="form-control" value="{{old('tipo_documento')}}" id="tipo_documento" name="tipo_documento" placeholder="CPF/CNPJ">
+                <input type="text" class="form-control" value="{{$parceiro->tipo_documento}}" id="tipo_documento" name="tipo_documento" placeholder="CPF/CNPJ">
             </div>
 
             <div class="col-auto">
                 <label for="cep">CEP:</label>
-                <input type="text" class="form-control" value="{{old('cep')}}" id="cep" name="cep" placeholder="Cep">
+                <input type="text" class="form-control" value="{{$parceiro->cep}}" id="cep" name="cep" placeholder="Cep">
             </div>
 
             <div class="col-auto">
                 <label for="logradouro">LOGRADOURO:</label>
-                <input type="text" id="logradouro" value="{{old('logradouro')}}" name="logradouro" class="form-control" placeholder="logradouro">
+                <input type="text" id="logradouro" value="{{$parceiro->logradouro}}" name="logradouro" class="form-control" placeholder="logradouro">
             </div>
             <div class="col-auto">
                 <label for="complemento">COMPLEMENTO:</label>
-                <input type="text" id="complemento" name="complemento" value="{{old('complemento')}}" class="form-control" placeholder="Complemento">
+                <input type="text" id="complemento" name="complemento" value="{{$parceiro->complemento}}" class="form-control" placeholder="Complemento">
             </div>
 
             <div class="col-auto">
                 <label for="bairro">BAIROO:</label>
-                <input type="text" id="bairro" name="bairro" value="{{old('bairro')}}" class="form-control" placeholder="Bairro">
+                <input type="text" id="bairro" name="bairro" value="{{$parceiro->bairro}}" class="form-control" placeholder="Bairro">
             </div>
             <div class="col-auto">
                 <label for="localidade">LOCALIDADE:</label>
-                <input type="text" id="localidade" name="localidade" value="{{old('localidade')}}" class="form-control" placeholder="Localidade">
+                <input type="text" id="localidade" name="localidade" value="{{$parceiro->localidade}}" class="form-control" placeholder="Localidade">
             </div>
 
             <div class="col-auto">
                 <label for="uf">UF:</label>
-                <input type="text" id="uf" name="uf" value="{{old('uf')}}" class="form-control" placeholder="Uf">
+                <input type="text" id="uf" name="uf" value="{{$parceiro->uf}}" class="form-control" placeholder="Uf">
             </div>
             <div class="col-auto">
                 <label for="telefone">TELEFONE:</label>
-                <input type="text" id="telefone" name="telefone" value="{{old('telefone')}}" class="form-control" placeholder="Telefone">
+                <input type="text" id="telefone" name="telefone" value="{{$parceiro->telefone}}" class="form-control" placeholder="Telefone">
             </div>
             <div class="col-auto">
                 <label for="celular">CELULAR:</label>
-                <input type="text" id="celular" name="celular" value="{{old('celular')}}" class="form-control" placeholder="Celular">
+                <input type="text" id="celular" name="celular" value="{{$parceiro->celular}}" class="form-control" placeholder="Celular">
             </div>
         </div>
         
     
-        <button class="btn btn-success btn-block mt-3">Cadastrar</button>
+        <button class="btn btn-success btn-block mt-3">Atualizar</button>
     </form>
 
 </div>

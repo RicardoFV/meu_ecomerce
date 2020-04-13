@@ -17,14 +17,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// ************************************* ROTA DE PARCEIRO ****************************************
+
 // rota de tela cadastro de parceiro
 Route::get('/parceiro','ParceiroController@index');
-// rota de tela cadastro de parceiro
-Route::get('/parceiro/listar','ParceiroController@listar')->name('parceiro.listar');
 
 // rota de cadastro de parceiro
 Route::post('/parceiro/cadastrar','ParceiroController@cadastrar')->name('parceiro.cadastrar');
 
+// rota de atualiza de parceiro
+Route::post('/parceiro/atualizar/{id}','ParceiroController@atualizar')->name('parceiro.atualizar');
+
+// rota que lista as informações do parceiro
+Route::get('/parceiro/listar','ParceiroController@listar')->name('parceiro.listar');
+
+// rota que faz a busca de um parceiro especifico
+Route::get('/parceiro/consultar/{id}','ParceiroController@consultar')->name('parceiro.consultar');
+
+// rota que faz a deleção  de um parceiro especifico
+Route::get('/parceiro/deletar/{id}','ParceiroController@deletar')->name('parceiro.deletar');
+
+
+// ************************************* ROTA DE PRODUTO ****************************************
 
 // rota de cadastro do produto
 Route::get('/produto','ProdutoController@index');

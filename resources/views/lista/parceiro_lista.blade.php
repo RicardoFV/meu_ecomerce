@@ -1,10 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
+        <!-- função criada para fazer deleção -->
+        <script type="text/javascript">
+
+        // função responsavel por deletar 
+        function deletar(url){
+            if(window.confirm('Deseja realmente remover este parceiro ?')){
+                window.location = url
+            }
+        }
+
+        </script>
+
     <div class="container">
         <div class="jumbotron jumbotron-fluid text-center">
-                <h1 class="display-4">Parceiro</h1>
+                <h2 class="display-6">Parceiro</h2>
         </div>
+
+        <!-- mensagem de sucesso-->
+        @if(session('mensagem'))
+            <div class="alert alert-success">
+                <p>{{session('mensagem')}}</p>
+            </div>
+        @endif
 
         <table class="table">
             <thead>
@@ -26,8 +45,12 @@
                     <td>{{$parceiro->telefone}}</td>
                     <td>{{$parceiro->celular}}</td>
                     <td>
-                        <a href="">Atualizar</a>
-                        <a href="">Excluir</a>
+                        <a href="{{action('ParceiroController@consultar',$parceiro->id )}}" class="btn btn-info btn-sm mr-2">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <a href="#" class="btn btn-danger btn-sm" onclick="deletar('{{ action("ParceiroController@deletar", $parceiro->id) }}');">
+                            <i class="far fa-trash-alt"></i>
+                        </a>
                     </td>
                 </tr>
                 @endforeach
@@ -36,6 +59,8 @@
 
     </div>
 
-   
+
 
 @endsection
+
+
