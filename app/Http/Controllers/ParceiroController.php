@@ -3,104 +3,41 @@
 namespace App\Http\Controllers;
 
 use App\Parceiro;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\ParceiroFormRequest;
 
-class ParceiroController extends Controller
-{
+class ParceiroController extends Controller {
+    
+    private $parceiro;
+
+
+    public function __construct() {
+        $this->parceiro = new Parceiro();
+    }
     // criação da controler com as informaçoes do parceiro
     // carrega a tela de cadastro do parceiro
-    public function index()
-    {
+    public function index() {
         return view('cadastro.parceiro');
     }
+
     // metodo de cadastro
-    public function cadastrar(Request $request)
-    {
+    public function cadastrar(ParceiroFormRequest $request) {
         // recebendo as informaçoes
-        $dados = $request->all();
-        // faz a validação
-        $validacao = Validator::make(
-            [ // campos que serão validados
-                'nome' => $dados['nome'],
-                'email' => $dados['email'],
-                'tipo_documento' => $dados['tipo_documento'],
-                'cep' => $dados['cep'],
-                'logradouro' => $dados['logradouro'],
-                'complemento' => $dados['complemento'],
-                'bairro' => $dados['bairro'],
-                'localidade' => $dados['localidade'],
-                'uf' => $dados['uf'],
-                'telefone' => $dados['telefone'],
-                'celular' => $dados['celular'],
-            ],
-            [ // que tipo de informações serão validados
-                'nome' => 'required|min:3|max:255',
-                'email' => 'required',
-                'tipo_documento' => 'required',
-                'cep' => 'required',
-                'logradouro' => 'required',
-                'complemento' => 'required',
-                'bairro' => 'required',
-                'localidade' => 'required',
-                'uf' => 'required',
-                'telefone' => 'required|min:10|max:11',
-                'celular' => 'required|min:10',
-            ],
-            [ // mensagens em português
-                'nome.required' => 'O campo :attribute é obrigatório',
-                'nome.min' => 'O campo :attribute não permite menos de 3 caracteres',
-                'nome.max' => 'O campo :attribute não permite mais de 255 caracteres',
-                'email.required' => 'O campo :attribute é obrigatório',
-                'tipo_documento.required' => 'O campo :attribute é obrigatório',
-                'cep.required' => 'O campo :attribute é obrigatório',
-                'logradouro.required' => 'O campo :attribute é obrigatório',
-                'complemento.required' => 'O campo :attribute é obrigatório',
-                'bairro.required' => 'O campo :attribute é obrigatório',
-                'localidade.required' => 'O campo :attribute é obrigatório',
-                'uf.required' => 'O campo :attribute é obrigatório',
-                'telefone.required' => 'O campo :attribute é obrigatório',
-                'telefone.min' => 'O campo :attribute não permite menos de 10 caracteres',
-                'telefone.max' => 'O campo :attribute não permite mais de 11 caracteres',
-                'celular.required' => 'O campo :attribute é obrigatório',
-                'celular.min' => 'O campo :attribute não permite menos de 10 caracteres',
-            ]
-        );
-
-        // verifica se esta tudo certo
-        if ($validacao->fails()) {
-            // redireciona para a tela de cadastro
-            return redirect()->action('ParceiroController@index')
-                ->withErrors($validacao)
-                ->withInput();
-        } else {
-            // instanciando o objeto
-            $parceiro = new Parceiro();
-            // passando para o objeto
-            $parceiro->nome = $dados['nome'];
-            $parceiro->email = $dados['email'];
-            $parceiro->tipo = $dados['tipo'];
-            $parceiro->tipo_documento = $dados['tipo_documento'];
-            $parceiro->cep = $dados['cep'];
-            $parceiro->logradouro = $dados['logradouro'];
-            $parceiro->complemento = $dados['complemento'];
-            $parceiro->bairro = $dados['bairro'];
-            $parceiro->localidade = $dados['localidade'];
-            $parceiro->uf = $dados['uf'];
-            $parceiro->telefone = $dados['telefone'];
-            $parceiro->celular = $dados['celular'];
-
-            // salva no banco
-            $parceiro->save();
-
+        $dadosForm = $request->all();
+        // instanciando o objeto
+        $inserir = Parceiro::create($dadosForm);
+        //faz a verificação se foi inserido corretamente
+        if ($inserir) {
             // redireciona para a tela de cadastro
             return redirect()->action('ParceiroController@listar')->with('mensagem', 'Parceiro cadastrado com Sucesso !');
+        } else {
+            return redirect()->action('ParceiroController@index')
+                            ->withErrors($dadosForm)
+                            ->withInput();
         }
-
     }
+
     // função que faz a consulta no banco
-    public function consultar($id)
-    {
+    public function consultar($id) {
         // consulta o parceiro
         $parceiro = Parceiro::find($id);
         // faz a verificação
@@ -113,91 +50,27 @@ class ParceiroController extends Controller
             ]);
         }
     }
+
     // metodo que faz a atualização
-    public function atualizar(Request $request, $id)
-    {
-        // recebendo as informaçoes
-        $dados = $request->all();
-        // faz a validação
-        $validacao = Validator::make(
-            [ // campos que serão validados
-                'nome' => $dados['nome'],
-                'email' => $dados['email'],
-                'tipo_documento' => $dados['tipo_documento'],
-                'cep' => $dados['cep'],
-                'logradouro' => $dados['logradouro'],
-                'complemento' => $dados['complemento'],
-                'bairro' => $dados['bairro'],
-                'localidade' => $dados['localidade'],
-                'uf' => $dados['uf'],
-                'telefone' => $dados['telefone'],
-                'celular' => $dados['celular'],
-            ],
-            [ // que tipo de informações serão validados
-                'nome' => 'required|min:3|max:255',
-                'email' => 'required',
-                'tipo_documento' => 'required',
-                'cep' => 'required',
-                'logradouro' => 'required',
-                'complemento' => 'required',
-                'bairro' => 'required',
-                'localidade' => 'required',
-                'uf' => 'required',
-                'telefone' => 'required|min:10|max:11',
-                'celular' => 'required|min:10',
-            ],
-            [ // mensagens em português
-                'nome.required' => 'O campo :attribute é obrigatório',
-                'nome.min' => 'O campo :attribute não permite menos de 3 caracteres',
-                'nome.max' => 'O campo :attribute não permite mais de 255 caracteres',
-                'email.required' => 'O campo :attribute é obrigatório',
-                'tipo_documento.required' => 'O campo :attribute é obrigatório',
-                'cep.required' => 'O campo :attribute é obrigatório',
-                'logradouro.required' => 'O campo :attribute é obrigatório',
-                'complemento.required' => 'O campo :attribute é obrigatório',
-                'bairro.required' => 'O campo :attribute é obrigatório',
-                'localidade.required' => 'O campo :attribute é obrigatório',
-                'uf.required' => 'O campo :attribute é obrigatório',
-                'telefone.required' => 'O campo :attribute é obrigatório',
-                'telefone.min' => 'O campo :attribute não permite menos de 10 caracteres',
-                'telefone.max' => 'O campo :attribute não permite mais de 11 caracteres',
-                'celular.required' => 'O campo :attribute é obrigatório',
-                'celular.min' => 'O campo :attribute não permite menos de 10 caracteres',
-            ]
-        );
-
-        // verifica se esta tudo certo
-        if ($validacao->fails()) {
-            // redireciona para a tela de cadastro
-            return redirect()->action('ParceiroController@atualizar')
-                ->withErrors($validacao);
-        } else {
-            // instanciando o objeto
-            $parceiro = Parceiro::find($id);
-            // passando para o objeto
-            $parceiro->nome = $dados['nome'];
-            $parceiro->email = $dados['email'];
-            $parceiro->tipo = $dados['tipo'];
-            $parceiro->tipo_documento = $dados['tipo_documento'];
-            $parceiro->cep = $dados['cep'];
-            $parceiro->logradouro = $dados['logradouro'];
-            $parceiro->complemento = $dados['complemento'];
-            $parceiro->bairro = $dados['bairro'];
-            $parceiro->localidade = $dados['localidade'];
-            $parceiro->uf = $dados['uf'];
-            $parceiro->telefone = $dados['telefone'];
-            $parceiro->celular = $dados['celular'];
-
-            // salva no banco
-            $parceiro->save();
-
+    protected function atualizar(ParceiroFormRequest $request, $id) {
+        /// recebe as informações 
+        $dadosForm = $request->all();
+        // faz a busca por id
+        $this->parceiro = $this->parceiro->find($id);
+        //faz a atualização
+        $atualizar = $this->parceiro->update($dadosForm);
+        //faz a verificação se foi atualizado corretamente
+        if ($atualizar) {
             // redireciona para a tela de cadastro
             return redirect()->action('ParceiroController@listar')->with('mensagem', 'Parceiro Alterado com Sucesso !');
+        } else {
+            return redirect()->action('ParceiroController@index')
+                            ->withErrors($dadosForm)
+                            ->withInput();
         }
     }
 
-    public function deletar($id)
-    {
+    public function deletar($id) {
         // consulta o parceiro
         $parceiro = Parceiro::find($id);
         // deleta o parceiro 
@@ -207,10 +80,10 @@ class ParceiroController extends Controller
     }
 
     // lista os dados do parceiro
-    public function listar()
-    { // lista as informações
+    public function listar() { // lista as informações
         $parceiros = Parceiro::all();
         // retorna as informaçoes
         return view('lista.parceiro_lista', compact('parceiros'));
     }
+
 }

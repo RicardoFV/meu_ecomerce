@@ -15,7 +15,7 @@
 
     <div class="container">
         <div class="jumbotron jumbotron-fluid text-center">
-                <h2 class="display-6">Parceiro</h2>
+                <h2 class="display-6">Meus Parceiros</h2>
         </div>
 
         <!-- mensagem de sucesso-->
