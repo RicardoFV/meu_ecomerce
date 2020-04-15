@@ -9,7 +9,6 @@ class ParceiroController extends Controller {
     
     private $parceiro;
 
-
     public function __construct() {
         $this->parceiro = new Parceiro();
     }
@@ -64,9 +63,9 @@ class ParceiroController extends Controller {
             // redireciona para a tela de cadastro
             return redirect()->action('ParceiroController@listar')->with('mensagem', 'Parceiro Alterado com Sucesso !');
         } else {
+            // se deu errado , volta a tela de cadastro
             return redirect()->action('ParceiroController@index')
-                            ->withErrors($dadosForm)
-                            ->withInput();
+                            ->withErrors($dadosForm);
         }
     }
 

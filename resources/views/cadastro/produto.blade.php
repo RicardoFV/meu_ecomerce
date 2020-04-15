@@ -5,11 +5,12 @@
 <div class="container">
     <div class="jumbotron jumbotron-fluid text-center">
         <div class="container">
-            <h2 class="display-6">Produto</h2>
+            <h2 class="display-6">Novo Produto</h2>
         </div>
     </div>
     <hr>
-    <form>
+    <form enctype="multipart/form-data" method="post" action="{{ route('produto.cadastrar') }}">
+        @Csrf
         <div class="form-row">
 
             <div class="col-3">
@@ -18,10 +19,14 @@
             </div>
             <div class="col-3">
                 <label for="id_parceiro">PARCEIRO:</label>
+                
                 <select name="id_parceiro" id="id_parceiro" class="form-control">
-                    <option value="">Fisica</option>
-                    <option value="">Juridica</option>
+                    <option value="">Selecione</option>
+                    @foreach($parceiros as $parceiro)
+                        <option value="{{$parceiro->id }}">{{$parceiro->nome }}</option>
+                    @endforeach
                 </select>
+                
             </div>
             <div class="col-auto">
                 <label for="cep">QUANTIDADE:</label>

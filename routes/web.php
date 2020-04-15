@@ -43,6 +43,9 @@ Route::get('/parceiro/deletar/{id}','ParceiroController@deletar')->name('parceir
 // rota de cadastro do produto
 Route::get('/produto','ProdutoController@index');
 
+// rota de cadastro de produto , rota que salva
+Route::post('/produto/cadastrar', 'ProdutoController@cadastrar')->name('produto.cadastrar');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
