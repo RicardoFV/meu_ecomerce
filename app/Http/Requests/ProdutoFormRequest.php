@@ -21,10 +21,29 @@ class ProdutoFormRequest extends FormRequest
      *
      * @return array
      */
+    // criando as validaçoes 
     public function rules()
     {
         return [
-            //
+            'imagem' => 'required|max:5000',
+            'descricao' => 'required|min:10|max:255',
+            'quantidade' =>'required',
+            'parceiro_id'=>'required',
+            'preco' =>'required'
+        ];
+    }
+    // colocando as mensagems em portugues 
+    public function messages() {
+        return [
+            'parceiro_id.required' =>'O campo Parceiro é obrigatório',
+            'preco.required' =>'O campo :attribute é obrigatório',
+            'quantidade.required'=>'O campo :attribute é obrigatório', 
+            'descricao.required'=>'O campo :attribute é obrigatório',
+            'descricao.min'=>'O campo :atrribute não permite menos de 10 digitos',
+            'descricao.max'=>'O campo :attribute não permite mais de 255 digitos',
+            'imagem.required'=>'O campo :attribute é obrigatório', 
+            'imagem.max'=>'O campo :attribute não permite arquivos maiores que 5 Megas',
+            //'imagem.mimes'=>'O campo :attribute só permite arquivos no formato JPG'
         ];
     }
 }

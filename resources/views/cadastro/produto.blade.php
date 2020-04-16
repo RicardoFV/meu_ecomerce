@@ -8,6 +8,16 @@
             <h2 class="display-6">Novo Produto</h2>
         </div>
     </div>
+    <!-- colocando a mensagem de erro -->
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <hr>
     <form enctype="multipart/form-data" method="post" action="{{ route('produto.cadastrar') }}">
         @Csrf
@@ -19,14 +29,14 @@
             </div>
             <div class="col-3">
                 <label for="id_parceiro">PARCEIRO:</label>
-                
-                <select name="id_parceiro" id="id_parceiro" class="form-control">
+
+                <select name="parceiro_id" id="parceiro_id" class="form-control">
                     <option value="">Selecione</option>
                     @foreach($parceiros as $parceiro)
-                        <option value="{{$parceiro->id }}">{{$parceiro->nome }}</option>
+                    <option value="{{$parceiro->id }}">{{$parceiro->nome }}</option>
                     @endforeach
                 </select>
-                
+
             </div>
             <div class="col-auto">
                 <label for="cep">QUANTIDADE:</label>
@@ -39,16 +49,16 @@
             </div>
             <div class="col-3">
                 <label for="descricao">DESCRIÇÃO:</label>
-                <textarea class="form-control" id="descricao" id="descricao" rows="2"></textarea>
+                <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição">
             </div>
 
             <div class="col-auto">
-                <label for="imagem" class="pb-3">IMAGEM:</label>
+                <label for="imagens" class="">IMAGEM:</label>
                 <input type="file" id="imagem" name="imagem" class="form-control-file">
             </div>
 
         </div>
-        
+
 
         <button class="btn btn-success btn-block mt-3">Cadastrar</button>
     </form>

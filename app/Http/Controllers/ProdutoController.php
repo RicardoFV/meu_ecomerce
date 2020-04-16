@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use App\Parceiro;
+use App\Produto;
+use App\Http\Requests\ProdutoFormRequest;
 
 class ProdutoController extends Controller {
 
@@ -16,29 +16,35 @@ class ProdutoController extends Controller {
         return view('cadastro.produto', ['parceiros' => $parceiros]);
     }
 
-    public function cadastrar(Request $request) {
-        //defino o valor padrão da variavel que contem o nome do arquivo
-        $nomeArquivo = null;
-
-        // verifica o arquivo , se foi enviado e se ele existe
-        if ($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
-            // Define um aleatório para o arquivo baseado no timestamps atual
-            $name = uniqid(date('HisYmd'));
-            // recupera a extensão do arquivo
-            $extensao = $request->imagem->extension();
-            //define o nome final 
-            $nomeArquivo = "{$name}.{$extensao}";
+    public function cadastrar(ProdutoFormRequest $request) {
+        // verifica se tem o arquivo
+        if($request->hasFile('imagem') && $request->file('imagem')->isValid()){
+            // pega o nome do arquivo 
+            $nomeArquivoAtual = $request->file('imagem')->getClientOriginalName();
+            // pega a extensão do arquivo 
+            $extensaoAqeuivo = $request->file('imagem')->extension();
+            // faz o novo nome do arquivo
+            $novoNome = "{$nomeArquivoAtual}.{$extensaoAqeuivo}";
             // faz o upload
-            $upload = $request->imagem->storeAs('imagens', $nomeArquivo);
-            // Se tiver funcionado o arquivo foi armazenado em storage/app/public/imagens/nomedinamicoarquivo.extensao
-            if(!$upload){
-                return redirect()
-                        ->back()
-                        ->with('error', 'Falha ao fazer upload')
-                        ->withInput();
-            }else {
-                echo $upload;
-            }
+            $upload = $request->file('imagem')->storeAs('imagens', $novoNome);
+            // caso de certo o uploud
+            if($upload){
+                // faz a inserção dos dados no banco.
+                $inserir = Produto::create([
+                    'nome'=>$request->input('nome'),
+                    'descricao'=>$request->input('descricao'), 
+                    'preco'=>$request->input('preco'),
+                    'quantidade'=>$request->input('quantidade'),
+                    'parceiro_id'=>$request->input('parceiro_id'),
+                    'imagem'=>$upload  // pega o caminho do arquivo
+                ]);
+                // verifica se deu certo a inserção
+                if($inserir){
+                    return redirect()->action('ProdutoController@index');
+                }else {
+                    echo 'erro';
+                }
+            }    
         }
     }
 
