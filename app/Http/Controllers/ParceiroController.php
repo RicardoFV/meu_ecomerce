@@ -75,7 +75,8 @@ class ParceiroController extends Controller {
         // deleta o parceiro 
         $parceiro->delete();
         // redireciona para a tela de cadastro
-        return redirect()->action('ParceiroController@listar')->with('mensagem', 'Parceiro Deletado com Sucesso !');
+        return redirect()->action('ParceiroController@listar')
+                ->with('mensagem', 'Parceiro Deletado com Sucesso !');
     }
 
     // lista os dados do parceiro

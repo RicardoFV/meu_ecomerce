@@ -46,6 +46,9 @@ Route::get('/produto','ProdutoController@index');
 // rota de cadastro de produto , rota que salva
 Route::post('/produto/cadastrar', 'ProdutoController@cadastrar')->name('produto.cadastrar');
 
+// roto que retorna o lista de produtos
+Route::get('/produto/listar', 'ProdutoController@listar')->name('produto.listar');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -49,11 +49,15 @@
             </div>
             <div class="col-3">
                 <label for="descricao">DESCRIÇÃO:</label>
-                <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição">
+                <textarea name="descricao" id="descricao" wrap="hard" class="form-control" cols="25" rows="3" placeholder="Digite a descrição do Produto">
+
+                </textarea>
+        
             </div>
 
             <div class="col-auto">
                 <label for="imagens" class="">IMAGEM:</label>
+                
                 <input type="file" id="imagem" name="imagem" class="form-control-file">
             </div>
 

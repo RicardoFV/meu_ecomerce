@@ -25,7 +25,7 @@ class ProdutoFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'imagem' => 'required|max:5000',
+            'imagem' => 'required|max:5000|image|mimes:jpeg',
             'descricao' => 'required|min:10|max:255',
             'quantidade' =>'required',
             'parceiro_id'=>'required',
@@ -43,7 +43,7 @@ class ProdutoFormRequest extends FormRequest
             'descricao.max'=>'O campo :attribute não permite mais de 255 digitos',
             'imagem.required'=>'O campo :attribute é obrigatório', 
             'imagem.max'=>'O campo :attribute não permite arquivos maiores que 5 Megas',
-            //'imagem.mimes'=>'O campo :attribute só permite arquivos no formato JPG'
+            'imagem.mimes'=>'O campo :attribute só permite arquivos no formato JPG e JPEG'
         ];
     }
 }

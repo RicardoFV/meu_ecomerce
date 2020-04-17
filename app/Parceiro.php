@@ -11,5 +11,5 @@ class Parceiro extends Model {
         'nome', 'email', 'tipo_documento', 'tipo','cep', 'logradouro', 'complemento',
         'bairro','localidade','uf', 'telefone', 'celular'
     ];
-
+   
 }
