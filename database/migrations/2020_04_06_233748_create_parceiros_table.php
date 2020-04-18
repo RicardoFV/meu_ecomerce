@@ -30,6 +30,8 @@ class CreateParceirosTable extends Migration
             $table->string('tipo');
             // nesse tipo documento sera armazenado (CPF ou CNPJ)
             $table->string('tipo_documento');
+            //esse campo e responsavel por dizer que esta ativo ou não (1 ativo 0 inivativo)
+            $table->string('ativo');
             $table->timestamps();
         });
     }

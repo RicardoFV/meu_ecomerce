@@ -20,6 +20,8 @@ class CreateProdutosTable extends Migration
             $table->decimal('preco', 10, 2)->default(0);
             $table->integer('quantidade');
             $table->string('imagem');
+            //esse campo e responsavel por dizer que esta ativo ou não (1 ativo 0 inivativo)
+            $table->string('ativo');
             $table->integer('parceiro_id')->unsigned();
             $table->foreign('parceiro_id')->references('id')->on('parceiros');
             $table->timestamps();

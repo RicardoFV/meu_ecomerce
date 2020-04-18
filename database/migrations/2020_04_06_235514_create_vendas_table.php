@@ -16,7 +16,10 @@ class CreateVendasTable extends Migration
         Schema::create('vendas', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('parceiro_id')->unsigned();
+            // vinculo de usuario com a venda
+            $table->integer('usuario_id')->unsigned();
             $table->foreign('parceiro_id')->references('id')->on('parceiros');
+            $table->foreign('usuario_id')->references('id')->on('users');
             $table->timestamps();
            
         });
