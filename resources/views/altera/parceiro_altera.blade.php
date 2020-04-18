@@ -11,7 +11,7 @@
 @section('content')
 <div class="container">
     <div class="jumbotron jumbotron-fluid text-center">
-            <h2 class="display-6">Parceiro</h2>
+            <h2 class="display-6">Atualizar Parceiro</h2>
     </div>
     <!-- colocando a mensagem de erro -->
     @if ($errors->any())

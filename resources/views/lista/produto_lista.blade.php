@@ -49,8 +49,12 @@
                     <td>{{$produto->nomeProduto }}</td>
                     <td>{{$produto->quantidade}}</td>
                     <td>
-                        <a href="">Editar</a>
-                        <a href="">Excluir</a>
+                        <a href="{{action('ProdutoController@consultar', $produto->id)}}" class="btn-info btn-sm mr-2">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <a href="" class="btn-danger btn-sm">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
                     </td>
                 </tr>
             @endforeach

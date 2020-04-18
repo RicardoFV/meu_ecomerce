@@ -49,6 +49,12 @@ Route::post('/produto/cadastrar', 'ProdutoController@cadastrar')->name('produto.
 // roto que retorna o lista de produtos
 Route::get('/produto/listar', 'ProdutoController@listar')->name('produto.listar');
 
+// rota que fazer a consulta do produto 
+Route::get('/produto/consultar/{id}', 'ProdutoController@consultar')->name('produto.consultar');
+
+// rota que faz a atualização
+Route::post('/produto/atualizar/{id}', 'ProdutoController@atualizar')->name('produto.atualizar');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

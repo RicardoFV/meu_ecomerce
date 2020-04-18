@@ -39,7 +39,7 @@ class ProdutoFormRequest extends FormRequest
             'preco.required' =>'O campo :attribute é obrigatório',
             'quantidade.required'=>'O campo :attribute é obrigatório', 
             'descricao.required'=>'O campo :attribute é obrigatório',
-            'descricao.min'=>'O campo :atrribute não permite menos de 10 digitos',
+            'descricao.min'=>'O campo :attribute não permite menos de 10 digitos',
             'descricao.max'=>'O campo :attribute não permite mais de 255 digitos',
             'imagem.required'=>'O campo :attribute é obrigatório', 
             'imagem.max'=>'O campo :attribute não permite arquivos maiores que 5 Megas',

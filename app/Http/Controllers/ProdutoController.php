@@ -43,21 +43,36 @@ class ProdutoController extends Controller {
                 // verifica se deu certo a inserção
                 if ($inserir) {
                     return redirect()->action('ProdutoController@listar')
-                            ->with('mensagem', 'Produto cadastrado com sucesso !');
+                                    ->with('mensagem', 'Produto cadastrado com sucesso !');
                 } else {
-                    return 'erro';
+                    return redirect()->action('ProdutoController@index')
+                                    ->withErrors($request->all())->withInput();
                 }
             }
         }
     }
+
     public function atualizar() {
         
     }
-    
-    public function consultar() {
-        
+
+    public function consultar($id) {
+        // faz a consulta com base no id e fazendo um join com parceiros
+        $produto = Produto::find($id);
+        // chamo o parceiro
+        $parceiros = Parceiro::where('tipo', 'juridica')->get();
+      
+        // verifica o se tem o produto
+        if (empty($produto) || empty($parceiros)) {
+            return 'Produto não existe';
+        } else {                     // quando o nome é igual , pode colocar assim
+            return view('altera.produto_altera')->with([
+                        'produto' => $produto,
+                        'parceiros' => $parceiros,
+            ]);
+        }
     }
-    
+
     public function deletar() {
         
     }
@@ -65,9 +80,9 @@ class ProdutoController extends Controller {
     public function listar() {
         // faz um select fazendo um relacinamento entre produtos e parceiros 
         // retorna todos os produtos com base no id send iguak ao parceiros
-       $produtos = DB::table('produtos')
-                ->join('parceiros', 'produtos.parceiro_id','=', 'parceiros.id')
-                ->select('produtos.*' , 'parceiros.nome as nomeProduto')->get();
+        $produtos = DB::table('produtos')
+                        ->join('parceiros', 'produtos.parceiro_id', '=', 'parceiros.id')
+                        ->select('produtos.*', 'parceiros.nome as nomeProduto')->get();
         // retorna o dados 
         return view('lista.produto_lista')->with('produtos', $produtos);
     }

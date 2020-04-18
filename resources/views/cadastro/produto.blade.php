@@ -25,32 +25,32 @@
 
             <div class="col-3">
                 <label for="nome">NOME:</label>
-                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
+                <input type="text" class="form-control" id="nome" value="{{old('nome')}}" name="nome" placeholder="Nome">
             </div>
             <div class="col-3">
-                <label for="id_parceiro">PARCEIRO:</label>
+                <label for="parceiro_id">PARCEIRO:</label>
 
                 <select name="parceiro_id" id="parceiro_id" class="form-control">
                     <option value="">Selecione</option>
                     @foreach($parceiros as $parceiro)
-                    <option value="{{$parceiro->id }}">{{$parceiro->nome }}</option>
+                    <option value="{{$parceiro->id}}">{{$parceiro->nome }}</option>
                     @endforeach
-                </select>
+                </select> 
 
             </div>
             <div class="col-auto">
                 <label for="cep">QUANTIDADE:</label>
-                <input type="text" class="form-control" id="quantidade" name="quantidade" placeholder="Quantidade">
+                <input type="text" class="form-control" value="{{old('quantidade')}}" id="quantidade" name="quantidade" placeholder="Quantidade">
             </div>
 
             <div class="col-3">
                 <label for="preco">PREÇO:</label>
-                <input type="text" class="form-control" id="preco" name="preco" placeholder="Preço">
+                <input type="text" class="form-control" id="preco" value="{{old('preco')}}" name="preco" placeholder="Preço">
             </div>
             <div class="col-3">
                 <label for="descricao">DESCRIÇÃO:</label>
-                <textarea name="descricao" id="descricao" wrap="hard" class="form-control" cols="25" rows="3" placeholder="Digite a descrição do Produto">
-
+                <textarea name="descricao" id="descricao" wrap="hard"  class="form-control" cols="25" rows="3" placeholder="Digite a descrição do Produto">
+                    {{old('descricao')}}
                 </textarea>
         
             </div>
