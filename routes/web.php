@@ -55,6 +55,9 @@ Route::get('/produto/consultar/{id}', 'ProdutoController@consultar')->name('prod
 // rota que faz a atualização
 Route::post('/produto/atualizar/{id}', 'ProdutoController@atualizar')->name('produto.atualizar');
 
+// rota que faz a deleçao do produto 
+Route::get('/produto/deletar/{id}', 'ProdutoController@deletar')->name('produto.deletar');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

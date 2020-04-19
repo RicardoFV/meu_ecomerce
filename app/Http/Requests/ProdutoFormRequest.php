@@ -25,7 +25,8 @@ class ProdutoFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'imagem' => 'required|max:5000|image|mimes:jpeg',
+            'ativo'=>'required',
+            'imagem' => 'max:5000|image|mimes:jpeg',
             'descricao' => 'required|min:10|max:255',
             'quantidade' =>'required',
             'parceiro_id'=>'required',

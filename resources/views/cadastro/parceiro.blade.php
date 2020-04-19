@@ -28,7 +28,8 @@
     <form method="post" action="{{route('parceiro.cadastrar')}}">
         @Csrf
         <div class="form-row">
-
+            <!-- campo responsavel por dizer que o cadastro esta ativo ou não -->
+            <input type="hidden" id="ativo" name="ativo" value="1">
             <div class="col-3">
                 <label for="nome">NOME:</label>
                 <input type="text" class="form-control" id="nome" value="{{old('nome')}}" name="nome" placeholder="Nome">

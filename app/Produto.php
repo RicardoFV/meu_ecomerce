@@ -8,11 +8,13 @@ class Produto extends Model
 {
     //campos que serão inseridos
     protected $fillable = [
+        'ativo',
         'nome', 
         'descricao',
         'preco',
         'quantidade',
         'parceiro_id',
-        'imagem'
+        'imagem',
+        
     ];
 }

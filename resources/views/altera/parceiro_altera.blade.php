@@ -28,7 +28,8 @@
     <form method="post" action="{{ action('ParceiroController@atualizar', $parceiro->id) }}" method="POST">
         @Csrf
         <div class="form-row">
-
+            <!-- campo responsavel por dizer que o cadastro esta ativo ou não -->
+            <input type="hidden" id="ativo" name="ativo" value="{{$parceiro->ativo}}">
             <div class="col-3">
                 <label for="nome">NOME:</label>
                 <input type="text" class="form-control" id="nome" value="{{$parceiro->nome}}" name="nome" placeholder="Nome">

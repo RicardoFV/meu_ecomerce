@@ -23,6 +23,7 @@ class ParceiroFormRequest extends FormRequest {
     public function rules() {
         return [
             // que tipo de informações serão validados
+            'ativo' => 'required',
             'nome' => 'required|min:3|max:255',
             'email' => 'required',
             'tipo_documento' => 'required',

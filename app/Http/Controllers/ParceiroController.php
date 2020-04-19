@@ -69,19 +69,29 @@ class ParceiroController extends Controller {
         }
     }
 
+    // no deletar vamos usar uma exclusão logica 
     public function deletar($id) {
         // consulta o parceiro
         $parceiro = Parceiro::find($id);
-        // deleta o parceiro 
-        $parceiro->delete();
-        // redireciona para a tela de cadastro
+        // altera o campo ativo para 0
+        $parceiro->ativo = 0;
+        // excluir recebe a atividade de excluir
+        $excluir = $parceiro->push();
+        // verifica se deu certo
+        if($excluir){
+             // redireciona para a tela de cadastro
         return redirect()->action('ParceiroController@listar')
-                ->with('mensagem', 'Parceiro Deletado com Sucesso !');
+                ->with('mensagem', 'Parceiro desativado com Sucesso !');
+        }else{
+             // redireciona para a tela de cadastro
+        return redirect()->action('ParceiroController@listar')
+                ->with('errror', 'Parceiro não pode ser removido !');
+        }    
     }
 
     // lista os dados do parceiro
-    public function listar() { // lista as informações
-        $parceiros = Parceiro::all();
+    public function listar() { // lista as informações , todos os ativos
+        $parceiros = Parceiro::where('ativo',1)->get();
         // retorna as informaçoes
         return view('lista.parceiro_lista', compact('parceiros'));
     }

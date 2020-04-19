@@ -6,9 +6,9 @@
 
 // função responsavel por deletar 
     function deletar(url) {
-        if (window.confirm('Deseja realmente remover este Produto ?')) {
-            window.location = url
-        }
+    if (window.confirm('Deseja realmente remover este Produto ?')) {
+    window.location = url
+    }
     }
 
 </script>
@@ -23,7 +23,14 @@
     <div class="alert alert-success">
         <p>{{session('mensagem')}}</p>
     </div>
+    
+    <!-- mensagem de erro-->
+    @elseif(session('erro'))
+    <div class="alert alert-danger">
+        <p>{{session('erro')}}</p>
+    </div>
     @endif
+    
 
     <table class="table">
         <thead>
@@ -39,24 +46,25 @@
         </thead>
         <tbody>
             @foreach($produtos as $produto)
-                <tr>
-                    <td>
-                        <img src="{{ url("storage/{$produto->imagem}") }}" alt="{{$produto->nome}}"width="50" height="50" />
-                    </td>
-                    <td>{{$produto->nome}}</td>
-                    <td>{{$produto->descricao}}</td>
-                    <td>{{$produto->preco}}</td>
-                    <td>{{$produto->nomeProduto }}</td>
-                    <td>{{$produto->quantidade}}</td>
-                    <td>
-                        <a href="{{action('ProdutoController@consultar', $produto->id)}}" class="btn-info btn-sm mr-2">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                        <a href="" class="btn-danger btn-sm">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    <img src="{{ url("storage/{$produto->imagem}") }}" width="50" height="50" />
+                </td>
+                <td>{{$produto->nome}}</td>
+                <td>{{$produto->descricao}}</td>
+                <td>{{$produto->preco}}</td>
+                <td>{{$produto->nomeProduto }}</td>
+                <td>{{$produto->quantidade}}</td>
+                <td>
+                    <a href="{{action('ProdutoController@consultar', $produto->id)}}" class="btn-info btn-sm mr-2">
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    <a href="" class="btn-danger btn-sm" 
+                       onclick="deletar('{{ action("ProdutoController@deletar", $produto->id) }}');">
+                        <i class="fas fa-trash-alt mt-3"></i>
+                    </a>
+                </td>
+            </tr>
             @endforeach
 
         </tbody>
