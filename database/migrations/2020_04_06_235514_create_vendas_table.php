@@ -15,6 +15,8 @@ class CreateVendasTable extends Migration
     {
         Schema::create('vendas', function (Blueprint $table) {
             $table->increments('id');
+            // pega o id da sesssao do navegador
+            $table->text('session_id');
             $table->integer('parceiro_id')->unsigned();
             // vinculo de usuario com a venda
             $table->integer('usuario_id')->unsigned();

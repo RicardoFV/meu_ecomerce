@@ -85,7 +85,7 @@ class ParceiroController extends Controller {
         }else{
              // redireciona para a tela de cadastro
         return redirect()->action('ParceiroController@listar')
-                ->with('errror', 'Parceiro não pode ser removido !');
+                ->with('erro', 'Parceiro não pode ser removido !');
         }    
     }
 

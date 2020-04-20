@@ -166,6 +166,10 @@ class ProdutoController extends Controller {
     public function deletar($id) {
         // faz a consulta
         $produto = Produto::find($id);
+        //print_r($produto);
+        
+        //exit();
+        
         // muda o parametro do ativo para 0
         $produto->ativo = 0;
         //cria uma variavel que recebe a exclusão logica
@@ -174,7 +178,9 @@ class ProdutoController extends Controller {
             return redirect()->action('ProdutoController@listar')
                             ->with('mensagem', 'Produto desativado com sucesso !');
         } else {
-            return 'erro';
+                  // redireciona para a tela de cadastro
+            return redirect()->action('ProdutoController@listar')
+                ->with('erro', 'Produto não pode ser removido !');
         }
     }
 
