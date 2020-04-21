@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layout');
+    return view('layouts/layout');
 });
 
 // ************************************* ROTA DE PARCEIRO ****************************************
