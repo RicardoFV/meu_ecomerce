@@ -16,7 +16,7 @@
     <body>
 
         <!-- inclusão do menu -->
-        @include('menu.menu_principal')
+        @include('esqueleto_projeto.menu_principal')
 
         <section class="jumbotron text-center">
             <div class="container">
@@ -28,4 +28,4 @@
         @yield('conteudo')
 
         <!-- inclusão do rodapé -->
-        @include('footer.footer')
+        @include('esqueleto_projeto.footer')
