@@ -24,13 +24,13 @@
         </div>
         <div class="col">
             <div class="row">
-           
-                <div class="col-12 col-md-6 col-lg-4 mb-3">
+           @foreach($produtos as $produto)
+                <div class="col-12 col-md-6 col-lg-4 mb-5">
                     <div class="card">
-                        <img class="card-img-top" src="" alt="Card image cap">
+                        <img class="card-img-top" src="{{url("storage/$produto->imagem") }}" alt="Card image cap">
                         <div class="card-body">
                             <h4 class="card-title"><a href="" title="ver Produto">
-                                
+                                {{$produto->nome}}
                                 </a>
                             </h4>
                             <p class="card-text">
@@ -39,7 +39,7 @@
                             <div class="row">
                                 <div class="col">
                                     <p class="btn btn-danger btn-block">R$
-                                    
+                                        {{$produto->preco}}
                                     </p>
                                 </div>
                                 <div class="col">
@@ -49,8 +49,7 @@
                         </div>
                     </div>
                 </div>
-        
-
+            @endforeach
             </div>
         </div>
 

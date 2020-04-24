@@ -58,6 +58,9 @@ Route::post('/produto/atualizar/{id}', 'ProdutoController@atualizar')->name('pro
 // rota que faz a deleçao do produto 
 Route::get('/produto/deletar/{id}', 'ProdutoController@deletar')->name('produto.deletar');
 
+// listando as produtos na parte inicial , antes de loga 
+Route::get('/', 'VendaController@index')->name('home');
 Auth::routes();
+// listando as produtos na parte inicial , ja logado 
+Route::get('/home', 'VendaController@index')->name('home');
 
-Route::get('/home', 'HomeController@index')->name('home');
