@@ -4,16 +4,8 @@
 
 <div class="container">
 
-    <!-- colocando a mensagem de erro -->
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-    @endif
+     <!-- colocando a mensagem de erro -->
+    @include('mensagens.erro_cadastro')
 
     <div class="row justify-content-center">
         <div class="col-md-12">
