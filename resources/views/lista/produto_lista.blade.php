@@ -3,19 +3,11 @@
 @section('content')
 
 <div class="container">
-
-    <!-- mensagem de sucesso-->
-    @if(session('mensagem'))
-    <div class="alert alert-success">
-        <p>{{session('mensagem')}}</p>
-    </div>
+    <!-- mensagem de Sucesso-->
+    @include('mensagens.sucesso')
 
     <!-- mensagem de erro-->
-    @elseif(session('erro'))
-    <div class="alert alert-danger">
-        <p>{{session('erro')}}</p>
-    </div>
-    @endif
+    @include('mensagens.erro')
 
     <div class="row justify-content-center">
         <div class="col-md-12">

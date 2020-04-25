@@ -53,8 +53,8 @@ class ProdutoController extends Controller {
                     return redirect()->action('ProdutoController@listar')
                                     ->with('mensagem', 'Produto cadastrado com sucesso !');
                 } else {
-                    return redirect()->action('ProdutoController@index')
-                                    ->withErrors($request->all())->withInput();
+                    // retorna para a mesma tela
+                    return redirect()->back()->withErrors($request->all())->withInput();
                 }
             }
         } else {
@@ -73,8 +73,8 @@ class ProdutoController extends Controller {
                 return redirect()->action('ProdutoController@listar')
                                 ->with('mensagem', 'Produto cadastrado com sucesso !');
             } else {
-                return redirect()->action('ProdutoController@index')
-                                ->withErrors($request->all())->withInput();
+                // retorna para a mesma tela 
+                return redirect()->back()->withErrors($request->all())->withInput();
             }
         }
     }
@@ -109,8 +109,8 @@ class ProdutoController extends Controller {
                     return redirect()->action('ProdutoController@listar')
                                     ->with('mensagem', 'Produto alterado com sucesso !');
                 } else {
-                    return redirect()->action('ProdutoController@index')
-                                    ->withErrors($request->all())->withInput();
+                    // retorna para a mesma tela 
+                    return redirect()->back()->withErrors($request->all())->withInput();
                 }
             }
         } else {
@@ -166,9 +166,6 @@ class ProdutoController extends Controller {
     public function deletar($id) {
         // faz a consulta
         $produto = Produto::find($id);
-        //print_r($produto);
-        
-        //exit();
         
         // muda o parametro do ativo para 0
         $produto->ativo = 0;
@@ -179,8 +176,7 @@ class ProdutoController extends Controller {
                             ->with('mensagem', 'Produto desativado com sucesso !');
         } else {
                   // redireciona para a tela de cadastro
-            return redirect()->action('ProdutoController@listar')
-                ->with('erro', 'Produto não pode ser removido !');
+            return redirect()->back()->with('erro', 'Produto não pode ser removido !');
         }
     }
 

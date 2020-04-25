@@ -29,9 +29,8 @@ class ParceiroController extends Controller {
             // redireciona para a tela de cadastro
             return redirect()->action('ParceiroController@listar')->with('mensagem', 'Parceiro cadastrado com Sucesso !');
         } else {
-            return redirect()->action('ParceiroController@index')
-                            ->withErrors($dadosForm)
-                            ->withInput();
+            // retorna para a mesma tela
+            return redirect()->back()->withErrors($dadosForm)->withInput();
         }
     }
 
@@ -64,8 +63,7 @@ class ParceiroController extends Controller {
             return redirect()->action('ParceiroController@listar')->with('mensagem', 'Parceiro Alterado com Sucesso !');
         } else {
             // se deu errado , volta a tela de cadastro
-            return redirect()->action('ParceiroController@index')
-                            ->withErrors($dadosForm);
+            return redirect()->back()->withErrors($dadosForm);
         }
     }
 
@@ -84,8 +82,7 @@ class ParceiroController extends Controller {
                 ->with('mensagem', 'Parceiro desativado com Sucesso !');
         }else{
              // redireciona para a tela de cadastro
-        return redirect()->action('ParceiroController@listar')
-                ->with('erro', 'Parceiro não pode ser removido !');
+        return redirect()->back()->with('erro', 'Parceiro não pode ser removido !');
         }    
     }
 
