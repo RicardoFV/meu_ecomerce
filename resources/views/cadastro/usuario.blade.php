@@ -1,14 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
+    
+     <!-- colocando a mensagem de erro -->
+    @include('mensagens.erro_cadastro')
+    
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Registra-se') }}</div>
+                <div class="card-header">{{ __('Cadastro de Usuários') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('usuario.cadastrar') }}">
                         @csrf
                         <input type="hidden" id="ativo" name="ativo" value="1">
                         <div class="form-group row">
@@ -24,10 +29,21 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="form-group row">    
-                            <input type="hidden" id="permissao" name="permissao" value="cliente">
-                        </div>
+                        <div class="form-group row">
+                            
+                            <label for="permissao" class="col-md-4 col-form-label text-md-right">{{ __('Permissao') }}</label>
 
+                            <div class="col-md-6">
+                                
+                                <select id="permissao" name="permissao" class="form-control">
+                                    <option value="administrador" >Administrador</option> 
+                                    <option value="vendedor" >Vendedor</option>
+                                    <option value="cliente" >Cliente</option>
+                                </select>
+                            </div>
+                            
+                        </div>
+                        
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
@@ -68,7 +84,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Registrar-se') }}
+                                    {{ __('Cadastrar') }}
                                 </button>
                             </div>
                         </div>

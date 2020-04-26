@@ -49,6 +49,7 @@
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" href="{{ route('parceiro') }}">Parceiros</a>
                                     <a class="dropdown-item" href="{{ route('produto') }}">Produtos</a>
+                                    <a class="dropdown-item" href="{{ route('usuario') }}">Usuário</a>
                                 </div>
 
                             </li>
@@ -61,6 +62,7 @@
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <a class="dropdown-item" href="{{ route('parceiro.listar') }}">Parceiros</a>
                                     <a class="dropdown-item" href="{{ route('produto.listar') }}">Produtos</a>
+                                    <a class="dropdown-item" href="{{ route('usuario.listar') }}">Usuário</a>
                                 </div>
 
                             </li>
