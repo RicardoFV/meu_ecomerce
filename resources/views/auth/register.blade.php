@@ -29,12 +29,10 @@
                             <label for="permissao" class="col-md-4 col-form-label text-md-right">{{ __('Permissao') }}</label>
 
                             <div class="col-md-6">
-                                <select id="permissao_id" name="permissao_id" class="form-control">
-                                    @foreach($permissoes  as $permissao)
-                                        
-                                            <option value="{{$permissao->id}}">{{$permissao->nome}}</option>
-                                           
-                                    @endforeach    
+                                <select id="permissao" name="permissao" class="form-control">
+                                    <option value="administrador" >Administrador</option> 
+                                    <option value="vendedor" >Vendedor</option>
+                                    <option value="cliente" >Cliente</option>
                                 </select>
                             </div>
                             

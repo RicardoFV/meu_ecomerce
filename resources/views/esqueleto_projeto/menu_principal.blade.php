@@ -8,7 +8,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             @auth
             <ul class="navbar-nav m-auto">
-               @can(Auth::user())
+               @can('adm', Auth::user())
                 <li class="nav-item dropdown">
                     
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

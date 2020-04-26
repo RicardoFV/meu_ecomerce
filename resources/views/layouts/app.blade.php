@@ -39,7 +39,32 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
-                            
+                            @can('adm', Auth::user())
+                            <li class="nav-item dropdown">
+
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Cadastros
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="{{ route('parceiro') }}">Parceiros</a>
+                                    <a class="dropdown-item" href="{{ route('produto') }}">Produtos</a>
+                                </div>
+
+                            </li>
+                            <li class="nav-item dropdown">
+
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Relatorios
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="{{ route('parceiro.listar') }}">Parceiros</a>
+                                    <a class="dropdown-item" href="{{ route('produto.listar') }}">Produtos</a>
+                                </div>
+
+                            </li>
+                            @endcan
                         </ul>
 
                         <!-- Right Side Of Navbar -->

@@ -17,7 +17,7 @@ class User extends Authenticatable {
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'permissao_id'
+        'name', 'email', 'password', 'permissao'
     ];
 
     /**
@@ -38,12 +38,4 @@ class User extends Authenticatable {
         'email_verified_at' => 'datetime',
     ];
     
-    public function isAdmin() {
-        $user = User::where('permissao_id',1)->get();
-        
-        return $user;
-    }
-    
-     
-
 }
