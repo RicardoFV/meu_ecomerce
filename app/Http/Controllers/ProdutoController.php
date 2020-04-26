@@ -14,6 +14,7 @@ class ProdutoController extends Controller {
     private $produto;
 
     public function __construct() {
+         $this->middleware('auth');
         $this->produto = new Produto();
     }
 

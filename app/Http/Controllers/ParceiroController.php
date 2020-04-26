@@ -8,8 +8,9 @@ use App\Http\Requests\ParceiroFormRequest;
 class ParceiroController extends Controller {
     
     private $parceiro;
-
+   
     public function __construct() {
+        $this->middleware('auth');
         $this->parceiro = new Parceiro();
     }
     // criação da controler com as informaçoes do parceiro
