@@ -15,11 +15,9 @@ use Illuminate\Support\Facades\Auth;
  */
 // ************************************* ROTA DE HOME ****************************************
 // listando as produtos na parte inicial , antes de loga 
-Route::get('/', 'VendaController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
-// listando as produtos na parte inicial , ja logado 
-Route::get('/home', 'VendaController@index')->name('home');
 
 // ************************************* ROTA DE PARCEIRO ****************************************
 // rota de tela cadastro de parceiro
@@ -73,3 +71,10 @@ Route::get('/usuario/consultar/{id}', 'UsuarioController@consultar')->name('usua
 Route::post('/usuario/atualizar/{id}', 'UsuarioController@atualizar')->name('usuario.atualizar');
 // rota de deletar
 Route::get('/usuario/deletar/{id}','UsuarioController@deletar')->name('usuario.deletar');
+
+// ************************************* ROTA DE INFORMAÇÃO DE VENDA ************************************
+
+// listando as produtos na parte inicial , ja logado 
+Route::get('/home', 'HomeController@index')->name('home');
+// listando as informações do produto selecinado
+Route::get('/informacao/produto/{id}','HomeController@consultar')->name('informacao.venda');

@@ -43,7 +43,7 @@
                                     </p>
                                 </div>
                                 <div class="col">
-                                    <a href="" class="btn btn-success btn-block">Comprar</a>
+                                    <a href="informacao/produto/{{$produto->id}}" class="btn btn-success btn-block">Comprar</a>
                                 </div>
                             </div>
                         </div>

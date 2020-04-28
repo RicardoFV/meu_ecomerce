@@ -6,8 +6,9 @@
         </button>
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
-            @auth
+
             <ul class="navbar-nav m-auto">
+                @auth
                 @can('adm', Auth::user())
                 <li class="nav-item dropdown">
 
@@ -36,23 +37,20 @@
 
                 </li>
                 @endcan
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/carrinho">Carrinho</a>
-                </li>
+                @endauth
 
             </ul>
-            @endauth
+
             <form class="form-inline my-2 my-lg-0">
 
-                <a class="btn btn-success btn-sm ml-3" href="/carrinho">
+                <a class="btn btn-success btn-sm ml-5" href="/carrinho">
                     <i class="fa fa-shopping-cart"></i> Carrinho
                     <span class="badge badge-light">
 
                     </span>
                 </a>
             </form>
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-1">
                 <!-- Authentication Links -->
                 @guest
                 <li class="nav-item">

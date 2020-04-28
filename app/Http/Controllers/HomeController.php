@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Produto;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -23,6 +23,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $produtos = Produto::where('ativo',1)->get();
+        return view('home', compact('produtos'));
     }
+    
+    public function consultar($id) {
+       $produto = Produto::find($id);
+       return view('venda.informacao_produto' , compact('produto'));
+   }
 }
