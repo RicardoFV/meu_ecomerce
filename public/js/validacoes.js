@@ -6,7 +6,7 @@ $(document).ready(function () {
     var digitado = campo.val().trim();
     //devolve as informações sem espaço
     $('#descricao').val(digitado)
-  
+
 })
 // diminue a soma 
 function diminuir() {
@@ -24,6 +24,8 @@ function diminuir() {
     } else {
         // faz a subtração
         resultado = numero - numero2;
+        //passo esse calculo para a função calcularValor
+        calcularValor(resultado)
         //retorna o valor
         return document.getElementById("quantidade").value = resultado;
     }
@@ -32,7 +34,7 @@ function diminuir() {
 
 // aumanta a quantidade
 function aumentar() {
-    
+
     //  alert(valor)
     // inicia  a variavel com 1
     var numero2 = 1;
@@ -46,12 +48,20 @@ function aumentar() {
     }
     // faz a soma
     var resultado = numero + numero2;
-    
-    var valor = document.getElementById("valor_produto").value  
-    var dados = valor *= resultado
-   document.getElementById("valor").value = dados
+    //passo esse calculo para a função calcularValor
+    calcularValor(resultado)
     //retorna o valor
     return document.getElementById("quantidade").value = resultado;
+}
+
+function calcularValor(resultado)
+{
+    // recebe o valor do produto 
+    var valor = parseFloat(document.getElementById("valor_produto").value)
+    // faz o calculo com base na quantidade 
+    var dados = parseFloat(valor *= resultado)
+    // retorna o valor 
+    return document.getElementById("valor").value = 'R$ ' + dados + '.00'
 }
 
 // função responsavel por fazer a deleção

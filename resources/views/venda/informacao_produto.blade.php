@@ -18,29 +18,44 @@
         <!-- Add to cart -->
         <div class="col-12 col-lg-6 add_to_cart_block">
             <div class="card bg-light mb-3">
-                <div class="card-body" class="mostrar_valor" id="mostrar_valor">
-                    <input class="form-control" value="R$ {{$produto->preco}}" type="text" id="valor" readonly="readonly" name="valor">
+                <div class="card-body">
+
                     <form method="get" action="cart.html">
-                        
-                       <input type="hidden" name="valor_produto" id="valor_produto" value="{{$produto->preco}}">
-                       <input type="hidden" name="qtde_maxima" id="qtde_maxima" value="{{$produto->quantidade}}">
+
+                        <input type="hidden" name="valor_produto" id="valor_produto" value="{{$produto->preco}}">
+                        <input type="hidden" name="qtde_maxima" id="qtde_maxima" value="{{$produto->quantidade}}">
                         <div class="form-group">
                             <label>Disponível : {{$produto->quantidade }}</label><br>
                             <label>Quantidade :</label>
-                            
+
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <button type="button" onclick="diminuir()" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
                                         <i class="fa fa-minus"></i>
                                     </button>
                                 </div>
-                                <input type="text" class="form-control" id="quantidade" name="quantidade" min="1" max="100" value="1">
+                                <input type="text" readonly="readonly" class="form-control" id="quantidade" name="quantidade" min="1" max="100" value="1">
                                 <div class="input-group-append">
                                     <button type="button" onclick="aumentar()" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </div>
                             </div>
+
+
+                            <div class="d-flex mb-1 justify-content-end">
+
+                                <div class=" mr-5 mb-1 d-flex">
+
+                                    <label class="mt-2 pr-2">Unitario: </label>
+                                    <input class="form-control mr-2 col-10" value="R$ {{$produto->preco}}" type="text" readonly="readonly">
+                              
+                                </div>
+
+                                <label class="mr-1 mt-2">Total:</label>
+                                <input class="form-control col-5" value="R$ {{$produto->preco}}" type="text" id="valor" readonly="readonly" name="valor">
+                            </div>
+
                         </div>
                         <a href="cart.html" class="btn btn-success btn-lg btn-block text-uppercase">
                             <i class="fa fa-shopping-cart"></i> Adicionar ao Carrinho
@@ -63,7 +78,7 @@
                         (4/5)
                         <a class="pull-right" href="#reviews">View all reviews</a>
                     </div>
-                   
+
                 </div>
             </div>
         </div>
@@ -78,7 +93,7 @@
                     <p class="card-text">
                         {{$produto->descricao }}
                     </p>
-                    
+
                 </div>
             </div>
         </div>
