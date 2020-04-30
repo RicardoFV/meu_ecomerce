@@ -17,7 +17,8 @@
                         <div class="form-row">
                             <!-- campo responsavel por dizer que o cadastro esta ativo ou não -->
                             <input type="hidden" id="ativo" name="ativo" value="1">
-
+                            <!-- pega o usuario logado -->
+                            <input type="hidden" id="usuario_id" name="usuario_id" value="{{Auth::user()->id }}"> 
                             <div class="col-3">
                                 <label for="nome">NOME:</label>
                                 <input type="text" class="form-control" id="nome" value="{{old('nome')}}" name="nome" placeholder="Nome">

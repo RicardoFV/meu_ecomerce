@@ -18,14 +18,16 @@
         <!-- Add to cart -->
         <div class="col-12 col-lg-6 add_to_cart_block">
             <div class="card bg-light mb-3">
-                <div class="card-body">
-         
-                    
-                    <p class="price_discounted">149.90 $</p>
+                <div class="card-body" class="mostrar_valor" id="mostrar_valor">
+                    <input class="form-control" value="R$ {{$produto->preco}}" type="text" id="valor" readonly="readonly" name="valor">
                     <form method="get" action="cart.html">
-                       <p class="price" id="valor" value="{{$produto->preco}}">R$ {{$produto->preco}}</p>
+                        
+                       <input type="hidden" name="valor_produto" id="valor_produto" value="{{$produto->preco}}">
+                       <input type="hidden" name="qtde_maxima" id="qtde_maxima" value="{{$produto->quantidade}}">
                         <div class="form-group">
+                            <label>Disponível : {{$produto->quantidade }}</label><br>
                             <label>Quantidade :</label>
+                            
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <button type="button" onclick="diminuir()" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">

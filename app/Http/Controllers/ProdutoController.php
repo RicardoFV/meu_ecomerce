@@ -24,7 +24,7 @@ class ProdutoController extends Controller {
         // verifico a permissão 
         if (Gate::allows('adm', Auth::user())) {
             // chamo o parceiro
-            $parceiros = Parceiro::where(['tipo' => 'juridica', 'ativo' => 1])->get();
+            $parceiros = Parceiro::where('ativo',1)->get();
             // faço o retorno 
             return view('cadastro.produto', ['parceiros' => $parceiros]);
         } else {
@@ -51,6 +51,7 @@ class ProdutoController extends Controller {
                     // faz a inserção dos dados no banco.
                     $inserir = Produto::create([
                                 'ativo' => $request->input('ativo'),
+                                'usuario_id' => $request->input('usuario_id'),
                                 'nome' => $request->input('nome'),
                                 'descricao' => $request->input('descricao'),
                                 'preco' => $request->input('preco'),
@@ -74,6 +75,7 @@ class ProdutoController extends Controller {
                             'nome' => $request->input('nome'),
                             'descricao' => $request->input('descricao'),
                             'preco' => $request->input('preco'),
+                            'usuario_id' => $request->input('usuario_id'),
                             'quantidade' => $request->input('quantidade'),
                             'parceiro_id' => $request->input('parceiro_id'),
                             'imagem' => 'sem imagem'  // caso não tenha imagem
@@ -115,6 +117,7 @@ class ProdutoController extends Controller {
                     $this->produto->nome = $request->input('nome');
                     $this->produto->descricao = $request->input('descricao');
                     $this->produto->preco = $request->input('preco');
+                    $this->produto->usuario_id = $request->input('usuario_id');
                     $this->produto->quantidade = $request->input('quantidade');
                     $this->produto->parceiro_id = $request->input('parceiro_id');
                     $this->produto->imagem = $upload;
@@ -134,6 +137,7 @@ class ProdutoController extends Controller {
                 $this->produto->nome = $request->input('nome');
                 $this->produto->descricao = $request->input('descricao');
                 $this->produto->preco = $request->input('preco');
+                $this->produto->usuario_id = $request->input('usuario_id');
                 $this->produto->quantidade = $request->input('quantidade');
                 $this->produto->parceiro_id = $request->input('parceiro_id');
                 $this->produto->imagem = $request->input('sem_imagem'); // caso não tenha imagem

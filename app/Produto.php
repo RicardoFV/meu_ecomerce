@@ -15,6 +15,6 @@ class Produto extends Model
         'quantidade',
         'parceiro_id',
         'imagem',
-        
+        'usuario_id'   
     ];
 }

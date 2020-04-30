@@ -4,15 +4,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateParceirosTable extends Migration
-{
+class CreateParceirosTable extends Migration {
+
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('parceiros', function (Blueprint $table) {
             $table->increments('id');
             // aqui sera o nome ou a razão social
@@ -32,6 +31,9 @@ class CreateParceirosTable extends Migration
             $table->string('tipo_documento');
             //esse campo e responsavel por dizer que esta ativo ou não (1 ativo 0 inivativo)
             $table->integer('ativo');
+            // vinculo de usuario com a venda
+            $table->integer('usuario_id')->unsigned();
+            $table->foreign('usuario_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -41,8 +43,8 @@ class CreateParceirosTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('parceiros');
     }
+
 }

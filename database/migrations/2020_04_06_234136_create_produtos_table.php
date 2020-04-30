@@ -22,6 +22,9 @@ class CreateProdutosTable extends Migration
             $table->string('imagem');
             //esse campo e responsavel por dizer que esta ativo ou não (1 ativo 0 inivativo)
             $table->integer('ativo');
+            // vinculo de usuario com a venda
+            $table->integer('usuario_id')->unsigned();
+            $table->foreign('usuario_id')->references('id')->on('users');
             $table->integer('parceiro_id')->unsigned();
             $table->foreign('parceiro_id')->references('id')->on('parceiros');
             $table->timestamps();
