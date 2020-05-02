@@ -78,3 +78,7 @@ Route::get('/usuario/deletar/{id}','UsuarioController@deletar')->name('usuario.d
 Route::get('/home', 'HomeController@index')->name('home');
 // listando as informações do produto selecinado
 Route::get('/informacao/produto/{id}','HomeController@consultar')->name('informacao.venda');
+
+// ******************ADICIONANDO OS PRODUTOS NO CARRINHO ******************************************
+// coloando no carrinho
+Route::post('carrinho/cadastrar', 'CarrinhoController@cadastrar')->name('carrinho.cadastrar');

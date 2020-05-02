@@ -20,10 +20,11 @@
             <div class="card bg-light mb-3">
                 <div class="card-body">
 
-                    <form method="get" action="cart.html">
-
+                    <form method="post" action="{{ route('carrinho.cadastrar') }}">
+                         @Csrf
                         <input type="hidden" name="valor_produto" id="valor_produto" value="{{$produto->preco}}">
                         <input type="hidden" name="qtde_maxima" id="qtde_maxima" value="{{$produto->quantidade}}">
+                        <input type="hidden" name="produto_id" id="produto_id" value="{{$produto->id}}">
                         <div class="form-group">
                             <label>Disponível : {{$produto->quantidade }}</label><br>
                             <label>Quantidade :</label>
@@ -57,9 +58,9 @@
                             </div>
 
                         </div>
-                        <a href="cart.html" class="btn btn-success btn-lg btn-block text-uppercase">
+                        <button  class="btn btn-success btn-lg btn-block text-uppercase">
                             <i class="fa fa-shopping-cart"></i> Adicionar ao Carrinho
-                        </a>
+                        </button>
                     </form>
                     <div class="product_rassurance">
                         <ul class="list-inline">
