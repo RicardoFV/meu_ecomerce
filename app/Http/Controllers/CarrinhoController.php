@@ -17,7 +17,6 @@ class CarrinhoController extends Controller {
         // passa os valores para as variaveis 
         $produto_id = $request->input('produto_id');
         $qde_desejada = $request->input('quantidade');
-
         // faz a busca do produto pelo o id
         $produto = Produto::find($produto_id);
         // calcuala o valor do produto 
@@ -31,10 +30,8 @@ class CarrinhoController extends Controller {
         $pedidoId = Pedido::consultarPedito($sessionId);
         //se o pedidoId viee vazio, significa que o pedido não existe, então insere
         if (empty($pedidoId)) {
-            Pedido::create([// insere os novos dados 
-                'session_id' => $sessionId,
-                'status' => 'pendente'
-            ]);
+            // faz o cadastro 
+            Pedido::cadastrarPedido($sessionId);
             // faz a consulta do pedido pelo id da session
             $pedidoId = Pedido::consultarPedito($sessionId);
         }
@@ -45,20 +42,37 @@ class CarrinhoController extends Controller {
                 ])->first(['id', 'quantidade']);
         // caso se vier vazio , adiciona
         if (empty($pedidoItem)) {
-            PedidoItem::create([
+            // passa os valores para a variavel
+            $dados = [
                 'quantidade' => $qde_desejada,
                 'valor' => $valorConpraProduto,
                 'pedido_id' => $pedidoId,
                 'produto_id' => $produto_id,
-            ]);
+            ];
+            //cadastra o novo pedidoitem
+            PedidoItem::cadastraPedidoItem($dados);
             // atualiza a quantidade 
             Produto::atualizarProduto($produto_id, $qde_desejada);
         } else { // se o pedidoItem e o produto for o mesmo, então atualiza 
             // consulta o pedido item 
-            PedidoItem::find($pedidoItem->id)->update(
-                    array('quantidade' => $qde_desejada,
-                        'valor' => $valorConpraProduto,
-            ));
+            $item = PedidoItem::find($pedidoItem->id);
+            // passa a quantidade que esta no banco 
+            $qde_registrada = $item->quantidade;
+            if ($qde_desejada < $qde_registrada) {
+                // faz a subtracao 
+                $qtde_sobra = $qde_registrada - $qde_desejada;
+                // corrigi o estoque 
+                Produto::voltarProEstoque($produto_id, $qtde_sobra);
+                //atuazlia o pedidoItem
+                PedidoItem::atualizaItemPedito($pedidoItem->id, $qde_desejada, $valorConpraProduto);
+            } else if ($qde_desejada > $qde_registrada) {
+                // faz a subtracao 
+                $qtde_sobra = $qde_registrada - $qde_desejada;
+                // corrigi o estoque 
+                Produto::retirarValorEstoque($produto_id, $qtde_sobra);
+                //atuazlia o pedidoItem
+                PedidoItem::atualizaItemPedito($pedidoItem->id, $qde_desejada, $valorConpraProduto);
+            }
         }
         return view('venda.carrinho');
     }
