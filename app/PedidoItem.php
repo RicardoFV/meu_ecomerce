@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use App\Produto;
 
 class PedidoItem extends Model {
 
@@ -22,8 +24,25 @@ class PedidoItem extends Model {
     }
 
     // atualiza pedido 
-    public static function atualizaItemPedito($idItem, $qde_desejada, $valorConpraProduto) {
+    public static function atualizaItemPedido($idItem, $qde_desejada, $valorConpraProduto) {
         self::find($idItem)->update(array('quantidade' => $qde_desejada, 'valor' => $valorConpraProduto));
+    }
+    //deleta o item 
+    public static function deletarPedidoItem($produtoId, $itemPedido) {
+        Self::where([
+            'produto_id' => $produtoId,
+            'pedido_id' => $itemPedido
+        ])->first()->delete();
+    }
+
+    // lista todos os pedidosItens
+    public static function listarPedidoItem() {
+        return DB::table('pedido_itens')
+                        ->join('produtos', 'pedido_itens.produto_id', '=', 'produtos.id')
+                        ->select('pedido_itens.*',
+                                'produtos.nome as produtoNome',
+                                'produtos.imagem',
+                                'produtos.quantidade as produtoQuantidade')->get();
     }
 
 }

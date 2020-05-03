@@ -82,3 +82,7 @@ Route::get('/informacao/produto/{id}','HomeController@consultar')->name('informa
 // ******************ADICIONANDO OS PRODUTOS NO CARRINHO ******************************************
 // coloando no carrinho
 Route::post('carrinho/cadastrar', 'CarrinhoController@cadastrar')->name('carrinho.cadastrar');
+// listar carrinho 
+Route::get('carrinho/listar', 'CarrinhoController@listar')->name('carrinho.listar');
+// criando a rota de atualizar
+Route::post('carrinho/atualizar', 'CarrinhoController@atualizar')->name('carrinho.atualizar');

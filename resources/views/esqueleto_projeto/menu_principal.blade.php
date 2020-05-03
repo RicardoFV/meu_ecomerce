@@ -43,7 +43,7 @@
 
             <form class="form-inline my-2 my-lg-0">
 
-                <a class="btn btn-success btn-sm ml-5" href="/carrinho">
+                <a class="btn btn-success btn-sm ml-5" href="{{ route('carrinho.listar')}}">
                     <i class="fa fa-shopping-cart"></i> Carrinho
                     <span class="badge badge-light">
 

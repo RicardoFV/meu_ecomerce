@@ -19,9 +19,15 @@ class Pedido extends Model {
             'status' => 'pendente'
         ]);
     }
+    // deleta o pedido
+    public static function deletarPedido($itemPedido) {
+        Pedido::where([
+            'id'=> $itemPedido
+        ])->first()->delete();
+    }
 
     // verificar se existe ou não a session
-    public static function consultarPedito($sessionId) {
+    public static function consultarPedidoPorSessio($sessionId) {
         // faz a busca 
         $pedido = self::where('session_id', $sessionId)->first('id');
         return !empty($pedido->id) ? $pedido->id : null;

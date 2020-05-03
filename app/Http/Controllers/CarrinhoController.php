@@ -9,6 +9,21 @@ use App\Produto;
 
 class CarrinhoController extends Controller {
 
+    public function listar() {
+        // recebe a session
+        $sessionId = session()->getId();
+        // faz a consulta , para ver se existe essa session
+        $pedidoOId = Pedido::consultarPedidoPorSessio($sessionId);
+        if (empty($pedidoOId)) {
+            // envia uma mensagem , ou faz uma atividade
+            // direciona para a home 
+            return redirect()->route('home');
+        }
+        // lista todos os itens do pedido
+        $carrinhoItem = PedidoItem::listarPedidoItem();
+        return view('venda.carrinho')->with('carrinhoItens', $carrinhoItem);
+    }
+
     //controller responsavel por montar o carrinho
     public function cadastrar(Request $request) {
         // pega a session do navegador 
@@ -27,13 +42,13 @@ class CarrinhoController extends Controller {
             // manda uma mensagem de erro
         }
         // faz a consulta do pedido pelo id da session
-        $pedidoId = Pedido::consultarPedito($sessionId);
+        $pedidoId = Pedido::consultarPedidoPorSessio($sessionId);
         //se o pedidoId viee vazio, significa que o pedido não existe, então insere
         if (empty($pedidoId)) {
             // faz o cadastro 
             Pedido::cadastrarPedido($sessionId);
             // faz a consulta do pedido pelo id da session
-            $pedidoId = Pedido::consultarPedito($sessionId);
+            $pedidoId = Pedido::consultarPedidoPorSessio($sessionId);
         }
         // verifica se o pedidoItem ja esta cadastrado
         $pedidoItem = PedidoItem::where([
@@ -64,17 +79,88 @@ class CarrinhoController extends Controller {
                 // corrigi o estoque 
                 Produto::voltarProEstoque($produto_id, $qtde_sobra);
                 //atuazlia o pedidoItem
-                PedidoItem::atualizaItemPedito($pedidoItem->id, $qde_desejada, $valorConpraProduto);
+                PedidoItem::atualizaItemPedido($pedidoItem->id, $qde_desejada, $valorConpraProduto);
             } else if ($qde_desejada > $qde_registrada) {
                 // faz a subtracao 
                 $qtde_sobra = $qde_registrada - $qde_desejada;
                 // corrigi o estoque 
                 Produto::retirarValorEstoque($produto_id, $qtde_sobra);
                 //atuazlia o pedidoItem
-                PedidoItem::atualizaItemPedito($pedidoItem->id, $qde_desejada, $valorConpraProduto);
+                PedidoItem::atualizaItemPedido($pedidoItem->id, $qde_desejada, $valorConpraProduto);
             }
         }
-        return view('venda.carrinho');
+        // vai para o carrinho 
+        return redirect()->route('carrinho.listar');
+    }
+
+    public function atualizar(Request $request) {
+        // faz a busca a session
+        $sessionId = session()->getId();
+        //verifica se tem a session
+        $pedidoId = Pedido::consultarPedidoPorSessio($sessionId);
+        //verifica se não veio vazio
+        if (empty($pedidoId)) {
+            // faz alguma acao
+        }
+        // recebe os dados da tela 
+        $produtoId = $request->input('produto_id');
+        $qde_desejada = $request->input('quantidade');
+        $itemPedido = $request->input('item_pedido');
+        // faz a busca do produto
+        $produto = Produto::find($produtoId);
+        // calcuala o valor do produto 
+        $valorConpraProduto = $produto->preco * $qde_desejada;
+
+        //se quantidade maior que zero
+        if ($qde_desejada > 0) {
+            // consulta o pedido item 
+            $item = PedidoItem::find($itemPedido);
+            // passa a quantidade que esta no banco 
+            $qde_registrada = $item->quantidade;
+
+            if ($qde_desejada < $qde_registrada) {
+                // faz a subtracao 
+                $qtde_sobra = $qde_registrada - $qde_desejada;
+                // corrigi o estoque 
+                Produto::voltarProEstoque($produtoId, $qtde_sobra);
+                //atuazlia o pedidoItem
+                PedidoItem::atualizaItemPedido($itemPedido, $qde_desejada, $valorConpraProduto);
+            } else if ($qde_desejada > $qde_registrada) {
+                // faz a subtracao 
+                $qtde_sobra = $qde_registrada - $qde_desejada;
+                // corrigi o estoque 
+                Produto::retirarValorEstoque($produtoId, $qtde_sobra);
+                //atuazlia o pedidoItem
+                PedidoItem::atualizaItemPedido($itemPedido, $qde_desejada, $valorConpraProduto);
+            }
+        }
+        // vai para o carrinho 
+        return redirect()->route('carrinho.listar');
+    }
+
+    public function deletar(Request $request) {
+        // faz a busca a session
+        $sessionId = session()->getId();
+        //verifica se tem a session
+        $pedidoId = Pedido::consultarPedidoPorSessio($sessionId);
+        //verifica se não veio vazio
+        if (empty($pedidoId)) {
+            // faz alguma acao
+        }
+        // recebe os dados da tela
+        $produtoId = $request->input('produto_id');
+        $itemPedido = $request->input('item_pedido');
+        $produtoId = $request->input('produto_id');
+        // faz a busca e faz a delecao do pedidoItens
+        PedidoItem::deletarPedidoItem($produtoId, $itemPedido);
+        // faz a busca e deleta o pedido
+        Pedido::deletarPedido($itemPedido);
+        //busca o produto
+        $produto = Produto::find($produtoId);
+        //
+        
+        // vai para o carrinho 
+        return redirect()->route('carrinho.listar');
     }
 
 }
