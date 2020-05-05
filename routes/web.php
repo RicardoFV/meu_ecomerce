@@ -86,3 +86,5 @@ Route::post('carrinho/cadastrar', 'CarrinhoController@cadastrar')->name('carrinh
 Route::get('carrinho/listar', 'CarrinhoController@listar')->name('carrinho.listar');
 // criando a rota de atualizar
 Route::post('carrinho/atualizar', 'CarrinhoController@atualizar')->name('carrinho.atualizar');
+// rota que deleta o produto
+Route::post('carrinho/deletar','CarrinhoController@deletar')->name('carrinho.deletar');

@@ -31,11 +31,11 @@
                                 <td><input class="form-control text-center" value="{{$carrinho->quantidade}}" type="text" id="quantidade" name="quantidade" /></td>
                             </form>
                                 <td class="text-right">R$ {{$carrinho->valor }}</td>
-                            <form>
+                            <form action="{{ route('carrinho.deletar') }}" method="post">
                                  @Csrf
                                  <input type="hidden" name="produto_id" id="produto_id" value="{{ $carrinho->produto_id }}"/>
-                                 <input type="hidden" name="produto_id" id="produto_id" value="{{ $carrinho->produto_id }}"/>
-                                <input type="hidden" name="item_pedido" id="item_pedido" value="{{ $carrinho->id }}"/>
+                                <input type="hidden" name="pedido_item" id="pedido_item" value="{{ $carrinho->id }}"/>
+                                <input type="hidden" name="quantidade_escolhidade" id="quantidade_escolhidade" value="{{ $carrinho->quantidade }}"/>
                                 <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
                             </form> 
                         </tr>

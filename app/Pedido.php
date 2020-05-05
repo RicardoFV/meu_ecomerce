@@ -20,12 +20,10 @@ class Pedido extends Model {
         ]);
     }
     // deleta o pedido
-    public static function deletarPedido($itemPedido) {
-        Pedido::where([
-            'id'=> $itemPedido
-        ])->first()->delete();
+    public static function deletarPedido(Pedido $pedido) {
+        $pedido->delete();
     }
-
+   
     // verificar se existe ou não a session
     public static function consultarPedidoPorSessio($sessionId) {
         // faz a busca 

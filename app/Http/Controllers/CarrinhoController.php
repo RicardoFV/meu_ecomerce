@@ -127,7 +127,7 @@ class CarrinhoController extends Controller {
                 PedidoItem::atualizaItemPedido($itemPedido, $qde_desejada, $valorConpraProduto);
             } else if ($qde_desejada > $qde_registrada) {
                 // faz a subtracao 
-                $qtde_sobra = $qde_registrada - $qde_desejada;
+                $qtde_sobra = $qde_desejada - $qde_registrada;
                 // corrigi o estoque 
                 Produto::retirarValorEstoque($produtoId, $qtde_sobra);
                 //atuazlia o pedidoItem
@@ -149,16 +149,29 @@ class CarrinhoController extends Controller {
         }
         // recebe os dados da tela
         $produtoId = $request->input('produto_id');
-        $itemPedido = $request->input('item_pedido');
-        $produtoId = $request->input('produto_id');
-        // faz a busca e faz a delecao do pedidoItens
-        PedidoItem::deletarPedidoItem($produtoId, $itemPedido);
-        // faz a busca e deleta o pedido
-        Pedido::deletarPedido($itemPedido);
-        //busca o produto
-        $produto = Produto::find($produtoId);
-        //
-        
+        $pedidoitemId = $request->input('pedido_item');
+        $quantidade_escolhidade = $request->input('quantidade_escolhidade');
+        // pesquisa o pedidoItem
+        $pedidoItem = PedidoItem::find($pedidoitemId);
+
+        //chama o metodo que retorna quantidade de produtos
+        Produto::voltarProEstoque($produtoId, $quantidade_escolhidade);
+        // deleta o pedidoItem
+        PedidoItem::deletarPedidoItem($pedidoItem);
+
+        // pesquisa o pedido
+        $pedido = Pedido::find($pedidoId);
+
+        // pesquisa o pedidoItem com base pedido_id 
+        $pedidoItens = PedidoItem::where('pedido_id', $pedido->id)->first();
+       
+        // caso o produto vinculado nao esteja no pedidoitens
+        if (!isset($pedidoItens)) {
+            // deleta o pedido
+            Pedido::deletarPedido($pedido);
+            // vai para a home 
+            return redirect()->route('home');
+        }
         // vai para o carrinho 
         return redirect()->route('carrinho.listar');
     }

@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use App\Produto;
+
 
 class PedidoItem extends Model {
 
@@ -28,13 +28,11 @@ class PedidoItem extends Model {
         self::find($idItem)->update(array('quantidade' => $qde_desejada, 'valor' => $valorConpraProduto));
     }
     //deleta o item 
-    public static function deletarPedidoItem($produtoId, $itemPedido) {
-        Self::where([
-            'produto_id' => $produtoId,
-            'pedido_id' => $itemPedido
-        ])->first()->delete();
+    public static function deletarPedidoItem(PedidoItem $pedidoItem) {
+        $pedidoItem->delete();
     }
-
+    
+    
     // lista todos os pedidosItens
     public static function listarPedidoItem() {
         return DB::table('pedido_itens')
