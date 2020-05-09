@@ -175,5 +175,14 @@ class CarrinhoController extends Controller {
         // vai para o carrinho 
         return redirect()->route('carrinho.listar');
     }
+    
+    public function finalizar()
+    {
+        if(auth()->check()){
+            echo 'logado';
+        }else{
+           return redirect()->route('register');
+        }
+    }
 
 }

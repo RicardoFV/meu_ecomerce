@@ -59,10 +59,12 @@ Route::get('/produto/deletar/{id}', 'ProdutoController@deletar')->name('produto.
 
 // ************************************* ROTA DE CADASTRO DE UM NOVO USUARIO ****************************************
 
-// rota de acesso ao cadastro de usuario 
+// rota de acesso ao cadastro de usuario e cliente
 Route::get('/usuario', 'UsuarioController@index')->name('usuario');
 // rota que cadastra o novo usuario
 Route::post('/usuario/cadastrar', 'UsuarioController@cadastrar')->name('usuario.cadastrar');
+// rota que cadastra o novo usuario
+Route::post('/usuario/cadastrar/novo_cliente', 'UsuarioController@cadastrarCliente')->name('usuario.cadastrar.cliente');
 // listar os usuarios 
 Route::get('/usuario/listar','UsuarioController@listar' )->name('usuario.listar');
 // rota de consulta
@@ -88,3 +90,7 @@ Route::get('carrinho/listar', 'CarrinhoController@listar')->name('carrinho.lista
 Route::post('carrinho/atualizar', 'CarrinhoController@atualizar')->name('carrinho.atualizar');
 // rota que deleta o produto
 Route::post('carrinho/deletar','CarrinhoController@deletar')->name('carrinho.deletar');
+
+//*************FINALIZAR VENDA*****************************************************************
+Route::get('carrinho/finalizar', 'CarrinhoController@finalizar')->name('carrinho.finalizar');
+

@@ -37,6 +37,7 @@ class AuthServiceProvider extends ServiceProvider {
         });
         
         $gate->allows('adm');
+         $gate->allows('cliente');
         
     }
 

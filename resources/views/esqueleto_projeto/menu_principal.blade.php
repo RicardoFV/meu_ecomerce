@@ -46,7 +46,11 @@
                 <a class="btn btn-success btn-sm ml-5" href="{{ route('carrinho.listar')}}">
                     <i class="fa fa-shopping-cart"></i> Carrinho
                     <span class="badge badge-light">
-
+                        @if(!empty(Session::get('carrinho')))
+                            {{ Session::get('carrinho') }}
+                        @else
+                            0
+                        @endif
                     </span>
                 </a>
             </form>

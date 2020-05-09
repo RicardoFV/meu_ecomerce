@@ -18,6 +18,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                       
+                        @php 
+                            $total = 0;
+                            $quantidade =0;
+                            Session::put('carrinho', 0);
+                        @endphp
                         @foreach($carrinhoItens as $carrinho)
 
                         <tr>
@@ -39,31 +45,20 @@
                                 <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
                             </form> 
                         </tr>
+                        @php
+                            $total += $carrinho->valor ;
+                            $quantidade ++;
+                            Session::put('carrinho', $quantidade);
+                        @endphp
                     @endforeach
-
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>Sub-Total</td>
-                        <td class="text-right">255,90 €</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>Shipping</td>
-                        <td class="text-right">6,90 €</td>
-                    </tr>
+       
                     <tr>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
                         <td><strong>Total</strong></td>
-                        <td class="text-right"><strong>346,90 €</strong></td>
+                        <td class="text-right"><strong>RS {{ number_format($total,2,',','.' )}}</strong></td>
                     </tr>
                     </tbody>
                 </table>
@@ -75,7 +70,7 @@
                     <a href="{{ route('home')}}" class="btn btn-lg btn-block btn-primary text-uppercase">voltar a comprar</a>
                 </div>
                 <div class="col-sm-12 col-md-6 text-right">
-                    <button class="btn btn-lg btn-block btn-success text-uppercase">Finalizar Compra</button>
+                    <a href="{{ route('carrinho.finalizar') }}" class="btn btn-lg btn-block btn-success text-uppercase">Finalizar Compra</a>
                 </div>
             </div>
         </div>

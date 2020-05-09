@@ -13,7 +13,7 @@ class UsuarioController extends Controller {
     private $usuario;
 
     public function __construct() {
-        $this->middleware('auth');
+       // $this->middleware('auth');
         $this->usuario = new User();
     }
 
@@ -22,6 +22,23 @@ class UsuarioController extends Controller {
             return view('cadastro.usuario');
         } else {
             abort(403, 'Não autorizado');
+        }
+    }
+
+    public function cadastrarCliente(UsuarioFormRequest $request) {
+
+        $data = $request->except('_token');
+        $data['password'] = Hash::make($data['password']);
+        $inserir = User::create($data);
+        if ($inserir) {
+            // pega os dados 
+            $credencial = $request->only('email', 'password');
+            // altentica o cliente
+            Auth::attempt($credencial);
+            return view('cadastro.cliente')
+                            ->with('mensagem', 'Cliente Cadastro com Sucesso !');
+        } else {
+            return redirect()->back()->withErrors($data)->withInput();
         }
     }
 
@@ -69,20 +86,20 @@ class UsuarioController extends Controller {
             abort(403, 'Não autorizado');
         }
     }
-    
+
     public function deletar($id) {
         if (Gate::allows('adm', Auth::user())) {
             $usuario = User::find($id);
             $usuario->ativo = 0;
             $excluir = $usuario->push();
-            if($excluir){
-                 return redirect()->route('usuario.listar')
+            if ($excluir) {
+                return redirect()->route('usuario.listar')
                                 ->with('mensagem', 'Usuáro desativado com Sucesso !');
-            }else{
+            } else {
                 // redireciona para a lista
                 return redirect()->back()->with('erro', 'Usuáro não pode ser removido !');
             }
-        }else {
+        } else {
             abort(403, 'Não autorizado');
         }
     }
@@ -95,5 +112,5 @@ class UsuarioController extends Controller {
             abort(403, 'Não autorizado');
         }
     }
-   
+
 }
