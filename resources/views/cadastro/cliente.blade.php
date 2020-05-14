@@ -5,26 +5,29 @@
 
     <!-- colocando a mensagem de erro -->
     @include('mensagens.erro_cadastro')
-    
+
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">Cadastro de Cliente</div>
                 <div class="card-body">
 
-                    <form method="post" >
+                    <form method="post" action="{{ route('cliente.cadastrar') }}">
                         @Csrf
                         <div class="form-row">
                             <!-- campo responsavel por dizer que o cadastro esta ativo ou não -->
                             <input type="hidden" id="ativo" name="ativo" value="1">
                             <!-- pega o usuario logado -->
-                            <input type="hidden" id="usuario_id" name="usuario_id">                           <div class="col-3">
+                            <input type="hidden" id="usuario_id" name="usuario_id" value="{{Auth::user()->id }}">
+                            <!-- carrega a sessao  -->
+                            <input type="hidden" id="pedido_id" name="pedido_id" value="{{ $pedido }}">
+                            <div class="col-3">
                                 <label for="nome">NOME:</label>
-                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
+                                <input type="text" readonly="readonly" class="form-control" id="nome" value="{{ Auth::user()->name }}" name="nome" placeholder="Nome">
                             </div>
                             <div class="col-3">
                                 <label for="email">E-MAIL:</label>
-                                <input type="email" class="form-control" id="email" value="{{old('email')}}" name="email" placeholder="E-mail">
+                                <input type="email" readonly="readonly" class="form-control" id="email" value="{{ Auth::user()->email }}" name="email" placeholder="E-mail">
                             </div>
                             <div class="col-3">
                                 <label for="data_nascimento">Data de Nascimento:</label>

@@ -11,6 +11,8 @@
                     <form method="POST" action="{{ route('usuario.cadastrar.cliente') }}">
                         @csrf
                         <input type="hidden" id="ativo" name="ativo" value="1">
+                        <!-- carrega a sessao  -->
+                        <input type="hidden" id="pedido_id" name="pedido_id" value="{{ $pedido }}">
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>
 
@@ -65,13 +67,18 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
+                        <div class="form-group row mb-0 text-center">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Registrar-se') }}
                                 </button>
+                                <a href="" class="btn btn-primary">
+                                    {{ __('Já tenho cadastro') }}
+                                </a>
                             </div>
+                            
                         </div>
+                         
                     </form>
                 </div>
             </div>

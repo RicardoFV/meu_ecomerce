@@ -3,16 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-/*
-  |--------------------------------------------------------------------------
-  | Web Routes
-  |--------------------------------------------------------------------------
-  |
-  | Here is where you can register web routes for your application. These
-  | routes are loaded by the RouteServiceProvider within a group which
-  | contains the "web" middleware group. Now create something great!
-  |
- */
 // ************************************* ROTA DE HOME ****************************************
 // listando as produtos na parte inicial , antes de loga 
 Route::get('/', 'HomeController@index')->name('home');
@@ -91,6 +81,8 @@ Route::post('carrinho/atualizar', 'CarrinhoController@atualizar')->name('carrinh
 // rota que deleta o produto
 Route::post('carrinho/deletar','CarrinhoController@deletar')->name('carrinho.deletar');
 
-//*************FINALIZAR VENDA*****************************************************************
+//*************FINALIZAR VENDA VERIFICANDO SE TEM CADASTRO*******************************************
 Route::get('carrinho/finalizar', 'CarrinhoController@finalizar')->name('carrinho.finalizar');
 
+//*************CADASTRO DE CLIENTE*******************************************
+Route::post('cliente/cadastrar', 'ClienteController@cadastrar')->name('cliente.cadastrar');

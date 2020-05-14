@@ -164,7 +164,7 @@ class CarrinhoController extends Controller {
 
         // pesquisa o pedidoItem com base pedido_id 
         $pedidoItens = PedidoItem::where('pedido_id', $pedido->id)->first();
-       
+
         // caso o produto vinculado nao esteja no pedidoitens
         if (!isset($pedidoItens)) {
             // deleta o pedido
@@ -175,13 +175,20 @@ class CarrinhoController extends Controller {
         // vai para o carrinho 
         return redirect()->route('carrinho.listar');
     }
-    
-    public function finalizar()
-    {
-        if(auth()->check()){
+
+    public function finalizar() {
+        if (auth()->check()) {
             echo 'logado';
-        }else{
-           return redirect()->route('register');
+        } else {
+            // pega a sessao 
+            $sessao_id = session()->getId();
+            //consulta a sessao
+            $pedido = Pedido::consultarPedidoPorSessio($sessao_id);
+            // verifica se tem se tem session 
+            if ($pedido) {             
+                // retorna a sessao 
+                return view('auth.register', compact('pedido'));
+            }
         }
     }
 

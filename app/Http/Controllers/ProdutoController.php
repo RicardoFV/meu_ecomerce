@@ -24,7 +24,7 @@ class ProdutoController extends Controller {
         // verifico a permissão 
         if (Gate::allows('adm', Auth::user())) {
             // chamo o parceiro
-            $parceiros = Parceiro::where('ativo',1)->get();
+            $parceiros = Parceiro::where('ativo', 1)->get();
             // faço o retorno 
             return view('cadastro.produto', ['parceiros' => $parceiros]);
         } else {
@@ -172,16 +172,11 @@ class ProdutoController extends Controller {
             } else {
                 // chamo o parceiro
                 $parceiros = Parceiro::where(['tipo' => 'juridica', 'ativo' => 1])->get();
-
-                // verifica o se tem o produto
-                if (empty($produto) || empty($parceiros)) {
-                    return 'Produto não existe';
-                } else {                     // quando o nome é igual , pode colocar assim
-                    return view('altera.produto_altera')->with([
-                                'produto' => $produto,
-                                'parceiros' => $parceiros,
-                    ]);
-                }
+                // quando o nome é igual , pode colocar assim
+                return view('altera.produto_altera')->with([
+                            'produto' => $produto,
+                            'parceiros' => $parceiros,
+                ]);
             }
         } else {
             abort(403, 'Não autorizado');

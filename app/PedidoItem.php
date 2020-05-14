@@ -32,7 +32,10 @@ class PedidoItem extends Model {
         $pedidoItem->delete();
     }
     
-    
+    // pesquisar pedido retornando o mesmo
+    public static function consultarPedidoItem($pedido){
+        return self::where('pedido_id', $pedido)->get();
+    }
     // lista todos os pedidosItens
     public static function listarPedidoItem() {
         return DB::table('pedido_itens')

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -33,10 +34,11 @@ class UsuarioController extends Controller {
         if ($inserir) {
             // pega os dados 
             $credencial = $request->only('email', 'password');
+            // recebe a sessao
+            $pedido = $data['pedido_id'];
             // altentica o cliente
             Auth::attempt($credencial);
-            return view('cadastro.cliente')
-                            ->with('mensagem', 'Cliente Cadastro com Sucesso !');
+            return view('cadastro.cliente')->with('pedido', $pedido);
         } else {
             return redirect()->back()->withErrors($data)->withInput();
         }

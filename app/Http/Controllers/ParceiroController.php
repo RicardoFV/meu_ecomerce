@@ -31,7 +31,7 @@ class ParceiroController extends Controller {
         if (Gate::allows('adm', Auth::user())) {
             // recebendo as informaçoes
             $dadosForm = $request->all();
-            // instanciando o objeto
+            // faz a ação de inserir
             $inserir = Parceiro::create($dadosForm);
             //faz a verificação se foi inserido corretamente
             if ($inserir) {

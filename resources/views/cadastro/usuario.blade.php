@@ -16,6 +16,7 @@
                     <form method="POST" action="{{ route('usuario.cadastrar') }}">
                         @csrf
                         <input type="hidden" id="ativo" name="ativo" value="1">
+                        
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>
 

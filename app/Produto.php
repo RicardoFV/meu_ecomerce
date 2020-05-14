@@ -44,6 +44,10 @@ class Produto extends Model
         // atualiza a quantidade 
         $produto->push();
     }
+    // retorna os produtos , fazendo a consulta
+    public static function consultarProduto($produto_id) {
+        return self::where('id', $produto_id)->get();
+    }
     
     // corrige o estoque em caso de pedido subtraido 
     public static function retirarValorEstoque($id, $qtde_sobra) {
