@@ -20,7 +20,9 @@
                             <!-- pega o usuario logado -->
                             <input type="hidden" id="usuario_id" name="usuario_id" value="{{Auth::user()->id }}">
                             <!-- carrega a sessao  -->
+                            @if(isset($pedido))
                             <input type="hidden" id="pedido_id" name="pedido_id" value="{{ $pedido }}">
+                            @endif
                             <div class="col-3">
                                 <label for="nome">NOME:</label>
                                 <input type="text" readonly="readonly" class="form-control" id="nome" value="{{ Auth::user()->name }}" name="nome" placeholder="Nome">

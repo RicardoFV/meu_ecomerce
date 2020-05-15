@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Pedido;
 use App\PedidoItem;
 use App\Produto;
+use App\Cliente;
 
 class CarrinhoController extends Controller {
 
@@ -26,6 +27,7 @@ class CarrinhoController extends Controller {
 
     //controller responsavel por montar o carrinho
     public function cadastrar(Request $request) {
+        
         // pega a session do navegador 
         $sessionId = session()->getId();
         $this->middleware('VerifyCsrfToken');
@@ -178,14 +180,32 @@ class CarrinhoController extends Controller {
 
     public function finalizar() {
         if (auth()->check()) {
-            echo 'logado';
+            // verifico se tem cadastro de cliente
+            $cliente = Cliente::consultarPorUsuario(auth()->user()->id);
+            // se existir cliente
+            if (isset($cliente)) {
+                // pesquisa os itens no carrinho
+                $itens = PedidoItem::listarPedidoItem();
+                // retorna pra view
+                return view('venda.finalizar_venda', [
+                    'itens' => $itens,
+                    'cliente' => $cliente,
+                ]);
+            } else {
+                // pega a sessao 
+                $sessao_id = session()->getId();
+                //consulta a sessao
+                $pedido = Pedido::consultarPedidoPorSessio($sessao_id);
+                // envia para a tela de cadastro de cliente
+                return view('cadastro.cliente')->with('pedido', $pedido);
+            }
         } else {
             // pega a sessao 
             $sessao_id = session()->getId();
             //consulta a sessao
             $pedido = Pedido::consultarPedidoPorSessio($sessao_id);
             // verifica se tem se tem session 
-            if ($pedido) {             
+            if ($pedido) {
                 // retorna a sessao 
                 return view('auth.register', compact('pedido'));
             }

@@ -23,6 +23,11 @@ class Cliente extends Model {
         'ativo',
         'usuario_id'
     ];
+    
+    //consultar por usuario 
+    public static function consultarPorUsuario($usuario_id) {
+        return self::where('usuario_id',$usuario_id)->first();
+    }
    
 
 }

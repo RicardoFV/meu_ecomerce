@@ -6,24 +6,24 @@
     <div class="row">
         <div class="col-sm-7">
 
-            <h5 class="ml-5 mb-2">Meu Carrinho</h5>
+            <h5 class="ml-5 mb-1">Meu Carrinho</h5>
             <div class="card ml-5 col-sm-7">
                 @foreach($itens as $item)
                 <div class="card-body d-flex">
-
-                    <img src="{{ url("storage/{$produto[0]->imagem}")}}" width="50" height="50">
-                    <p class=" ml-2 mt-4"> <strong>{{$produto[0]->nome }}</strong> </p>
+                    <img src="{{ url("storage/{$item->imagem}")}}" width="50" height="50">
+                    <p class=" ml-2 mt-4"> <strong>{{$item->produtoNome }}</strong> </p>
                     <span class=" ml-2 mt-4">Quantidade : {{ $item->quantidade }}</span>
                     <span class=" ml-3 mt-4">R$ {{ $item->valor }}</span>
                     <div class="mt-3 ml-5 ">
                         <a href="" class="btn btn-danger btn-sm d-inline">
                             <i class="fas fa-trash-alt"></i>
                         </a>
-                    </div>
+                         
+                    </div>             
                 </div>
-                @endforeach
+                <hr>
+                @endforeach   
             </div>
-
         </div>
 
         <div class="col-sm-5">
@@ -53,7 +53,7 @@
 
 <br><br>
 
-{{ $produto }}
+
 
 
 

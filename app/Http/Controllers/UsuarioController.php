@@ -8,13 +8,14 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UsuarioFormRequest;
+use App\Pedido;
 
 class UsuarioController extends Controller {
 
     private $usuario;
 
     public function __construct() {
-       // $this->middleware('auth');
+        // $this->middleware('auth');
         $this->usuario = new User();
     }
 
@@ -38,7 +39,17 @@ class UsuarioController extends Controller {
             $pedido = $data['pedido_id'];
             // altentica o cliente
             Auth::attempt($credencial);
-            return view('cadastro.cliente')->with('pedido', $pedido);
+            // se ouver pedido
+            if (isset($pedido)) {
+                // recebe a nova sessao
+                $sessao_id = session()->getId();
+                // atualiza a sessao
+                Pedido::atualizarSessao($pedido, $sessao_id);
+
+                return view('cadastro.cliente')->with('pedido', $pedido);
+            } else {
+                return view('cadastro.cliente');
+            }
         } else {
             return redirect()->back()->withErrors($data)->withInput();
         }
@@ -53,6 +64,7 @@ class UsuarioController extends Controller {
                 return redirect()->route('usuario.listar')
                                 ->with('mensagem', 'Usuáro Cadastro com Sucesso !');
             } else {
+
                 return redirect()->back()->withErrors($data)->withInput();
             }
         } else {

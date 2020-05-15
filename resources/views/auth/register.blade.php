@@ -12,7 +12,9 @@
                         @csrf
                         <input type="hidden" id="ativo" name="ativo" value="1">
                         <!-- carrega a sessao  -->
+                        @if(isset($pedido))
                         <input type="hidden" id="pedido_id" name="pedido_id" value="{{ $pedido }}">
+                        @endif
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nome') }}</label>
 
@@ -72,9 +74,6 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Registrar-se') }}
                                 </button>
-                                <a href="" class="btn btn-primary">
-                                    {{ __('Já tenho cadastro') }}
-                                </a>
                             </div>
                             
                         </div>
