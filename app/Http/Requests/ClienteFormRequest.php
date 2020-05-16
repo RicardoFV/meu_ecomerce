@@ -4,14 +4,15 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ParceiroFormRequest extends FormRequest {
-
+class ClienteFormRequest extends FormRequest
+{
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
 
@@ -20,24 +21,26 @@ class ParceiroFormRequest extends FormRequest {
      *
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         return [
-            // que tipo de informações serão validados
+             // que tipo de informações serão validados
             'ativo' => 'required',
             'nome' => 'required|min:3|max:255',
             'email' => 'required',
-            'tipo_documento' => 'required',
             'cep' => 'required',
             'logradouro' => 'required',
             'bairro' => 'required',
             'localidade' => 'required',
             'complemento' => 'required',
             'uf' => 'required',
+            'data_nascimento' => 'required',
+            'cpf' => 'required',
             'telefone' => 'required|min:10|max:11',
             'celular' => 'required|min:10'
         ];
     }
-
+    
     public function messages() {
         return[
             // mensagens em português
@@ -45,7 +48,8 @@ class ParceiroFormRequest extends FormRequest {
             'nome.min' => 'O campo :attribute não permite menos de 3 caracteres',
             'nome.max' => 'O campo :attribute não permite mais de 255 caracteres',
             'email.required' => 'O campo :attribute é obrigatório',
-            'tipo_documento.required' => 'O campo :attribute é obrigatório',
+            'data_nascimento.required' => 'O campo :attribute é obrigatório',
+            'cpf.required' => 'O campo :attribute é obrigatório',
             'cep.required' => 'O campo :attribute é obrigatório',
             'logradouro.required' => 'O campo :attribute é obrigatório',
             'bairro.required' => 'O campo :attribute é obrigatório',
@@ -59,5 +63,4 @@ class ParceiroFormRequest extends FormRequest {
             'celular.min' => 'O campo :attribute não permite menos de 10 caracteres',
         ];
     }
-
 }

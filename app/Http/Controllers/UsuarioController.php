@@ -35,21 +35,20 @@ class UsuarioController extends Controller {
         if ($inserir) {
             // pega os dados 
             $credencial = $request->only('email', 'password');
-            // recebe a sessao
-            $pedido = $data['pedido_id'];
             // altentica o cliente
             Auth::attempt($credencial);
-            // se ouver pedido
-            if (isset($pedido)) {
+            if (isset($data['pedido_id'])) {
+                // recebe a sessao
+                $pedido = $data['pedido_id'];
                 // recebe a nova sessao
                 $sessao_id = session()->getId();
                 // atualiza a sessao
                 Pedido::atualizarSessao($pedido, $sessao_id);
 
                 return view('cadastro.cliente')->with('pedido', $pedido);
-            } else {
-                return view('cadastro.cliente');
             }
+            // direciona para a home 
+            return redirect()->route('home');
         } else {
             return redirect()->back()->withErrors($data)->withInput();
         }

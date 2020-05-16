@@ -25,7 +25,7 @@
                             @endif
                             <div class="col-3">
                                 <label for="nome">NOME:</label>
-                                <input type="text" readonly="readonly" class="form-control" id="nome" value="{{ Auth::user()->name }}" name="nome" placeholder="Nome">
+                                <input type="text" readonly="readonly"  class="form-control" id="nome" value="{{ Auth::user()->name }}" name="nome" placeholder="Nome">
                             </div>
                             <div class="col-3">
                                 <label for="email">E-MAIL:</label>
@@ -38,7 +38,7 @@
 
                             <div class="col-3">
                                 <label for="cpf">CPF:</label>
-                                <input type="text" class="form-control"  id="cpf" name="cpf" placeholder="CPF">
+                                <input type="text" class="form-control" value="{{old('cpf')}}" id="cpf" name="cpf" placeholder="CPF">
                             </div>
 
                             <div class="col-auto">

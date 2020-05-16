@@ -10,18 +10,22 @@ use App\Cliente;
 
 class CarrinhoController extends Controller {
 
+    // e necessario esta logado 
+     public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function listar() {
         // recebe a session
         $sessionId = session()->getId();
         // faz a consulta , para ver se existe essa session
         $pedidoOId = Pedido::consultarPedidoPorSessio($sessionId);
         if (empty($pedidoOId)) {
-            // envia uma mensagem , ou faz uma atividade
             // direciona para a home 
             return redirect()->route('home');
         }
         // lista todos os itens do pedido
-        $carrinhoItem = PedidoItem::listarPedidoItem();
+        $carrinhoItem = PedidoItem::listarPedidoItem($pedidoOId);
         return view('venda.carrinho')->with('carrinhoItens', $carrinhoItem);
     }
 
@@ -184,8 +188,10 @@ class CarrinhoController extends Controller {
             $cliente = Cliente::consultarPorUsuario(auth()->user()->id);
             // se existir cliente
             if (isset($cliente)) {
+                // pega a sessao 
+                $sessao_id = session()->getId();
                 // pesquisa os itens no carrinho
-                $itens = PedidoItem::listarPedidoItem();
+                $itens = PedidoItem::listarPedidoItem($sessao_id);
                 // retorna pra view
                 return view('venda.finalizar_venda', [
                     'itens' => $itens,
