@@ -10,13 +10,15 @@ class Pedido extends Model {
     protected $fillable = [
         'session_id',
         'status',
+        'cliente_id'
     ];
 
     // salvar um novo pedido 
-    public static function cadastrarPedido($sessionId) {
+    public static function cadastrarPedido($sessionId, $clienteId) {
         Self::create([// insere os novos dados 
             'session_id' => $sessionId,
-            'status' => 'pendente'
+            'status' => 'pendente',
+            'cliente_id' => $clienteId
         ]);
     }
     //faz a atuazlização da sessao 

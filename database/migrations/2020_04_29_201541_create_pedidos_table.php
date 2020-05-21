@@ -17,6 +17,8 @@ class CreatePedidosTable extends Migration
             $table->increments('id');
             $table->text('session_id');
             $table->enum('status', ['pendente','aprovado']);
+            $table->integer('cliente_id')->unsigned();
+            $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->timestamps();
         });
     }

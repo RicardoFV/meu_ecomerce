@@ -21,14 +21,18 @@ class ClienteController extends Controller {
             $sessionId = session()->getId();
             // faz a consulta , para ver se existe essa session
             $pedidoOId = Pedido::consultarPedidoPorSessio($sessionId);
-            // pega os elementos        
-            $cliente = Cliente::where('usuario_id', auth()->user()->id)->first();
-            $itens = PedidoItem::listarPedidoItem($pedidoOId);
-            // retorna pra view
-            return view('venda.finalizar_venda', [
-                'itens' => $itens,
-                'cliente' => $cliente,
-            ]);
+            if (isset($pedidoOId)) {
+                // pega os elementos        
+                $cliente = Cliente::where('usuario_id', auth()->user()->id)->first();
+                $itens = PedidoItem::listarPedidoItem($pedidoOId);
+                // retorna pra view
+                return view('venda.finalizar_venda', [
+                    'itens' => $itens,
+                    'cliente' => $cliente,
+                ]);
+            }else {
+                return redirect()->route('home');
+            }
         } else {
             return redirect()->back()->withErrors($dadosForm)->withInput();
         }

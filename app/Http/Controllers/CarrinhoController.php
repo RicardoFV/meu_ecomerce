@@ -13,17 +13,20 @@ class CarrinhoController extends Controller {
     // e necessario esta logado 
      public function __construct()
     {
-        $this->middleware('auth');
+       $this->middleware('auth');
     }
     public function listar() {
         // recebe a session
         $sessionId = session()->getId();
         // faz a consulta , para ver se existe essa session
         $pedidoOId = Pedido::consultarPedidoPorSessio($sessionId);
+       
+        /*
         if (empty($pedidoOId)) {
             // direciona para a home 
             return redirect()->route('home');
         }
+         */
         // lista todos os itens do pedido
         $carrinhoItem = PedidoItem::listarPedidoItem($pedidoOId);
         return view('venda.carrinho')->with('carrinhoItens', $carrinhoItem);
@@ -51,8 +54,10 @@ class CarrinhoController extends Controller {
         $pedidoId = Pedido::consultarPedidoPorSessio($sessionId);
         //se o pedidoId viee vazio, significa que o pedido não existe, então insere
         if (empty($pedidoId)) {
+            // verifico se tem cadastro de cliente
+            $cliente = Cliente::consultarPorUsuario(auth()->user()->id);
             // faz o cadastro 
-            Pedido::cadastrarPedido($sessionId);
+            Pedido::cadastrarPedido($sessionId, $cliente['id']);
             // faz a consulta do pedido pelo id da session
             $pedidoId = Pedido::consultarPedidoPorSessio($sessionId);
         }
@@ -202,6 +207,8 @@ class CarrinhoController extends Controller {
                 $sessao_id = session()->getId();
                 //consulta a sessao
                 $pedido = Pedido::consultarPedidoPorSessio($sessao_id);
+                // atualizar a sessao 
+                Pedido::atualizarSessao($pedido, $sessao_id);
                 // envia para a tela de cadastro de cliente
                 return view('cadastro.cliente')->with('pedido', $pedido);
             }

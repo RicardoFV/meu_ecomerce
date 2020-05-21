@@ -69,9 +69,11 @@
                 <div class="col-sm-12  col-md-6">
                     <a href="{{ route('home')}}" class="btn btn-lg btn-block btn-primary text-uppercase">voltar a comprar</a>
                 </div>
-                <div class="col-sm-12 col-md-6 text-right">
-                    <a href="{{ route('carrinho.finalizar') }}" class="btn btn-lg btn-block btn-success text-uppercase">Finalizar Compra</a>
-                </div>
+                @if($quantidade > 0)
+                    <div class="col-sm-12 col-md-6 text-right">
+                        <a href="{{ route('carrinho.finalizar') }}" class="btn btn-lg btn-block btn-success text-uppercase">Finalizar Compra</a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

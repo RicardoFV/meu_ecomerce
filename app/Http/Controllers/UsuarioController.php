@@ -47,8 +47,8 @@ class UsuarioController extends Controller {
 
                 return view('cadastro.cliente')->with('pedido', $pedido);
             }
-            // direciona para a home 
-            return redirect()->route('home');
+            // direciona para a cliente 
+            return view('cadastro.cliente');
         } else {
             return redirect()->back()->withErrors($data)->withInput();
         }
