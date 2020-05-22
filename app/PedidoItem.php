@@ -41,12 +41,27 @@ class PedidoItem extends Model {
     public static function listarPedidoItem($sessionId) {
         return DB::table('pedido_itens')
                         ->join('produtos', 'pedido_itens.produto_id', '=', 'produtos.id')
-                        ->join('pedidos' ,'pedido_itens.pedido_id', '=','pedidos.id')
+                        ->join('pedidos', 'pedido_itens.pedido_id', '=', 'pedidos.id')
                         ->select('pedido_itens.*',
                                 'produtos.nome as produtoNome',
                                 'produtos.imagem',
                                 'produtos.quantidade as produtoQuantidade')
-                        ->where('pedido_id' , $sessionId)->get();
+                        ->where('pedido_id', $sessionId)->get();
+    }
+
+    public static function listarItensPorCliente($clienteId) {
+        return DB::table('pedido_itens')
+                        ->join('produtos', 'pedido_itens.produto_id', '=', 'produtos.id')
+                        ->join('pedidos', 'pedido_itens.pedido_id', '=', 'pedidos.id')
+                        ->join('clientes', 'pedidos.cliente_id', '=', 'clientes.id')
+                        ->select('pedido_itens.*',
+                                'produtos.nome as produtoNome',
+                                'produtos.imagem',
+                                'produtos.quantidade as produtoQuantidade',
+                                'clientes.id as idCliente',
+                                'clientes.nome as nomeCliente',
+                                'clientes.email as emailCliente')
+                        ->where('cliente_id', $clienteId)->where('pedidos.status', 'pendente')->get();
     }
 
 }

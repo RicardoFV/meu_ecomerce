@@ -17,20 +17,17 @@ class ClienteController extends Controller {
         $inserir = Cliente::create($dadosForm);
         //faz o teste 
         if ($inserir) {
-            // recebe a session
-            $sessionId = session()->getId();
-            // faz a consulta , para ver se existe essa session
-            $pedidoOId = Pedido::consultarPedidoPorSessio($sessionId);
-            if (isset($pedidoOId)) {
-                // pega os elementos        
-                $cliente = Cliente::where('usuario_id', auth()->user()->id)->first();
-                $itens = PedidoItem::listarPedidoItem($pedidoOId);
+
+            // pega os elementos        
+            $cliente = Cliente::where('usuario_id', auth()->user()->id)->first();
+            if (isset($cliente)) {
+
+                $itens = PedidoItem::listarItensPorCliente($cliente['id']);
                 // retorna pra view
                 return view('venda.finalizar_venda', [
-                    'itens' => $itens,
-                    'cliente' => $cliente,
+                    'itens' => $itens
                 ]);
-            }else {
+            } else {
                 return redirect()->route('home');
             }
         } else {

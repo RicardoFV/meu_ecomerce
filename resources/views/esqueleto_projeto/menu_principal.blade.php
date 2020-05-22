@@ -37,6 +37,11 @@
 
                 </li>
                 @endcan
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('carrinho.pendentes')}}">Vendas Pendentes</a>
+                </li>
+                
                 @endauth
 
             </ul>

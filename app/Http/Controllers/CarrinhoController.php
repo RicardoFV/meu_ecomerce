@@ -11,21 +11,21 @@ use App\Cliente;
 class CarrinhoController extends Controller {
 
     // e necessario esta logado 
-     public function __construct()
-    {
-       $this->middleware('auth');
+    public function __construct() {
+        $this->middleware('auth');
     }
+
     public function listar() {
         // recebe a session
         $sessionId = session()->getId();
         // faz a consulta , para ver se existe essa session
         $pedidoOId = Pedido::consultarPedidoPorSessio($sessionId);
-       
+
         /*
-        if (empty($pedidoOId)) {
-            // direciona para a home 
-            return redirect()->route('home');
-        }
+          if (empty($pedidoOId)) {
+          // direciona para a home
+          return redirect()->route('home');
+          }
          */
         // lista todos os itens do pedido
         $carrinhoItem = PedidoItem::listarPedidoItem($pedidoOId);
@@ -34,7 +34,7 @@ class CarrinhoController extends Controller {
 
     //controller responsavel por montar o carrinho
     public function cadastrar(Request $request) {
-        
+
         // pega a session do navegador 
         $sessionId = session()->getId();
         $this->middleware('VerifyCsrfToken');
@@ -56,10 +56,18 @@ class CarrinhoController extends Controller {
         if (empty($pedidoId)) {
             // verifico se tem cadastro de cliente
             $cliente = Cliente::consultarPorUsuario(auth()->user()->id);
-            // faz o cadastro 
-            Pedido::cadastrarPedido($sessionId, $cliente['id']);
-            // faz a consulta do pedido pelo id da session
-            $pedidoId = Pedido::consultarPedidoPorSessio($sessionId);
+            // verifico se tem cliente cadastrado
+            if (isset($cliente)) {
+                // faz o cadastro 
+                Pedido::cadastrarPedido($sessionId, $cliente['id']);
+                // faz a consulta do pedido pelo id da session
+                $pedidoId = Pedido::consultarPedidoPorSessio($sessionId);
+            } else {
+                // atualizar a sessao 
+                Pedido::atualizarSessao($pedidoId, $sessionId);
+                // envia para a tela de cadastro de cliente
+                return view('cadastro.cliente')->with('pedido', $pedido);
+            }
         }
         // verifica se o pedidoItem ja esta cadastrado
         $pedidoItem = PedidoItem::where([
@@ -193,14 +201,12 @@ class CarrinhoController extends Controller {
             $cliente = Cliente::consultarPorUsuario(auth()->user()->id);
             // se existir cliente
             if (isset($cliente)) {
-                // pega a sessao 
-                $sessao_id = session()->getId();
-                // pesquisa os itens no carrinho
-                $itens = PedidoItem::listarPedidoItem($sessao_id);
+                // pesquisa os  itens no carrinho
+                $itens = PedidoItem::listarItensPorCliente($cliente['id']);
+
                 // retorna pra view
                 return view('venda.finalizar_venda', [
-                    'itens' => $itens,
-                    'cliente' => $cliente,
+                    'itens' => $itens
                 ]);
             } else {
                 // pega a sessao 
@@ -222,6 +228,18 @@ class CarrinhoController extends Controller {
                 // retorna a sessao 
                 return view('auth.register', compact('pedido'));
             }
+        }
+    }
+
+    public function pendentes() {
+        // verifico se tem cadastro de cliente
+        $cliente = Cliente::consultarPorUsuario(auth()->user()->id);
+        if (isset($cliente)) {
+            // pesquisa os  itens no carrinho
+            $itens = PedidoItem::listarItensPorCliente($cliente['id']);
+
+            // retorna pra view
+            return view('venda.pendentes', compact('itens'));
         }
     }
 

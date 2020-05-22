@@ -3,12 +3,15 @@
 @section('conteudo')
 
 <div>
+     <h2 class="ml-5 mb-1 text-center">Meu Carrinho</h2>
+            <hr>
     <div class="row">
+       
         <div class="col-sm-7">
             @php
                 $total =0;
             @endphp
-            <h5 class="ml-5 mb-1">Meu Carrinho</h5>
+            
             <div class="card ml-5 col-sm-7">
 
                 @foreach($itens as $item)
@@ -48,11 +51,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-{{ $cliente }}
 
 <br><br>
 

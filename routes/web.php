@@ -81,8 +81,12 @@ Route::post('carrinho/atualizar', 'CarrinhoController@atualizar')->name('carrinh
 // rota que deleta o produto
 Route::post('carrinho/deletar','CarrinhoController@deletar')->name('carrinho.deletar');
 
+//*************VENDAS PENDENTES*******************************************
+Route::get('carrinho/pendentes', 'CarrinhoController@pendentes')->name('carrinho.pendentes');
+
 //*************FINALIZAR VENDA VERIFICANDO SE TEM CADASTRO*******************************************
 Route::get('carrinho/finalizar', 'CarrinhoController@finalizar')->name('carrinho.finalizar');
 
 //*************CADASTRO DE CLIENTE*******************************************
 Route::post('cliente/cadastrar', 'ClienteController@cadastrar')->name('cliente.cadastrar');
+
