@@ -69,6 +69,8 @@ class CarrinhoController extends Controller {
                 return view('cadastro.cliente')->with('pedido', $pedido);
             }
         }
+         // faz a consulta do pedido pelo id da session
+         //$pedidoId = Pedido::consultarPedidoPorSessio($sessionId);
         // verifica se o pedidoItem ja esta cadastrado
         $pedidoItem = PedidoItem::where([
                     'produto_id' => $produto_id,
@@ -155,6 +157,37 @@ class CarrinhoController extends Controller {
         }
         // vai para o carrinho 
         return redirect()->route('carrinho.listar');
+    }
+    
+    public function deleta_pendente(Request $request) {
+        // recebe os dados da tela
+        $pedidoId = $request->input('pedido_id');
+        $produtoId = $request->input('produto_id');
+        $pedidoitemId = $request->input('pedido_item');
+        $quantidade_escolhidade = $request->input('quantidade_escolhidade');
+        // pesquisa o pedidoItem
+        $pedidoItem = PedidoItem::find($pedidoitemId);
+
+        //chama o metodo que retorna quantidade de produtos
+        Produto::voltarProEstoque($produtoId, $quantidade_escolhidade);
+        // deleta o pedidoItem
+        PedidoItem::deletarPedidoItem($pedidoItem);
+
+        // pesquisa o pedido
+        $pedido = Pedido::find($pedidoId);
+
+        // pesquisa o pedidoItem com base pedido_id 
+        $pedidoItens = PedidoItem::where('pedido_id', $pedido->id)->first();
+
+        // caso o produto vinculado nao esteja no pedidoitens
+        if (!isset($pedidoItens)) {
+            // deleta o pedido
+            Pedido::deletarPedido($pedido);
+            // vai para a home 
+            return redirect()->route('home');
+        }
+        // vai para o carrinho 
+        return redirect()->route('carrinho.finalizar');
     }
 
     public function deletar(Request $request) {

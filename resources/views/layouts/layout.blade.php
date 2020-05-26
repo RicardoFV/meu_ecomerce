@@ -21,7 +21,7 @@
 
         <section class="jumbotron text-center">
             <div class="container">
-                <h2 class="jumbotron-heading">Loja Virtual - RN Tecnologia</h2>
+                <h3 class="jumbotron-heading">Loja Virtual - RN Tecnologia</h3>
                 <p class="lead text-muted mb-0">Faça a compra do seu produto on-line</p>
             </div>
         </section>
