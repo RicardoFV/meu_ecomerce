@@ -9,6 +9,9 @@
 
             <ul class="navbar-nav m-auto">
                 @auth
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('carrinho.pendentes')}}">Vendas Pendentes</a>
+                </li>
                 @can('adm', Auth::user())
                 <li class="nav-item dropdown">
 
@@ -37,11 +40,7 @@
 
                 </li>
                 @endcan
-                
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('carrinho.pendentes')}}">Vendas Pendentes</a>
-                </li>
-                
+              
                 @endauth
 
             </ul>

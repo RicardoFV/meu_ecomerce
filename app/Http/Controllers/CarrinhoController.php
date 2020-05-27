@@ -275,5 +275,10 @@ class CarrinhoController extends Controller {
             return view('venda.pendentes', compact('itens'));
         }
     }
+    
+    public function pagamentoMercadoPago() {
+        
+        return view('pagamentos.mercado_pago');
+    }
 
 }

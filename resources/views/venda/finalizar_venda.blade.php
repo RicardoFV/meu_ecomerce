@@ -3,7 +3,7 @@
 @section('conteudo')
 
 <div>
-    <div class="col-sm-2 col-md-2 ml-4">
+    <div class="col-sm-2 col-md-3 ml-4">
         <a href="{{ route('home')}}" class="btn btn-lg btn-block btn-primary text-uppercase">voltar a comprar</a>
     </div>
     <h2 class="ml-5 mb-1 text-center">Meu Carrinho</h2>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="card-body">
                     <p class="card-text"> <strong>Total :</strong> R$ {{ number_format($total,2,',','.' )}}</p>
-                    <a href="" class="btn btn-success btn-block">Efetuar Pagamento</a>
+                    <a href="{{route('pagamento_mercado_pago') }}" class="btn btn-success btn-block">Efetuar Pagamento</a>
                 </div>
             </div>  
 

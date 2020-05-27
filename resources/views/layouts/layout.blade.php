@@ -19,12 +19,7 @@
         <!-- inclusão do menu -->
         @include('esqueleto_projeto.menu_principal')
 
-        <section class="jumbotron text-center">
-            <div class="container">
-                <h3 class="jumbotron-heading">Loja Virtual - RN Tecnologia</h3>
-                <p class="lead text-muted mb-0">Faça a compra do seu produto on-line</p>
-            </div>
-        </section>
+        <br><br>
         <!-- conteudo principal -->
         @yield('conteudo')
 
