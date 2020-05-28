@@ -13,20 +13,28 @@
         <div class="col-sm-7">
 
             @php
-            $total =0;
+                $total =0;
+                $idCliente =0;
+                $nomeCliente = '';
             @endphp
             <table class="table table-sm table-bordered table-hover ml-4 mb-5">
                 <thead class="text-center text-uppercase">
                     <tr>
                         <th scope="col" colspan="6" class=""> Cliente : {{$itens[0]->nomeCliente}} </th>
-                    </tr>
-                    <tr>
-                        <th scope="col">Imagem</th>
-                        <th scope="col">Nome do Produto</th>
-                        <th scope="col">Quantidade</th>
-                        <th scope="col">Valor</th>
-                        <th scope="col">Ação</th>
-                    </tr>
+                        
+                        @php 
+                            // pega o cliente 
+                            $idCliente = $itens[0]->idCliente;
+                            $nomeCliente = $itens[0]->nomeCliente;
+                        @endphp
+                </tr>
+                <tr>
+                    <th scope="col">Imagem</th>
+                    <th scope="col">Nome do Produto</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Ação</th>
+                </tr>
                 </thead>
                 <tbody>
                     @foreach($itens as $item)
@@ -62,13 +70,23 @@
                     <h5 class="card-title text-center">Finalizar Compra</h5>
                 </div>
                 <div class="card-body">
-                    <p class="card-text"> <strong>Total :</strong> R$ {{ number_format($total,2,',','.' )}}</p>
-                    <a href="{{route('pagamento_mercado_pago') }}" class="btn btn-success btn-block">Efetuar Pagamento</a>
+                    <form method="post" action="{{ route('pagamento_mercado_pago') }}">
+                         @Csrf
+                        <p class="card-text"> <strong>Total :</strong> R$ {{ number_format($total,2,',','.' )}}</p>
+                        <input type="hidden" id="valor_final" name="valor_final" value="{{ $total }}"> 
+                        <input type="hidden" name="idcliente" id="idcliente" value="{{ $idCliente }}">
+                        <input type="hidden" name="nomecliente" id="nomecliente" value="{{ $nomeCliente }}">
+                        <button class="btn btn-success btn-block">Efetuar Pagamento</button>
+                    </form>
+                    
+                    
                 </div>
             </div>  
 
         </div>
     </div>
 </div>
+
+{{ $itens}}
 
 @endsection

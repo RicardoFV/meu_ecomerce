@@ -14,7 +14,7 @@
         <div class="form-row">
             <div class="form-group col-md-3">
                 <label for="description"> Descrição</label>
-                <input class="form-control" type="text" name="description" id="description"/>    
+                <input class="form-control" type="text" name="description" readonly="readonly" value="Produtos Diversos" id="description"/>    
             </div>
 
             <div class="form-group col-md-3">

@@ -83,7 +83,7 @@ Route::post('carrinho/deletar','CarrinhoController@deletar')->name('carrinho.del
 // rota que deleta o produto pendentes
 Route::post('carrinho/deleta_pendente','CarrinhoController@deleta_pendente')->name('carrinho.deleta_pendente');
 // direcionando para pagamento 
-Route::get('carrinho/pagamentoMercadoPago', 'CarrinhoController@pagamentoMercadoPago')->name('pagamento_mercado_pago');
+Route::post('carrinho/pagamentoMercadoPago', 'CarrinhoController@pagamentoMercadoPago')->name('pagamento_mercado_pago');
 
 //*************VENDAS PENDENTES*******************************************
 Route::get('carrinho/pendentes', 'CarrinhoController@pendentes')->name('carrinho.pendentes');

@@ -276,8 +276,8 @@ class CarrinhoController extends Controller {
         }
     }
     
-    public function pagamentoMercadoPago() {
-        
+    public function pagamentoMercadoPago(Request $request) {
+        print_r($request->all()); exit();
         return view('pagamentos.mercado_pago');
     }
 
