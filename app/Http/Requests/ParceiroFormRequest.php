@@ -33,8 +33,8 @@ class ParceiroFormRequest extends FormRequest {
             'localidade' => 'required',
             'complemento' => 'required',
             'uf' => 'required',
-            'telefone' => 'required|min:10|max:11',
-            'celular' => 'required|min:10'
+            'telefone' => 'required|min:10|max:10',
+            'celular' => 'required|min:10|max:11'
         ];
     }
 
@@ -54,9 +54,10 @@ class ParceiroFormRequest extends FormRequest {
             'uf.required' => 'O campo :attribute é obrigatório',
             'telefone.required' => 'O campo :attribute é obrigatório',
             'telefone.min' => 'O campo :attribute não permite menos de 10 caracteres',
-            'telefone.max' => 'O campo :attribute não permite mais de 11 caracteres',
+            'telefone.max' => 'O campo :attribute não permite mais de 10 caracteres',
             'celular.required' => 'O campo :attribute é obrigatório',
             'celular.min' => 'O campo :attribute não permite menos de 10 caracteres',
+            'telefone.max' => 'O campo :attribute não permite mais de 11 caracteres',
         ];
     }
 

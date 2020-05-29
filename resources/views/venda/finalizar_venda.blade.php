@@ -16,6 +16,7 @@
                 $total =0;
                 $idCliente =0;
                 $nomeCliente = '';
+                $emailCliente = '';
             @endphp
             <table class="table table-sm table-bordered table-hover ml-4 mb-5">
                 <thead class="text-center text-uppercase">
@@ -26,6 +27,7 @@
                             // pega o cliente 
                             $idCliente = $itens[0]->idCliente;
                             $nomeCliente = $itens[0]->nomeCliente;
+                            $emailCliente = $itens[0]->emailCliente
                         @endphp
                 </tr>
                 <tr>
@@ -76,6 +78,8 @@
                         <input type="hidden" id="valor_final" name="valor_final" value="{{ $total }}"> 
                         <input type="hidden" name="idcliente" id="idcliente" value="{{ $idCliente }}">
                         <input type="hidden" name="nomecliente" id="nomecliente" value="{{ $nomeCliente }}">
+                        <input type="hidden" name="emailCliente" id="emailCliente" value="{{ $emailCliente }}">    
+                        emailCliente
                         <button class="btn btn-success btn-block">Efetuar Pagamento</button>
                     </form>
                     
@@ -86,7 +90,5 @@
         </div>
     </div>
 </div>
-
-{{ $itens}}
 
 @endsection

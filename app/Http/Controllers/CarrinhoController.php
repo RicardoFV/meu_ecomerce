@@ -277,8 +277,10 @@ class CarrinhoController extends Controller {
     }
     
     public function pagamentoMercadoPago(Request $request) {
-        print_r($request->all()); exit();
-        return view('pagamentos.mercado_pago');
+        // pega os dados
+        $dados = $request->except('_token');
+        //retorna as informacaos
+        return view('pagamentos.mercado_pago')->with('dados', $dados);
     }
 
 }

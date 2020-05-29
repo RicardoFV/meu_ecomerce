@@ -3,6 +3,8 @@
 @section('conteudo')
 
 <div class="container">
+    
+   
 
     <h1 class="text-center mt-0 mb-3">Realizar Pagamento</h1>
 
@@ -19,17 +21,17 @@
 
             <div class="form-group col-md-3">
                 <label for="cardholderName">Nome e Sobrenome</label>
-                <input type="text" class="form-control" id="cardholderName" data-checkout="cardholderName" />    
+                <input type="text" class="form-control" id="cardholderName" value="{{$dados['nomecliente']}}" data-checkout="cardholderName" />    
             </div>
 
             <div class="form-group col-md-3">
                 <label for="email">E-mail</label>
-                <input type="email" class="form-control" id="email" name="email" />   
+                <input type="email" class="form-control" id="email" value="{{$dados['emailCliente']}}" name="email" />   
             </div>
 
             <div class="form-group col-md-3">
                 <label for="transaction_amount">Valor a Pagar</label>
-                <input  class="form-control" name="transaction_amount" id="transaction_amount" />    
+                <input  class="form-control" name="transaction_amount" readonly="readonly" value="R$ {{$dados['valor_final']}}" id="transaction_amount" />    
             </div>
 
             <div class="form-group col-md-3">
@@ -74,6 +76,8 @@
             <button class="btn btn-success ml-1">Realizar Pagamento</button>  
         </div> 
     </form>
+    
+    {{ $dados['nomecliente']  }}
 
     <label for="termo_condicoes"><strong>Termos e condições</strong></label><br>
     <input type="checkbox" name="termo_condicoes" id="termo_condicoes"required="required">
@@ -92,9 +96,4 @@
 
     <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
 </div>
-
-
-
-
-
 @endsection

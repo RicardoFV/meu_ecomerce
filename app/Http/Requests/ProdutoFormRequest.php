@@ -25,6 +25,7 @@ class ProdutoFormRequest extends FormRequest
     public function rules()
     {
         return [
+            'nome' => 'required|min:8|max:255',
             'ativo'=>'required',
             'imagem' => 'max:5000|image|mimes:jpeg',
             'descricao' => 'required|min:10|max:255',
@@ -39,6 +40,9 @@ class ProdutoFormRequest extends FormRequest
             'parceiro_id.required' =>'O campo Parceiro é obrigatório',
             'preco.required' =>'O campo :attribute é obrigatório',
             'quantidade.required'=>'O campo :attribute é obrigatório', 
+            'nome.required'=>'O campo :attribute é obrigatório',
+            'nome.min'=>'O campo :attribute não permite menos de 10 digitos',
+            'nome.max'=>'O campo :attribute não permite mais de 255 digitos',
             'descricao.required'=>'O campo :attribute é obrigatório',
             'descricao.min'=>'O campo :attribute não permite menos de 10 digitos',
             'descricao.max'=>'O campo :attribute não permite mais de 255 digitos',
