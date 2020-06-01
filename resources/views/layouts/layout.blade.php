@@ -2,7 +2,8 @@
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
         <title>Loja Virtual - RN Tecnologia</title>
         
         <!-- Bootstrap CSS -->
@@ -11,8 +12,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo asset('css/estilofooter.css') ?>">
         <!-- trabalha com icone -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-        <script src="{{asset('js/validacoes.js')}}"></script>
-        
+        <script src="{{asset('js/validacoes.js')}}"></script>       
     </head>
     <body>
 

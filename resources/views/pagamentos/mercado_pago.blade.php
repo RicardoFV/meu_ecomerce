@@ -3,14 +3,12 @@
 @section('conteudo')
 
 <div class="container">
-    
-   
 
     <h1 class="text-center mt-0 mb-3">Realizar Pagamento</h1>
 
     <form>
         <!-- campos especificos  -->
-        <input type="hidden" name="amount" id="amount"/>
+        <input type="text" name="amount" id="amount"/>
         <input type="hidden" name="payment_method_id" id="payment_method_id"/>
 
         <div class="form-row">
@@ -76,12 +74,12 @@
             <button class="btn btn-success ml-1">Realizar Pagamento</button>  
         </div> 
     </form>
-    
-    {{ $dados['nomecliente']  }}
+
+
 
     <label for="termo_condicoes"><strong>Termos e condições</strong></label><br>
     <input type="checkbox" name="termo_condicoes" id="termo_condicoes"required="required">
-        Estou ciente que meus dados estão protegidos e que o sistema e-commerce não reterá nenhum 
+    Estou ciente que meus dados estão protegidos e que o sistema e-commerce não reterá nenhum 
     dado aqui digitado.
     <br><br>
     <div class="mb-5 mt-3 text-center">
@@ -90,10 +88,6 @@
              width="735" height="40"/>
     </div>
 
-
-
-
-
-    <script src="https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js"></script>
+   
 </div>
 @endsection
