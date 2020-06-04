@@ -74,13 +74,10 @@
                 <div class="card-body">
                     <form method="post" action="{{ route('gerar_boleto') }}">
                          @Csrf
-                        <p class="card-text"> <strong>Total :</strong> R$ {{ number_format($total,2,',','.' )}}</p>
-                        <input type="hidden" id="valor_final" name="valor_final" value="{{ $total }}"> 
+                        <p class="card-text"> <strong>Total :</strong> R$ {{ number_format($total,2,',','.' )}}</p>        
                         <input type="hidden" name="idcliente" id="idcliente" value="{{ $idCliente }}">
-                        <input type="hidden" name="nomecliente" id="nomecliente" value="{{ $nomeCliente }}">
-                        <input type="hidden" name="emailCliente" id="emailCliente" value="{{ $emailCliente }}">    
-                        
-                        <button class="btn btn-success btn-block">Gerar Boleto</button>
+                    
+                        <button target="_blank" class="btn btn-success btn-block">Gerar Boleto</button>
                     </form>
                     
                     
