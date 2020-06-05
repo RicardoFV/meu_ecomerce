@@ -9,10 +9,10 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Cadastro de Cliente</div>
+                <div class="card-header">Cadastro de Categoria</div>
                 <div class="card-body">
 
-                    <form method="post" action="{{ route('cliente.cadastrar') }}">
+                    <form method="post" action="{{ route('categoria.cadastrar') }}">
                         @Csrf
                         <div class="form-row">
                             <!-- campo responsavel por dizer que o cadastro esta ativo ou não -->
@@ -20,9 +20,9 @@
                             <!-- pega o usuario logado -->
                             <input type="hidden" id="usuario_id" name="usuario_id" value="{{Auth::user()->id }}">
                            
-                            <div class="col-3">
+                            <div class="col-sm-6">
                                 <label for="nome">NOME:</label>
-                                <input type="text" class="form-control" id="nome" value="{{ old('nome') }}" name="nome" placeholder="Nome">
+                                <input type="text" class="form-control" id="nome" value="{{ old('nome') }}" name="nome" placeholder="Nome da Categoria">
                             </div>
                             
                         </div>

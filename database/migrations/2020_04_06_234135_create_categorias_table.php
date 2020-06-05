@@ -15,7 +15,9 @@ class CreateCategoriasTable extends Migration
     {
         Schema::create('categorias', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('nome');
+            $table->string('nome');
+            //esse campo e responsavel por dizer que esta ativo ou não (1 ativo 0 inivativo)
+            $table->integer('ativo');
             $table->integer('usuario_id')->unsigned();
             $table->foreign('usuario_id')->references('id')->on('users');
             $table->timestamps();

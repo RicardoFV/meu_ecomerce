@@ -13,7 +13,7 @@ class CategoriaController extends Controller {
 
     public function __construct() {
         $this->middleware('auth');
-        $this->categoria = new App\Categoria;
+        $this->categoria = new Categoria;
     }
 
     /**
@@ -23,9 +23,7 @@ class CategoriaController extends Controller {
      */
     public function index() {
         if (Gate::allows('adm', Auth::user())) {
-            $categoria = Categoria::where('ativo', 1)->get();
-            // retorna as informaçoes
-            return view('lista.categoria_lista', compact('categoria'));
+            return view('cadastro.categoria');
         } else {
             abort(403, 'Não autorizado');
         }
@@ -45,7 +43,7 @@ class CategoriaController extends Controller {
             $inserir = Categoria::create($dadosForm);
             if ($inserir) {
                 // redireciona para a tela de cadastro
-                return redirect()->action('CategoriaController@index')->with('mensagem', 'Categoria cadastrado com Sucesso !');
+                return redirect()->action('CategoriaController@listar')->with('mensagem', 'Categoria cadastrado com Sucesso !');
             } else {
                 // retorna para a mesma tela
                 return redirect()->back()->withErrors($dadosForm)->withInput();
@@ -91,13 +89,13 @@ class CategoriaController extends Controller {
             /// recebe as informações 
             $dadosForm = $request->all();
             // faz a busca por id
-            $this->ca = $this->categoria->find($id);
+            $this->categoria = $this->categoria->find($id);
             //faz a atualização
             $atualizar = $this->categoria->update($dadosForm);
             //faz a verificação se foi atualizado corretamente
             if ($atualizar) {
                 // redireciona para a tela de cadastro
-                return redirect()->action('CategoriaController@index')->with('mensagem', 'Categoria Alterado com Sucesso !');
+                return redirect()->action('CategoriaController@listar')->with('mensagem', 'Categoria Alterado com Sucesso !');
             } else {
                 // se deu errado , volta a tela de cadastro
                 return redirect()->back()->withErrors($dadosForm);
@@ -124,13 +122,23 @@ class CategoriaController extends Controller {
             // verifica se deu certo
             if ($excluir) {
                 // redireciona para a tela de listagem
-                return redirect()->action('CategoriaController@index')
+                return redirect()->action('CategoriaController@listar')
                                 ->with('mensagem', 'categoria desativado com Sucesso !');
             } else {
                 // redireciona para a tela de cadastro
                 return redirect()->back()->with('erro', 'categoria não pode ser removido !');
             }
-        }else {
+        } else {
+            abort(403, 'Não autorizado');
+        }
+    }
+
+    public function listar() {
+        if (Gate::allows('adm', Auth::user())) {
+            $categorias = Categoria::where('ativo', 1)->get();
+            // retorna as informaçoes
+            return view('lista.categoria_lista', compact('categorias'));
+        } else {
             abort(403, 'Não autorizado');
         }
     }

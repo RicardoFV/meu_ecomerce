@@ -19,8 +19,6 @@ class CreatePagamentosTable extends Migration
             $table->enum('forma_pagamento', ['boleto', 'cartao']);
             $table->decimal('valor_pago', 10, 2)->default(0);
             $table->string('data_vencimento');
-            //esse campo e responsavel por dizer que esta ativo ou não (1 ativo 0 inivativo)
-            $table->integer('ativo');
             $table->integer('pedido_id')->unsigned();
             $table->foreign('pedido_id')->references('id')->on('pedidos');
             $table->integer('cliente_id')->unsigned();

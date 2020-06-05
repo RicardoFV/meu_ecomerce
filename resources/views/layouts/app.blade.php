@@ -48,6 +48,7 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="{{ route('categoria') }}">Categoria</a>
                                     <a class="dropdown-item" href="{{ route('parceiro') }}">Parceiros</a>
                                     <a class="dropdown-item" href="{{ route('produto') }}">Produtos</a>
                                     <a class="dropdown-item" href="{{ route('usuario') }}">Usuário</a>

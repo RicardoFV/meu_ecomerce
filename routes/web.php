@@ -29,11 +29,12 @@ Route::get('/parceiro/consultar/{id}', 'ParceiroController@consultar')->name('pa
 Route::get('/parceiro/deletar/{id}', 'ParceiroController@deletar')->name('parceiro.deletar');
 
 // ************************************* ROTA DE CATEGORIA****************************************
-Route::get('/categoria', 'CategoriaController@index')->name('categoria.listar');
+Route::get('/categoria', 'CategoriaController@index')->name('categoria');
 Route::post('/categoria/cadastrar', 'CategoriaController@store')->name('categoria.cadastrar');
 Route::get('/categoria/consultar/{id}', 'CategoriaController@show')->name('categoria.consultar');
+Route::get('/categoria/listar', 'CategoriaController@listar')->name('categoria.listar');
 Route::post('/categoria/atualizar/{id}', 'CategoriaController@update')->name('categoria.atualizar');
-Route::get('/categoria/atualizar/{id}','CategoriaController@destroy' )->name('categoria.deletar');
+Route::get('/categoria/deletar/{id}','CategoriaController@destroy' )->name('categoria.deletar');
 
 // ************************************* ROTA DE PRODUTO ****************************************
 // rota de cadastro do produto
