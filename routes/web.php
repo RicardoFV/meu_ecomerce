@@ -28,6 +28,13 @@ Route::get('/parceiro/consultar/{id}', 'ParceiroController@consultar')->name('pa
 // rota que faz a deleção  de um parceiro especifico
 Route::get('/parceiro/deletar/{id}', 'ParceiroController@deletar')->name('parceiro.deletar');
 
+// ************************************* ROTA DE CATEGORIA****************************************
+Route::get('/categoria', 'CategoriaController@index')->name('categoria.listar');
+Route::post('/categoria/cadastrar', 'CategoriaController@store')->name('categoria.cadastrar');
+Route::get('/categoria/consultar/{id}', 'CategoriaController@show')->name('categoria.consultar');
+Route::post('/categoria/atualizar/{id}', 'CategoriaController@update')->name('categoria.atualizar');
+Route::get('/categoria/atualizar/{id}','CategoriaController@destroy' )->name('categoria.deletar');
+
 // ************************************* ROTA DE PRODUTO ****************************************
 // rota de cadastro do produto
 Route::get('/produto', 'ProdutoController@index')->name('produto');
