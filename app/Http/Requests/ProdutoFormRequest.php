@@ -31,7 +31,8 @@ class ProdutoFormRequest extends FormRequest
             'descricao' => 'required|min:10|max:255',
             'quantidade' =>'required',
             'parceiro_id'=>'required',
-            'preco' =>'required'
+            'preco' =>'required',
+            'categoria_id'=>'required'
         ];
     }
     // colocando as mensagems em portugues 
@@ -48,7 +49,8 @@ class ProdutoFormRequest extends FormRequest
             'descricao.max'=>'O campo :attribute não permite mais de 255 digitos',
             'imagem.required'=>'O campo :attribute é obrigatório', 
             'imagem.max'=>'O campo :attribute não permite arquivos maiores que 5 Megas',
-            'imagem.mimes'=>'O campo :attribute só permite arquivos no formato JPG e JPEG'
+            'imagem.mimes'=>'O campo :attribute só permite arquivos no formato JPG e JPEG',
+            'categoria_id.required' =>'O campo Categoria é obrigatório',
         ];
     }
 }
