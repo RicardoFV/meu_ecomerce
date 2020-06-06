@@ -43,12 +43,23 @@
                                 <label for="preco">PREÇO:</label>
                                 <input type="text" class="form-control" id="preco" value="{{old('preco')}}" name="preco" placeholder="Preço">
                             </div>
+                            
                             <div class="col-3">
                                 <label for="descricao">DESCRIÇÃO:</label>
                                 <textarea name="descricao"  id="descricao" wrap="hard"  class="form-control" cols="25" rows="3" placeholder="Digite a descrição do Produto">
                     {{old('descricao')}}
                                 </textarea>
 
+                            </div>
+                             <div class="col-3">
+                                <label for="parceiro_id">CATEGORIA:</label>
+
+                               <select name="categoria_id" id="categoria_id" class="form-control">
+                                    <option value="">Selecione</option>
+                                    @foreach($categorias as $categoria)
+                                    <option value="{{$categoria->id}}">{{$categoria->nome }}</option>
+                                    @endforeach
+                               </select> 
                             </div>
 
                             <div class="col-auto">

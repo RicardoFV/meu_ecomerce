@@ -8,6 +8,10 @@ use App\Pedido;
 use App\Http\Requests\ClienteFormRequest;
 
 class ClienteController extends Controller {
+    
+    public function index() {
+         return view('cadastro.cliente');
+    }
 
     //cadastrar o cliente
     public function cadastrar(ClienteFormRequest $request) {

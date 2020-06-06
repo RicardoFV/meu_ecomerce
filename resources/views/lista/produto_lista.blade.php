@@ -22,6 +22,7 @@
                                 <th scope="col">Descricao</th>
                                 <th scope="col">Valor Unitario</th>
                                 <th scope="col">Parceiro</th>
+                                <th scope="col">Categoria</th>
                                 <th scope="col">Quantidade</th>
                                 <th scope="col">Ações</th>
                             </tr>
@@ -36,6 +37,7 @@
                                 <td>{{$produto->descricao}}</td>
                                 <td>{{$produto->preco}}</td>
                                 <td>{{$produto->nomeProduto }}</td>
+                                <td>{{$produto->nomeCategoria }}</td>
                                 <td>{{$produto->quantidade}}</td>
                                 <td>
                                     <a href="{{action('ProdutoController@consultar', $produto->id)}}" class="btn-info btn-sm mr-2">

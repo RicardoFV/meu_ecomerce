@@ -8,6 +8,7 @@ use App\Http\Requests\ProdutoFormRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
+use App\Categoria;
 
 class ProdutoController extends Controller {
 
@@ -23,10 +24,14 @@ class ProdutoController extends Controller {
     public function index() {
         // verifico a permissão 
         if (Gate::allows('adm', Auth::user())) {
-            // chamo o parceiro
+            // chamo o parceiro e categoria
             $parceiros = Parceiro::where('ativo', 1)->get();
+            $categorias = Categoria::where('ativo', 1)->get();
             // faço o retorno 
-            return view('cadastro.produto', ['parceiros' => $parceiros]);
+            return view('cadastro.produto', [
+                'parceiros' => $parceiros,
+                'categorias' => $categorias
+            ]);
         } else {
             abort(403, 'Não autorizado');
         }
@@ -57,6 +62,7 @@ class ProdutoController extends Controller {
                                 'preco' => $request->input('preco'),
                                 'quantidade' => $request->input('quantidade'),
                                 'parceiro_id' => $request->input('parceiro_id'),
+                                'categoria_id' => $request->input('categoria_id'),
                                 'imagem' => $upload  // pega o caminho do arquivo
                     ]);
                     // verifica se deu certo a inserção
@@ -78,6 +84,7 @@ class ProdutoController extends Controller {
                             'usuario_id' => $request->input('usuario_id'),
                             'quantidade' => $request->input('quantidade'),
                             'parceiro_id' => $request->input('parceiro_id'),
+                            'categoria_id' => $request->input('categoria_id'),
                             'imagem' => 'sem imagem'  // caso não tenha imagem
                 ]);
                 //verifica se foi feito a inclusão 
@@ -120,6 +127,7 @@ class ProdutoController extends Controller {
                     $this->produto->usuario_id = $request->input('usuario_id');
                     $this->produto->quantidade = $request->input('quantidade');
                     $this->produto->parceiro_id = $request->input('parceiro_id');
+                    $this->produto->categoria_id = $request->input('categoria_id');
                     $this->produto->imagem = $upload;
                     $atualizar = $this->produto->save();
                     // verifica se deu certo a inserção
@@ -140,6 +148,7 @@ class ProdutoController extends Controller {
                 $this->produto->usuario_id = $request->input('usuario_id');
                 $this->produto->quantidade = $request->input('quantidade');
                 $this->produto->parceiro_id = $request->input('parceiro_id');
+                $this->produto->categoria_id = $request->input('categoria_id');
                 $this->produto->imagem = $request->input('sem_imagem'); // caso não tenha imagem
                 $atualizar = $this->produto->save();
                 //verifica se foi feito a inclusão 
@@ -163,19 +172,27 @@ class ProdutoController extends Controller {
             $produto = Produto::find($id);
             // recebe o parceiro 
             $parceiro_id = $produto->parceiro_id;
+            // recebe a categoria
+            $categoria_id = $produto->categoria_id;
             // consulta o parceiro
             $parceiro = Parceiro::find($parceiro_id);
+            // consultando a categoria
+            $categoria = Categoria::find($categoria_id); 
+      
             // verifica se ativo veio 0 ou não
-            if ($parceiro->ativo == 0) {
+            if ($parceiro->ativo == 0 && $categoria->ativo == 0) {
                 return redirect()->action('ProdutoController@listar')
                                 ->with('erro', 'Produto desativado, não pode ser alterado !');
             } else {
                 // chamo o parceiro
                 $parceiros = Parceiro::where(['tipo' => 'juridica', 'ativo' => 1])->get();
+                //chama a Categoria
+                $categorias = Categoria::where('ativo', 1)->get();
                 // quando o nome é igual , pode colocar assim
                 return view('altera.produto_altera')->with([
                             'produto' => $produto,
                             'parceiros' => $parceiros,
+                            'categorias' => $categorias
                 ]);
             }
         } else {
@@ -212,7 +229,8 @@ class ProdutoController extends Controller {
             // retorna todos os produtos com base no id send iguak ao parceiros
             $produtos = DB::table('produtos')
                             ->join('parceiros', 'produtos.parceiro_id', '=', 'parceiros.id')
-                            ->select('produtos.*', 'parceiros.nome as nomeProduto')
+                            ->join('categorias', 'produtos.categoria_id', '=','categorias.id' )
+                            ->select('produtos.*', 'parceiros.nome as nomeProduto', 'categorias.nome as nomeCategoria')
                             ->where('produtos.ativo', 1)->get();
             // retorna o dados 
             return view('lista.produto_lista')->with('produtos', $produtos);

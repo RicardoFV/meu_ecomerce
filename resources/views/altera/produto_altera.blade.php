@@ -57,6 +57,17 @@
                                 </textarea>
 
                             </div>
+                            <div class="col-3">
+                                <label for="parceiro_id">CATEGORIA:</label>
+
+                                <select name="categoria_id" id="categoria_id" class="form-control">
+                                    <option value="">Selecione</option>
+                                    @foreach($categorias as $categoria)
+                                    <option value="{{$categoria->id }}" <?= ($produto->categoria_id == $categoria->id) ? 'selected' : '' ?> >{{$categoria->nome }}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
 
                             <div class="col-auto">
                                 <label for="imagem"  class="">IMAGEM:</label>
