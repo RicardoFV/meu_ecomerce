@@ -25,7 +25,9 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php if(isset($itens)): ?>
                     <?php $__currentLoopData = $itens; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    
                     <tr class="text-center">
                         <td scope="row"><img src="<?php echo e(url("storage/{$item->imagem}")); ?>" width="50" height="50"></td>
                         <td scope="row"> <?php echo e($item->produtoNome); ?></td>
@@ -44,6 +46,7 @@
                         </td>
                     </tr>
                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                     <?php endif; ?>
                      <tr>
                          <td colspan="6">
                              <a href="<?php echo e(route('carrinho.finalizar')); ?>" class="btn btn-success btn-block col-sm-12 mt-2 mb-2">Ir para Finalizar Compra</a>

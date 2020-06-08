@@ -25,7 +25,9 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if(isset($itens))
                     @foreach($itens as $item)
+                    
                     <tr class="text-center">
                         <td scope="row"><img src="{{ url("storage/{$item->imagem}")}}" width="50" height="50"></td>
                         <td scope="row"> {{$item->produtoNome }}</td>
@@ -44,6 +46,7 @@
                         </td>
                     </tr>
                      @endforeach
+                     @endif
                      <tr>
                          <td colspan="6">
                              <a href="{{ route('carrinho.finalizar')}}" class="btn btn-success btn-block col-sm-12 mt-2 mb-2">Ir para Finalizar Compra</a>

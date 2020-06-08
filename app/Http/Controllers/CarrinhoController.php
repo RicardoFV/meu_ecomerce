@@ -57,20 +57,18 @@ class CarrinhoController extends Controller {
             // verifico se tem cadastro de cliente
             $cliente = Cliente::consultarPorUsuario(auth()->user()->id);
             // verifico se tem cliente cadastrado
-            if (isset($cliente)) {
+            if (!isset($cliente)) { 
+              // envia para a tela de cadastro de cliente
+                return view('cadastro.cliente')->with('pedido', $pedidoId);
+            } else {
                 // faz o cadastro 
                 Pedido::cadastrarPedido($sessionId, $cliente['id']);
                 // faz a consulta do pedido pelo id da session
-                $pedidoId = Pedido::consultarPedidoPorSessio($sessionId);
-            } else {
-                // atualizar a sessao 
-                Pedido::atualizarSessao($pedidoId, $sessionId);
-                // envia para a tela de cadastro de cliente
-                return view('cadastro.cliente')->with('pedido', $pedido);
+               // $pedidoId = Pedido::consultarPedidoPorSessio($sessionId);
             }
         }
-         // faz a consulta do pedido pelo id da session
-         //$pedidoId = Pedido::consultarPedidoPorSessio($sessionId);
+        // faz a consulta do pedido pelo id da session
+        $pedidoId = Pedido::consultarPedidoPorSessio($sessionId);
         // verifica se o pedidoItem ja esta cadastrado
         $pedidoItem = PedidoItem::where([
                     'produto_id' => $produto_id,
@@ -158,7 +156,7 @@ class CarrinhoController extends Controller {
         // vai para o carrinho 
         return redirect()->route('carrinho.listar');
     }
-    
+
     public function deleta_pendente(Request $request) {
         // recebe os dados da tela
         $pedidoId = $request->input('pedido_id');
@@ -270,12 +268,18 @@ class CarrinhoController extends Controller {
         if (isset($cliente)) {
             // pesquisa os  itens no carrinho
             $itens = PedidoItem::listarItensPorCliente($cliente['id']);
+            
+            // verifica se veio alguma coisa
+            if(sizeof($itens) == 0){
+                // se não tiver vendas pendentes , direciona para a home
+                return redirect()->route('home');
+            }
 
             // retorna pra view
             return view('venda.pendentes', compact('itens'));
         }
     }
-    
+
     public function pagamentoMercadoPago(Request $request) {
         // pega os dados
         $dados = $request->except('_token');

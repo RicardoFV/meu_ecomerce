@@ -8,9 +8,9 @@ use App\Pedido;
 use App\Http\Requests\ClienteFormRequest;
 
 class ClienteController extends Controller {
-    
+
     public function index() {
-         return view('cadastro.cliente');
+        return view('cadastro.cliente');
     }
 
     //cadastrar o cliente
@@ -25,12 +25,17 @@ class ClienteController extends Controller {
             // pega os elementos        
             $cliente = Cliente::where('usuario_id', auth()->user()->id)->first();
             if (isset($cliente)) {
-
+                // faz a busca dos itens
                 $itens = PedidoItem::listarItensPorCliente($cliente['id']);
-                // retorna pra view
-                return view('venda.finalizar_venda', [
-                    'itens' => $itens
-                ]);
+                if (sizeof($itens) == 0) {
+                    return redirect()->route('home');
+                } else {
+                    //print_r($itens); exit();
+                    // retorna pra view
+                    return view('venda.finalizar_venda', [
+                        'itens' => $itens
+                    ]);
+                }
             } else {
                 return redirect()->route('home');
             }
