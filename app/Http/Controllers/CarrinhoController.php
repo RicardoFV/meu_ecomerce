@@ -274,7 +274,6 @@ class CarrinhoController extends Controller {
                 // se não tiver vendas pendentes , direciona para a home
                 return redirect()->route('home');
             }
-
             // retorna pra view
             return view('venda.pendentes', compact('itens'));
         }
