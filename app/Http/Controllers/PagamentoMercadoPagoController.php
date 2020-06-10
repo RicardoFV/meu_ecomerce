@@ -22,42 +22,55 @@ class PagamentoMercadoPagoController extends Controller {
         $idCliente = $request->get('idcliente');
         //consulta o pedido pelo idcliente
         $itens = PedidoItem::listarItensPorCliente($idCliente);
-
-        $dados = null;
+        // cria as variaveis que serão colocados no boleto     
+        $valor_final = null;
+        $nome_produto = '';
+        $cliente = null;
         foreach ($itens as $iten) {
-            $dados += $iten->valor;
-
-            echo '<pre>';
-            print_r($itens);
-            exit();
-            echo '</pre>';
+            $valor_final += $iten->valor;
+            $nome_produto .= $iten->produtoNome . ' ';
+            $cliente = [
+                'idCliente' => $iten->cliente_id,
+                'nomeCliente' => $iten->nomeCliente,
+                'emailCliente' => $iten->email,
+                'cpf' => $iten->cpf,
+                'cep'=> $iten->cep,
+                'logradouro' => $iten->logradouro,
+                'complemento' => $iten->complemento,
+                'bairro' => $iten->bairro,
+                'localidade' => $iten->localidade, 
+                'uf' => $iten->uf
+            ];
         }
-
-
-
+        /*
+        echo '<pre>';
+        print_r($cliente);
+        exit();
+        echo '</pre>';
+        */
         MercadoPago\SDK::setAccessToken($this->sand_token_hom);
 
         $payment_methods = MercadoPago\SDK::get("/v1/payment_methods");
         $payment = new MercadoPago\Payment();
-        $payment->date_of_expiration = "2020-06-07T21:52:49.000-04:00";
-        $payment->transaction_amount = $request['valor_final'];
-        $payment->description = '';
+        $payment->date_of_expiration = "2020-06-13T21:52:49.000-04:00";
+        $payment->transaction_amount = $valor_final;
+        $payment->description = $nome_produto;
         $payment->payment_method_id = "bolbradesco";
         $payment->payer = array(
-            "email" => "test_user_1965372@testuser.com",
-            "first_name" => "Test",
-            "last_name" => "User",
+            "email" => $cliente['emailCliente'],
+            "first_name" => $cliente['nomeCliente'],
+            "last_name" => $cliente['nomeCliente'],
             "identification" => array(
                 "type" => "CPF",
-                "number" => "19119119100"
+                "number" => $cliente['cpf']
             ),
             "address" => array(
-                "zip_code" => "06233200",
-                "street_name" => "Av. das Nações Unidas",
-                "street_number" => "3003",
-                "neighborhood" => "Bonfim",
-                "city" => "Osasco",
-                "federal_unit" => "SP"
+                "zip_code" => $cliente['cep'],
+                "street_name" => $cliente['logradouro'],
+                "street_number" => $cliente['complemento'],
+                "neighborhood" => $cliente['bairro'],
+                "city" => $cliente['localidade'],
+                "federal_unit" => $cliente['uf'],
             )
         );
 

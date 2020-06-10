@@ -61,7 +61,7 @@ class PedidoItem extends Model {
                                 'produtos.quantidade as produtoQuantidade',
                                 'clientes.id as idCliente',
                                 'clientes.nome as nomeCliente',
-                                'clientes.cpf', 'clientes.cep','clientes.logradouro','clientes.bairro',
+                                'clientes.cpf','clientes.complemento', 'clientes.cep','clientes.logradouro','clientes.bairro',
                                 'clientes.localidade','clientes.uf','clientes.email',
                                 'clientes.email as emailCliente')
                         ->where('cliente_id', $clienteId)->where('pedidos.status', 'pendente')->get();

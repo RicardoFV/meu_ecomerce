@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Http/Controllers/PagamentoMercadoPagoController.php</file>
+            <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Pedido.php</file>
+            <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Http/Controllers/ClienteController.php</file>
+            <file>file:/C:/Projetos/laravel/meu_ecomerce/resources/views/venda/finalizar_venda.blade.php</file>
+            <file>file:/C:/Projetos/laravel/meu_ecomerce/resources/views/venda/pendentes.blade.php</file>
+        </group>
     </open-files>
 </project-private>
