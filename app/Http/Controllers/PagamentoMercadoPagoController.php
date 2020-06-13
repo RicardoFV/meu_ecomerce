@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use MercadoPago;
 use App\PedidoItem;
+use DateTime;
+use App\Pedido;
+use App\Pagamento;
 
 class PagamentoMercadoPagoController extends Controller {
 
@@ -18,6 +21,10 @@ class PagamentoMercadoPagoController extends Controller {
     //pagamento via boleto 
 
     public function gerarBoleto(Request $request) {
+
+
+        $dataAtual = new DateTime();
+
         // recebe o cliente 
         $idCliente = $request->get('idcliente');
         //consulta o pedido pelo idcliente
@@ -26,34 +33,46 @@ class PagamentoMercadoPagoController extends Controller {
         $valor_final = null;
         $nome_produto = '';
         $cliente = null;
+        $status = null; 
         foreach ($itens as $iten) {
+            /*
+            echo '<pre>';
+            print_r($iten);
+            echo '</pre>';
+
+            echo '<pre>';
+            print_r($dataAtual->format('Y-m-d H:i:s'));
+            echo '</pre>';
+
+            dd();
+            */
             $valor_final += $iten->valor;
-            $nome_produto .= $iten->produtoNome . ' ';
-            $cliente = [
-                'idCliente' => $iten->cliente_id,
-                'nomeCliente' => $iten->nomeCliente,
-                'emailCliente' => $iten->email,
-                'cpf' => $iten->cpf,
-                'cep'=> $iten->cep,
-                'logradouro' => $iten->logradouro,
-                'complemento' => $iten->complemento,
-                'bairro' => $iten->bairro,
-                'localidade' => $iten->localidade, 
-                'uf' => $iten->uf
-            ];
+            $nome_produto .= $iten->produtoNome . ' | ';
+            $status = $iten->status;
+            // caso já tenha dados , não ira preencher
+            if (empty($cliente)) {
+                $cliente = [
+                    'idCliente' => $iten->cliente_id,
+                    'nomeCliente' => $iten->nomeCliente,
+                    'emailCliente' => $iten->email,
+                    'cpf' => $iten->cpf,
+                    'cep' => $iten->cep,
+                    'logradouro' => $iten->logradouro,
+                    'complemento' => $iten->complemento,
+                    'bairro' => $iten->bairro,
+                    'localidade' => $iten->localidade,
+                    'uf' => $iten->uf
+                ];
+            }
+            
         }
-        /*
-        echo '<pre>';
-        print_r($cliente);
-        exit();
-        echo '</pre>';
-        */
+
         MercadoPago\SDK::setAccessToken($this->sand_token_hom);
 
         $payment_methods = MercadoPago\SDK::get("/v1/payment_methods");
         $payment = new MercadoPago\Payment();
         $payment->date_of_expiration = "2020-06-13T21:52:49.000-04:00";
-        $payment->transaction_amount = $valor_final;
+        $payment->transaction_amount =  $valor_final;
         $payment->description = $nome_produto;
         $payment->payment_method_id = "bolbradesco";
         $payment->payer = array(

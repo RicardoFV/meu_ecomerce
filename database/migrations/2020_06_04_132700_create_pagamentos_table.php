@@ -18,7 +18,7 @@ class CreatePagamentosTable extends Migration
             $table->enum('status_pagamento', ['pendente', 'aprovado', 'cancelado']);
             $table->enum('forma_pagamento', ['boleto', 'cartao']);
             $table->decimal('valor_pago', 10, 2)->default(0);
-            $table->string('data_vencimento');
+            $table->date('data_vencimento');
             $table->integer('pedido_id')->unsigned();
             $table->foreign('pedido_id')->references('id')->on('pedidos');
             $table->integer('cliente_id')->unsigned();
