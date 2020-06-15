@@ -19,7 +19,7 @@
             $emailCliente = '';
             @endphp
             
-            <?php if($itens[0]->status == 'pendente' || !empty($itens)){ ?>
+          
             <table class="table table-sm table-bordered table-hover ml-4 mb-5">
                 <thead class="text-center text-uppercase">
                     <tr>
@@ -42,7 +42,6 @@
                 </thead>
                 <tbody>
                
-
                     @foreach($itens as $item)
                    
                         <tr class="text-center">
@@ -69,9 +68,7 @@
 
                 </tbody>
             </table>
-            <?php }else{
-     echo 'não ha itens';
-            } ?>
+            
         </div>
 
         <div class="col-sm-5">
