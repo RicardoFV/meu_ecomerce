@@ -27,6 +27,12 @@ class Pedido extends Model {
         $pedido->session_id = $sessao_id;
         $pedido->push();       
     }
+     //faz a atuazlização da sessao 
+    public static function atualizarPedido($id , $status ) {
+        $pedido = self::find($id);
+        $pedido->status = $status;
+        $pedido->push();       
+    }
     
     // deleta o pedido
     public static function deletarPedido(Pedido $pedido) {
@@ -39,5 +45,4 @@ class Pedido extends Model {
         $pedido = self::where('session_id', $sessionId)->first('id');
         return !empty($pedido->id) ? $pedido->id : null;
     }
-
 }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use MercadoPago;
 use App\PedidoItem;
-use DateTime;
 use App\Pedido;
 use App\Pagamento;
 
@@ -21,10 +20,6 @@ class PagamentoMercadoPagoController extends Controller {
     //pagamento via boleto 
 
     public function gerarBoleto(Request $request) {
-
-
-        $dataAtual = new DateTime();
-
         // recebe o cliente 
         $idCliente = $request->get('idcliente');
         //consulta o pedido pelo idcliente
@@ -33,22 +28,15 @@ class PagamentoMercadoPagoController extends Controller {
         $valor_final = null;
         $nome_produto = '';
         $cliente = null;
-        $status = null; 
+        $status = '';
+        $pedido_id = null;
+        // carrega as informações 
         foreach ($itens as $iten) {
-            /*
-            echo '<pre>';
-            print_r($iten);
-            echo '</pre>';
 
-            echo '<pre>';
-            print_r($dataAtual->format('Y-m-d H:i:s'));
-            echo '</pre>';
-
-            dd();
-            */
             $valor_final += $iten->valor;
             $nome_produto .= $iten->produtoNome . ' | ';
             $status = $iten->status;
+            $pedido_id = $iten->id;
             // caso já tenha dados , não ira preencher
             if (empty($cliente)) {
                 $cliente = [
@@ -64,15 +52,15 @@ class PagamentoMercadoPagoController extends Controller {
                     'uf' => $iten->uf
                 ];
             }
-            
         }
-
+        // pega a data atual e joga mais 5 dias 
+        $dataVencimento = date('Y-m-d', strtotime("+5 days"));
+        // executa atividade do mercado pago 
         MercadoPago\SDK::setAccessToken($this->sand_token_hom);
-
         $payment_methods = MercadoPago\SDK::get("/v1/payment_methods");
         $payment = new MercadoPago\Payment();
-        $payment->date_of_expiration = "2020-06-13T21:52:49.000-04:00";
-        $payment->transaction_amount =  $valor_final;
+        $payment->date_of_expiration = $dataVencimento . "T23:59:59.000-03:00";
+        $payment->transaction_amount = $valor_final;
         $payment->description = $nome_produto;
         $payment->payment_method_id = "bolbradesco";
         $payment->payer = array(
@@ -94,6 +82,22 @@ class PagamentoMercadoPagoController extends Controller {
         );
 
         $payment->save();
+        // atualiza o status do pedido
+        $status = 'aprovado';
+        // atualiza o pedido 
+        Pedido::atualizarPedido($pedido_id, $status);
+        // captura os dados no pagamento
+        $pagamento = [
+            'status_pagamento' =>'pendente',
+            'forma_pagamento' =>'boleto', 
+            'valor_pago' => $valor_final,
+            'data_vencimento' => $dataVencimento,
+            'pedido_id' => $pedido_id,
+            'cliente_id' => $cliente['idCliente']
+        ];
+        
+        // salva o pagamento 
+        Pagamento::cadastrarPagamento($pagamento);
 
         //   echo '<pre>', print_r($payment), '</pre>';
         // so usa em produção 

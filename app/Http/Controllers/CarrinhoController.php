@@ -57,14 +57,14 @@ class CarrinhoController extends Controller {
             // verifico se tem cadastro de cliente
             $cliente = Cliente::consultarPorUsuario(auth()->user()->id);
             // verifico se tem cliente cadastrado
-            if (!isset($cliente)) { 
-              // envia para a tela de cadastro de cliente
+            if (!isset($cliente)) {
+                // envia para a tela de cadastro de cliente
                 return view('cadastro.cliente')->with('pedido', $pedidoId);
             } else {
                 // faz o cadastro 
                 Pedido::cadastrarPedido($sessionId, $cliente['id']);
                 // faz a consulta do pedido pelo id da session
-               // $pedidoId = Pedido::consultarPedidoPorSessio($sessionId);
+                // $pedidoId = Pedido::consultarPedidoPorSessio($sessionId);
             }
         }
         // faz a consulta do pedido pelo id da session
@@ -234,11 +234,15 @@ class CarrinhoController extends Controller {
             if (isset($cliente)) {
                 // pesquisa os  itens no carrinho
                 $itens = PedidoItem::listarItensPorCliente($cliente['id']);
-
-                // retorna pra view
-                return view('venda.finalizar_venda', [
-                    'itens' => $itens
-                ]);
+                // se caso for aprovado ou vazio ele vai retornar para a view
+                if ( sizeof($itens) == 0) {
+                    return redirect()->route('home');
+                } else {
+                    // retorna pra view
+                    return view('venda.finalizar_venda', [
+                        'itens' => $itens
+                    ]);
+                }
             } else {
                 // pega a sessao 
                 $sessao_id = session()->getId();
@@ -268,12 +272,12 @@ class CarrinhoController extends Controller {
         if (isset($cliente)) {
             // pesquisa os  itens no carrinho
             $itens = PedidoItem::listarItensPorCliente($cliente['id']);
-            
             // verifica se veio alguma coisa
-            if(sizeof($itens) == 0){
+            if (sizeof($itens) == 0) {
                 // se não tiver vendas pendentes , direciona para a home
                 return redirect()->route('home');
             }
+
             // retorna pra view
             return view('venda.pendentes', compact('itens'));
         }

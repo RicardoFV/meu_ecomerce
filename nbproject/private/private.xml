@@ -5,6 +5,8 @@
         <group>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Http/Controllers/PagamentoMercadoPagoController.php</file>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/app/PedidoItem.php</file>
+            <file>file:/C:/Projetos/laravel/meu_ecomerce/resources/views/lista/produto_lista.blade.php</file>
+            <file>file:/C:/Projetos/laravel/meu_ecomerce/routes/web.php</file>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Pedido.php</file>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Http/Controllers/ClienteController.php</file>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/resources/views/venda/finalizar_venda.blade.php</file>

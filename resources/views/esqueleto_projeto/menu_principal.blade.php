@@ -9,9 +9,20 @@
 
             <ul class="navbar-nav m-auto">
                 @auth
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('carrinho.pendentes')}}">Vendas Pendentes</a>
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Minhas Compras
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="">Aguardando Pagamento</a> 
+                        <a class="dropdown-item" href="">Aprovadas</a> 
+                        <a class="dropdown-item" href="{{route('carrinho.pendentes')}}">Pendentes</a> 
+                    </div>
+
                 </li>
+
                 @can('adm', Auth::user())
                 <li class="nav-item dropdown">
 
@@ -42,7 +53,7 @@
 
                 </li>
                 @endcan
-              
+
                 @endauth
 
             </ul>
@@ -53,9 +64,9 @@
                     <i class="fa fa-shopping-cart"></i> Carrinho
                     <span class="badge badge-light">
                         @if(!empty(Session::get('carrinho')))
-                            {{ Session::get('carrinho') }}
+                        {{ Session::get('carrinho') }}
                         @else
-                            0
+                        0
                         @endif
                     </span>
                 </a>

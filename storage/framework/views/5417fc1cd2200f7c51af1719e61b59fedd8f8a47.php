@@ -9,9 +9,20 @@
 
             <ul class="navbar-nav m-auto">
                 <?php if(auth()->guard()->check()): ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo e(route('carrinho.pendentes')); ?>">Vendas Pendentes</a>
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Minhas Compras
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="">Aguardando Pagamento</a> 
+                        <a class="dropdown-item" href="">Aprovadas</a> 
+                        <a class="dropdown-item" href="<?php echo e(route('carrinho.pendentes')); ?>">Pendentes</a> 
+                    </div>
+
                 </li>
+
                 <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('adm', Auth::user())): ?>
                 <li class="nav-item dropdown">
 
@@ -42,7 +53,7 @@
 
                 </li>
                 <?php endif; ?>
-              
+
                 <?php endif; ?>
 
             </ul>
@@ -53,10 +64,10 @@
                     <i class="fa fa-shopping-cart"></i> Carrinho
                     <span class="badge badge-light">
                         <?php if(!empty(Session::get('carrinho'))): ?>
-                            <?php echo e(Session::get('carrinho')); ?>
+                        <?php echo e(Session::get('carrinho')); ?>
 
                         <?php else: ?>
-                            0
+                        0
                         <?php endif; ?>
                     </span>
                 </a>
