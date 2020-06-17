@@ -16,7 +16,7 @@
                         Minhas Compras
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="">Aguardando Pagamento</a> 
+                        <a class="dropdown-item" href="<?php echo e(route('pagamento_boleto_pendente')); ?>">Aguardando Pagamento</a> 
                         <a class="dropdown-item" href="">Aprovadas</a> 
                         <a class="dropdown-item" href="<?php echo e(route('carrinho.pendentes')); ?>">Pendentes</a> 
                     </div>

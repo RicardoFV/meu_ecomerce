@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\PedidoItem;
 use App\Cliente;
-use App\Pedido;
 use App\Http\Requests\ClienteFormRequest;
 
 class ClienteController extends Controller {

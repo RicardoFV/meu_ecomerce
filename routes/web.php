@@ -105,4 +105,6 @@ Route::post('cliente/cadastrar', 'ClienteController@cadastrar')->name('cliente.c
 
 //****************GERAR BOLETO PARA PAGAMENTO**************************************************
 Route::post('pagamento/boleto', 'PagamentoMercadoPagoController@gerarBoleto')->name('gerar_boleto');
-
+// pagamento pendente
+Route::get('pagamento/aguardando', 'PagamentoMercadoPagoController@aguardandoPagamento')
+        ->name('pagamento_boleto_pendente');

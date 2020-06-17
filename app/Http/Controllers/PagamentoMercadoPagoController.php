@@ -16,8 +16,12 @@ class PagamentoMercadoPagoController extends Controller {
     // produção
     private $sand_key_prod = 'APP_USR-5ba23260-6b26-4d76-9353-00a8b5b61230';
     private $sand_token_prod = 'APP_USR-4667265261301949-060120-c4a9c447639676c6a778df8ba8c4fe41-199421913';
+    
+    function __construct() {
+        $this->middleware('auth');
+    }
 
-    //pagamento via boleto 
+        //pagamento via boleto 
 
     public function gerarBoleto(Request $request) {
         // recebe o cliente 
@@ -104,5 +108,10 @@ class PagamentoMercadoPagoController extends Controller {
         return redirect($payment->transaction_details->external_resource_url);
         //header("location: ".$payment->transaction_details->external_resource_url);
     }
-
+    public function aguardandoPagamento() {
+        
+        $aguardando = Pagamento::listarAguardandoPagamento(auth()->user()->id);
+        
+        return view('venda.aguardando_pagamento', compact('aguardando'));
+    }
 }
