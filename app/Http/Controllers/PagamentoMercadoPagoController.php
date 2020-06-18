@@ -20,9 +20,7 @@ class PagamentoMercadoPagoController extends Controller {
     function __construct() {
         $this->middleware('auth');
     }
-
         //pagamento via boleto 
-
     public function gerarBoleto(Request $request) {
         // recebe o cliente 
         $idCliente = $request->get('idcliente');
@@ -109,8 +107,20 @@ class PagamentoMercadoPagoController extends Controller {
         //header("location: ".$payment->transaction_details->external_resource_url);
     }
     public function aguardandoPagamento() {
-        
         $aguardando = Pagamento::listarAguardandoPagamento(auth()->user()->id);
+        foreach ($aguardando as $chave => $valor ){
+            // passa os valores 
+            $dataSenFormatarVencimento = $valor->data_vencimento;
+            // formata a data
+            $dataFormatadaVencimento = Pagamento::formatarData($dataSenFormatarVencimento);
+            // passa os valores 
+            $dataCriacaoSemFormatar = $valor->created_at;
+            // formata a data
+            $dataCriacaoFormatada = Pagamento::formatarData($dataCriacaoSemFormatar);
+            // faz a variavel receber o novo valor 
+            $aguardando[$chave]->data_vencimento = $dataFormatadaVencimento;
+            $aguardando[$chave]->created_at = $dataCriacaoFormatada;
+        }
         
         return view('venda.aguardando_pagamento', compact('aguardando'));
     }

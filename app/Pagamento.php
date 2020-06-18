@@ -34,5 +34,9 @@ class Pagamento extends Model {
     public static function listaPagamentoAprovado($usuarioId) {
         
     }
+    // formata a data 
+    public static function formatarData($data) {
+        return date("d-m-Y H:i:s", strtotime($data));
+    }
 
 }
