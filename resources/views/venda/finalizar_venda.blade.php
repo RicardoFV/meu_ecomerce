@@ -83,7 +83,7 @@
                         <p class="card-text"> <strong>Total :</strong> R$ {{ number_format($total,2,',','.' )}}</p>        
                         <input type="hidden" name="idcliente" id="idcliente" value="{{ $idCliente }}">
 
-                        <button target="_blank" class="btn btn-success btn-block">Gerar Boleto</button>
+                        <button class="btn btn-success btn-block">Gerar Boleto</button>
                     </form>                  
                 </div>
             </div>  

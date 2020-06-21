@@ -48,7 +48,7 @@ class PedidoItem extends Model {
                                 'produtos.quantidade as produtoQuantidade')
                         ->where('pedido_id', $sessionId)->get();
     }
-
+    // lista os itens por cliente
     public static function listarItensPorCliente($clienteId) {
         return DB::table('pedido_itens')
                         ->join('produtos', 'pedido_itens.produto_id', '=', 'produtos.id')
@@ -65,6 +65,24 @@ class PedidoItem extends Model {
                                 'clientes.localidade','clientes.uf','clientes.email',
                                 'clientes.email as emailCliente')
                         ->where('cliente_id', $clienteId)->where('pedidos.status', 'pendente')->get();
+    }
+    // metodo que busca os itens por pedidoId
+    public static function listarItensPorPedidoId($pedidoId) {
+        return DB::table('pedido_itens')
+                        ->join('produtos', 'pedido_itens.produto_id', '=', 'produtos.id')
+                        ->join('pedidos', 'pedido_itens.pedido_id', '=', 'pedidos.id')
+                        ->join('clientes', 'pedidos.cliente_id', '=', 'clientes.id')
+                        ->select('pedido_itens.*',
+                                'pedidos.*',
+                                'produtos.nome as produtoNome',
+                                'produtos.imagem',
+                                'produtos.quantidade as produtoQuantidade',
+                                'clientes.id as idCliente',
+                                'clientes.nome as nomeCliente',
+                                'clientes.cpf','clientes.complemento', 'clientes.cep','clientes.logradouro','clientes.bairro',
+                                'clientes.localidade','clientes.uf','clientes.email',
+                                'clientes.email as emailCliente')
+                        ->where('pedido_id', $pedidoId)->where('pedidos.status', 'aprovado')->get();
     }
 
 }

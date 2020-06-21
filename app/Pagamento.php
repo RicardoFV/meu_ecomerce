@@ -29,6 +29,16 @@ class Pagamento extends Model {
                         ->where('clientes.usuario_id', $usuarioId)
                         ->where('pedidos.status', 'aprovado')->get();
     }
+    // lista os pagamentos
+    public static function listarPagamento($pedido){
+        return self::where('pedido_id', $pedido)->get();
+    }
+    // atualiza as informações de pagamento 
+    public static function atualizarPagamento($novaData, $id) {
+        $pagamento = self::find($id);
+        $pagamento->data_vencimento = $novaData;
+        $pagamento->push();
+    }
 
     // lista as vendas que estão pagamento aprovado por cliente
     public static function listaPagamentoAprovado($usuarioId) {

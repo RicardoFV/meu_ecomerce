@@ -40,9 +40,9 @@
                     <td scope="row">{{ $ag->created_at }}</td>
                     <td scope="row">{{ $ag->data_vencimento }}</td>   
                     <td scope="row"> 
-                        <form action="" method="post">
+                        <form action="{{ route('gerar_boleto') }}" method="post">
                             @Csrf
-
+                            <input type="hidden" name="pedidoId" value="{{ $ag->pedido_id }}"/>
                             <button class="btn btn-sm btn-info mt-2">Gerar Boleto</button> 
                         </form>
 

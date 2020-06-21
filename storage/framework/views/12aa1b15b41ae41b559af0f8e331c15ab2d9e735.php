@@ -19,7 +19,7 @@
             $emailCliente = '';
             ?>
             
-            <?php if($itens[0]->status == 'pendente' || !empty($itens)){ ?>
+          
             <table class="table table-sm table-bordered table-hover ml-4 mb-5">
                 <thead class="text-center text-uppercase">
                     <tr>
@@ -42,7 +42,6 @@
                 </thead>
                 <tbody>
                
-
                     <?php $__currentLoopData = $itens; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                    
                         <tr class="text-center">
@@ -69,9 +68,7 @@
 
                 </tbody>
             </table>
-            <?php }else{
-     echo 'não ha itens';
-            } ?>
+            
         </div>
 
         <div class="col-sm-5">
@@ -86,7 +83,7 @@
                         <p class="card-text"> <strong>Total :</strong> R$ <?php echo e(number_format($total,2,',','.' )); ?></p>        
                         <input type="hidden" name="idcliente" id="idcliente" value="<?php echo e($idCliente); ?>">
 
-                        <button target="_blank" class="btn btn-success btn-block">Gerar Boleto</button>
+                        <button class="btn btn-success btn-block">Gerar Boleto</button>
                     </form>                  
                 </div>
             </div>  

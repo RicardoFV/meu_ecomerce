@@ -16,16 +16,33 @@ class PagamentoMercadoPagoController extends Controller {
     // produção
     private $sand_key_prod = 'APP_USR-5ba23260-6b26-4d76-9353-00a8b5b61230';
     private $sand_token_prod = 'APP_USR-4667265261301949-060120-c4a9c447639676c6a778df8ba8c4fe41-199421913';
-    
+
     function __construct() {
         $this->middleware('auth');
     }
-        //pagamento via boleto 
+
+    //pagamento via boleto 
     public function gerarBoleto(Request $request) {
-        // recebe o cliente 
-        $idCliente = $request->get('idcliente');
-        //consulta o pedido pelo idcliente
-        $itens = PedidoItem::listarItensPorCliente($idCliente);
+        //clienteId
+        $idCliente = null;
+        // pedsdioId
+        $pedidoId = null;
+        // se tiver clienteId
+        if ($request->post('idcliente')) {
+            //recebe o id do cliente 
+            $idCliente = $request->post('idcliente');
+            //consulta o pedido pelo idcliente
+            $itens = PedidoItem::listarItensPorCliente($idCliente);
+        }
+        // se tiver pedidoId
+        if ($request->post('pedidoId')) {
+            // recebe o id do pedido
+            $pedidoId = $request->post('pedidoId');
+            //consulta o pedido pelo idcliente
+            $itens = PedidoItem::listarItensPorPedidoId($pedidoId);
+            // lista os pagamentos 
+            $dados = Pagamento::listarPagamento($pedidoId);
+        }
         // cria as variaveis que serão colocados no boleto     
         $valor_final = null;
         $nome_produto = '';
@@ -56,7 +73,8 @@ class PagamentoMercadoPagoController extends Controller {
             }
         }
         // pega a data atual e joga mais 5 dias 
-        $dataVencimento = date('Y-m-d', strtotime("+5 days"));
+        $dataVencimento = date('Y-m-d', strtotime("+3 days"));
+
         // executa atividade do mercado pago 
         MercadoPago\SDK::setAccessToken($this->sand_token_hom);
         $payment_methods = MercadoPago\SDK::get("/v1/payment_methods");
@@ -82,33 +100,42 @@ class PagamentoMercadoPagoController extends Controller {
                 "federal_unit" => $cliente['uf'],
             )
         );
+        // verifica se tem dados 
+        if (!empty($dados)) {
+            // gera a nova data
+            $novaData = $dataVencimento;
+            // atualiza as informações 
+            Pagamento::atualizarPagamento($novaData, $dados[0]->id);
+        } else {
+            // atualiza o status do pedido
+            $status = 'aprovado';
+            // atualiza o pedido 
+            Pedido::atualizarPedido($pedido_id, $status);
+            // captura os dados no pagamento
+            $pagamento = [
+                'status_pagamento' => 'pendente',
+                'forma_pagamento' => 'boleto',
+                'valor_pago' => $valor_final,
+                'data_vencimento' => $dataVencimento,
+                'pedido_id' => $pedido_id,
+                'cliente_id' => $cliente['idCliente']
+            ];
+            // salva o pagamento 
+            Pagamento::cadastrarPagamento($pagamento);
+        }
 
+
+        //  salva as informações 
         $payment->save();
-        // atualiza o status do pedido
-        $status = 'aprovado';
-        // atualiza o pedido 
-        Pedido::atualizarPedido($pedido_id, $status);
-        // captura os dados no pagamento
-        $pagamento = [
-            'status_pagamento' =>'pendente',
-            'forma_pagamento' =>'boleto', 
-            'valor_pago' => $valor_final,
-            'data_vencimento' => $dataVencimento,
-            'pedido_id' => $pedido_id,
-            'cliente_id' => $cliente['idCliente']
-        ];
-        
-        // salva o pagamento 
-        Pagamento::cadastrarPagamento($pagamento);
-
         //   echo '<pre>', print_r($payment), '</pre>';
         // so usa em produção 
         return redirect($payment->transaction_details->external_resource_url);
         //header("location: ".$payment->transaction_details->external_resource_url);
     }
+
     public function aguardandoPagamento() {
         $aguardando = Pagamento::listarAguardandoPagamento(auth()->user()->id);
-        foreach ($aguardando as $chave => $valor ){
+        foreach ($aguardando as $chave => $valor) {
             // passa os valores 
             $dataSenFormatarVencimento = $valor->data_vencimento;
             // formata a data
@@ -121,7 +148,8 @@ class PagamentoMercadoPagoController extends Controller {
             $aguardando[$chave]->data_vencimento = $dataFormatadaVencimento;
             $aguardando[$chave]->created_at = $dataCriacaoFormatada;
         }
-        
+
         return view('venda.aguardando_pagamento', compact('aguardando'));
     }
+
 }
