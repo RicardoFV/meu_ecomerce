@@ -21,28 +21,31 @@ class Pedido extends Model {
             'cliente_id' => $clienteId
         ]);
     }
+
     //faz a atuazlização da sessao 
-    public static function atualizarSessao($pedido_id , $sessao_id ) {
+    public static function atualizarSessao($pedido_id, $sessao_id) {
         $pedido = self::find($pedido_id);
         $pedido->session_id = $sessao_id;
-        $pedido->push();       
+        $pedido->push();
     }
-     //faz a atuazlização da sessao 
-    public static function atualizarPedido($id , $status ) {
+
+    //faz a atuazlização da sessao 
+    public static function atualizarPedido($id, $status) {
         $pedido = self::find($id);
         $pedido->status = $status;
-        $pedido->push();       
+        $pedido->push();
     }
-    
+
     // deleta o pedido
     public static function deletarPedido(Pedido $pedido) {
         $pedido->delete();
     }
-   
+
     // verificar se existe ou não a session
     public static function consultarPedidoPorSessio($sessionId) {
         // faz a busca 
-        $pedido = self::where('session_id', $sessionId)->first('id');
+        $pedido = self::where(['session_id' => $sessionId, 'status' => 'pendente'])->first('id');
         return !empty($pedido->id) ? $pedido->id : null;
     }
+
 }

@@ -4,15 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Http/Controllers/PagamentoMercadoPagoController.php</file>
-            <file>file:/C:/Projetos/laravel/meu_ecomerce/resources/views/esqueleto_projeto/menu_principal.blade.php</file>
-            <file>file:/C:/Projetos/laravel/meu_ecomerce/app/PedidoItem.php</file>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/resources/views/venda/aguardando_pagamento.blade.php</file>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/routes/web.php</file>
+            <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Pedido.php</file>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Pagamento.php</file>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Http/Controllers/CategoriaController.php</file>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Http/Controllers/ClienteController.php</file>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/resources/views/venda/finalizar_venda.blade.php</file>
-            <file>file:/C:/Projetos/laravel/meu_ecomerce/database/migrations/2020_06_04_132700_create_pagamentos_table.php</file>
         </group>
     </open-files>
 </project-private>

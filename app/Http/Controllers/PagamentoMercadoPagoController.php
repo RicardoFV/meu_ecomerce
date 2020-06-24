@@ -123,8 +123,6 @@ class PagamentoMercadoPagoController extends Controller {
             // salva o pagamento 
             Pagamento::cadastrarPagamento($pagamento);
         }
-
-
         //  salva as informações 
         $payment->save();
         //   echo '<pre>', print_r($payment), '</pre>';
@@ -135,21 +133,32 @@ class PagamentoMercadoPagoController extends Controller {
 
     public function aguardandoPagamento() {
         $aguardando = Pagamento::listarAguardandoPagamento(auth()->user()->id);
-        foreach ($aguardando as $chave => $valor) {
-            // passa os valores 
-            $dataSenFormatarVencimento = $valor->data_vencimento;
-            // formata a data
-            $dataFormatadaVencimento = Pagamento::formatarData($dataSenFormatarVencimento);
-            // passa os valores 
-            $dataCriacaoSemFormatar = $valor->created_at;
-            // formata a data
-            $dataCriacaoFormatada = Pagamento::formatarData($dataCriacaoSemFormatar);
-            // faz a variavel receber o novo valor 
-            $aguardando[$chave]->data_vencimento = $dataFormatadaVencimento;
-            $aguardando[$chave]->created_at = $dataCriacaoFormatada;
+        // caso não tenha nenhum item 
+        if (sizeof($aguardando) == 0) {
+            return redirect()->back();
+        } else {
+            foreach ($aguardando as $chave => $valor) {
+                // passa os valores 
+                $dataSenFormatarVencimento = $valor->data_vencimento;
+                // formata a data
+                $dataFormatadaVencimento = Pagamento::formatarData($dataSenFormatarVencimento);
+                // passa os valores 
+                $dataCriacaoSemFormatar = $valor->created_at;
+                // formata a data
+                $dataCriacaoFormatada = Pagamento::formatarData($dataCriacaoSemFormatar);
+                // faz a variavel receber o novo valor 
+                $aguardando[$chave]->data_vencimento = $dataFormatadaVencimento;
+                $aguardando[$chave]->created_at = $dataCriacaoFormatada;
+            }
+            return view('venda.aguardando_pagamento', compact('aguardando'));
         }
-
-        return view('venda.aguardando_pagamento', compact('aguardando'));
     }
-
+    // metodo que aprova o pagamento 
+    public function aprovarPagamento($id) {
+        
+    }
+    // cancela pagamento 
+    public function cancelarPagamento($id) {
+        
+    }
 }

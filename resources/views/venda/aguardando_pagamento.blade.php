@@ -43,9 +43,12 @@
                         <form action="{{ route('gerar_boleto') }}" method="post">
                             @Csrf
                             <input type="hidden" name="pedidoId" value="{{ $ag->pedido_id }}"/>
-                            <button class="btn btn-sm btn-info mt-2">Gerar Boleto</button> 
+                            
+                            <button class="btn btn-sm btn-info">Gerar Boleto</button> 
+                            <a href="" class="btn btn-sm btn-success">Aprovar</a>
+                            <a href="" class="btn btn-sm btn-danger">Cancelar</a>
                         </form>
-
+                        
                     </td>
                 </tr>
                 @endforeach 

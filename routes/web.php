@@ -108,3 +108,7 @@ Route::post('pagamento/boleto', 'PagamentoMercadoPagoController@gerarBoleto')->n
 // pagamento pendente
 Route::get('pagamento/aguardando', 'PagamentoMercadoPagoController@aguardandoPagamento')
         ->name('pagamento_boleto_pendente');
+// rota para aprovar pagamento 
+Route::get('', '')->name('');
+// rota para cancelar pagamento
+Route::get('', '')->name('');

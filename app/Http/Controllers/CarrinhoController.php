@@ -275,7 +275,7 @@ class CarrinhoController extends Controller {
             // verifica se veio alguma coisa
             if (sizeof($itens) == 0) {
                 // se não tiver vendas pendentes , direciona para a home
-                return redirect()->route('home');
+                return redirect()->back();
             }
 
             // retorna pra view
