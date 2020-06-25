@@ -27,16 +27,24 @@ class Pagamento extends Model {
                                 'clientes.id as cliente_id', 'clientes.nome as nomeCliente', 'clientes.usuario_id',
                                 'pedidos.status as statusPedido')
                         ->where('clientes.usuario_id', $usuarioId)
-                        ->where('pedidos.status', 'aprovado')->get();
+                        ->where('pedidos.status', 'aprovado')
+                        ->where('pagamentos.status_pagamento', 'pendente')->get();
     }
     // lista os pagamentos
     public static function listarPagamento($pedido){
         return self::where('pedido_id', $pedido)->get();
     }
     // atualiza as informações de pagamento 
-    public static function atualizarPagamento($novaData, $id) {
+    public static function atualizarDataPagamento($novaData, $id) {
         $pagamento = self::find($id);
         $pagamento->data_vencimento = $novaData;
+        $pagamento->push();
+    }
+    
+    // atualiza o status do pagamento 
+    public static function atualizarStatusPagamento($id) {
+        $pagamento = self::find($id);
+        $pagamento->status_pagamento = "aprovado";
         $pagamento->push();
     }
 

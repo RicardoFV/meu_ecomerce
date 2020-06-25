@@ -161,24 +161,24 @@ class CarrinhoController extends Controller {
         // recebe os dados da tela
         $pedidoId = $request->input('pedido_id');
         $produtoId = $request->input('produto_id');
-        $pedidoitemId = $request->input('pedido_item');
         $quantidade_escolhidade = $request->input('quantidade_escolhidade');
         // pesquisa o pedidoItem
-        $pedidoItem = PedidoItem::find($pedidoitemId);
-
+        $pedidoItem = PedidoItem::where('pedido_id', $pedidoId)->first();
+        //se tiver pedido item 
+        if ($pedidoItem) {
+            // deleta o pedidoItem
+            PedidoItem::deletarPedidoItem($pedidoItem);
+        }
         //chama o metodo que retorna quantidade de produtos
         Produto::voltarProEstoque($produtoId, $quantidade_escolhidade);
-        // deleta o pedidoItem
-        PedidoItem::deletarPedidoItem($pedidoItem);
-
         // pesquisa o pedido
         $pedido = Pedido::find($pedidoId);
 
         // pesquisa o pedidoItem com base pedido_id 
-        $pedidoItens = PedidoItem::where('pedido_id', $pedido->id)->first();
+        $pedidoItens = PedidoItem::where('pedido_id', $pedido->id)->get();
 
         // caso o produto vinculado nao esteja no pedidoitens
-        if (!isset($pedidoItens)) {
+        if (sizeof($pedidoItens) == 0) {
             // deleta o pedido
             Pedido::deletarPedido($pedido);
             // vai para a home 
@@ -203,12 +203,12 @@ class CarrinhoController extends Controller {
         $quantidade_escolhidade = $request->input('quantidade_escolhidade');
         // pesquisa o pedidoItem
         $pedidoItem = PedidoItem::find($pedidoitemId);
-
+        if ($pedidoItem) {
+            // deleta o pedidoItem
+            PedidoItem::deletarPedidoItem($pedidoItem);
+        }
         //chama o metodo que retorna quantidade de produtos
         Produto::voltarProEstoque($produtoId, $quantidade_escolhidade);
-        // deleta o pedidoItem
-        PedidoItem::deletarPedidoItem($pedidoItem);
-
         // pesquisa o pedido
         $pedido = Pedido::find($pedidoId);
 
@@ -235,7 +235,7 @@ class CarrinhoController extends Controller {
                 // pesquisa os  itens no carrinho
                 $itens = PedidoItem::listarItensPorCliente($cliente['id']);
                 // se caso for aprovado ou vazio ele vai retornar para a view
-                if ( sizeof($itens) == 0) {
+                if (sizeof($itens) == 0) {
                     return redirect()->route('home');
                 } else {
                     // retorna pra view

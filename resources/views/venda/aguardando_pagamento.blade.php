@@ -2,9 +2,6 @@
 
 @section('conteudo')
 
-{{ $aguardando }}
-
-
 <div class="container">
     <div class="col-sm-2 col-md-3 ml-4 mb-5">
         <a href="{{ route('home')}}" class="btn btn-lg btn-block btn-primary text-uppercase">
@@ -42,11 +39,11 @@
                     <td scope="row"> 
                         <form action="{{ route('gerar_boleto') }}" method="post">
                             @Csrf
-                            <input type="hidden" name="pedidoId" value="{{ $ag->pedido_id }}"/>
+                            <input type="hidden" name="pedidoId" value="{{ $ag->id }}"/>
                             
                             <button class="btn btn-sm btn-info">Gerar Boleto</button> 
-                            <a href="" class="btn btn-sm btn-success">Aprovar</a>
-                            <a href="" class="btn btn-sm btn-danger">Cancelar</a>
+                            <a href="#" onclick="acaoBoleto( '{{ action("PagamentoMercadoPagoController@aprovarPagamento", $ag->id) }}' )" class="btn btn-sm btn-success">Aprovar</a>
+                            <a href="#" onclick="acaoBoleto( '{{ action("PagamentoMercadoPagoController@cancelarPagamento", $ag->id) }}' )" class="btn btn-sm btn-danger">Cancelar</a>
                         </form>
                         
                     </td>

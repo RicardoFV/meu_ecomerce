@@ -109,6 +109,6 @@ Route::post('pagamento/boleto', 'PagamentoMercadoPagoController@gerarBoleto')->n
 Route::get('pagamento/aguardando', 'PagamentoMercadoPagoController@aguardandoPagamento')
         ->name('pagamento_boleto_pendente');
 // rota para aprovar pagamento 
-Route::get('', '')->name('');
+Route::get('pagamento/aprovar/{id}', 'PagamentoMercadoPagoController@aprovarPagamento')->name('aprovar_pagamento');
 // rota para cancelar pagamento
-Route::get('', '')->name('');
+Route::get('pagamento/cancelar/{id}', 'PagamentoMercadoPagoController@cancelarPagamento')->name('cancelar_pagamento');

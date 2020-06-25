@@ -71,3 +71,12 @@ function deletar(url, nome) {
     }
 }
 
+// metodo que faz o retorno para url, se cancelar ou se aprovar
+function acaoBoleto(url){
+    if(window.confirm("Deseja realmente realizar essa ação ?")){
+        window.location = url
+    }
+}
+
+
+

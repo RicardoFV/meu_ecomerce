@@ -105,7 +105,7 @@ class PagamentoMercadoPagoController extends Controller {
             // gera a nova data
             $novaData = $dataVencimento;
             // atualiza as informações 
-            Pagamento::atualizarPagamento($novaData, $dados[0]->id);
+            Pagamento::atualizarDataPagamento($novaData, $dados[0]->id);
         } else {
             // atualiza o status do pedido
             $status = 'aprovado';
@@ -155,7 +155,9 @@ class PagamentoMercadoPagoController extends Controller {
     }
     // metodo que aprova o pagamento 
     public function aprovarPagamento($id) {
+        Pagamento::atualizarStatusPagamento($id);
         
+        return redirect()->route('home');
     }
     // cancela pagamento 
     public function cancelarPagamento($id) {

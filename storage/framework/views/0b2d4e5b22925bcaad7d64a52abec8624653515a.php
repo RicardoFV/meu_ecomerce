@@ -38,7 +38,6 @@
                                  <?php echo csrf_field(); ?>
                                  <input type="hidden" name="pedido_id" id="pedido_id" value="<?php echo e($item->pedido_id); ?>"/>
                                  <input type="hidden" name="produto_id" id="produto_id" value="<?php echo e($item->produto_id); ?>"/>
-                                <input type="hidden" name="pedido_item" id="pedido_item" value="<?php echo e($item->id); ?>"/>
                                 <input type="hidden" name="quantidade_escolhidade" id="quantidade_escolhidade" value="<?php echo e($item->quantidade); ?>"/>
                                 <button class="btn btn-sm btn-danger mt-2">Remover</button> 
                             </form>
