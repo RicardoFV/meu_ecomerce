@@ -50,7 +50,7 @@
                             <td scope="row">{{ $item->quantidade }}</td>
                             <td scope="row">R$ {{ $item->valor }}</td>
                             <td scope="row"> 
-                                <form action="{{ route('carrinho.deleta_pendente') }}" method="post">
+                                <form action="{{ route('carrinho.deleta_pendente') }}" method="post" onclick="MensagemcarregarBoleto()>
                                     @Csrf
                                     <input type="hidden" name="pedido_id" id="pedido_id" value="{{ $item->pedido_id }}"/>
                                     <input type="hidden" name="produto_id" id="produto_id" value="{{ $item->produto_id }}"/>
@@ -83,7 +83,7 @@
                         <p class="card-text"> <strong>Total :</strong> R$ {{ number_format($total,2,',','.' )}}</p>        
                         <input type="hidden" name="idcliente" id="idcliente" value="{{ $idCliente }}">
 
-                        <button class="btn btn-success btn-block">Gerar Boleto</button>
+                        <button onclick="MensagemcarregarBoleto()" class="btn btn-success btn-block">Gerar Boleto</button>
                     </form>                  
                 </div>
             </div>  

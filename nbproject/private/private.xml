@@ -7,8 +7,9 @@
             <file>file:/C:/Projetos/laravel/meu_ecomerce/resources/views/venda/aguardando_pagamento.blade.php</file>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/routes/web.php</file>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Pagamento.php</file>
-            <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Http/Controllers/CategoriaController.php</file>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Http/Controllers/ClienteController.php</file>
+            <file>file:/C:/Projetos/laravel/meu_ecomerce/database/migrations/2020_06_04_132700_create_pagamentos_table.php</file>
+            <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Http/Controllers/CarrinhoController.php</file>
         </group>
     </open-files>
 </project-private>

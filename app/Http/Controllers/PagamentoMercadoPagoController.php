@@ -100,6 +100,8 @@ class PagamentoMercadoPagoController extends Controller {
                 "federal_unit" => $cliente['uf'],
             )
         );
+        //  salva as informações de pagamento no boleto
+        $payment->save();
         // verifica se tem dados 
         if (!empty($dados)) {
             // gera a nova data
@@ -112,23 +114,21 @@ class PagamentoMercadoPagoController extends Controller {
             // atualiza o pedido 
             Pedido::atualizarPedido($pedido_id, $status);
             // captura os dados no pagamento
+            // cria o array para salvar no banco
             $pagamento = [
                 'status_pagamento' => 'pendente',
                 'forma_pagamento' => 'boleto',
                 'valor_pago' => $valor_final,
                 'data_vencimento' => $dataVencimento,
                 'pedido_id' => $pedido_id,
-                'cliente_id' => $cliente['idCliente']
+                'cliente_id' => $cliente['idCliente'],
+                'codigo_boleto' => $payment->id
             ];
             // salva o pagamento 
             Pagamento::cadastrarPagamento($pagamento);
-        }
-        //  salva as informações 
-        $payment->save();
-        //   echo '<pre>', print_r($payment), '</pre>';
+        }    
         // so usa em produção 
         return redirect($payment->transaction_details->external_resource_url);
-        //header("location: ".$payment->transaction_details->external_resource_url);
     }
 
     public function aguardandoPagamento() {
@@ -153,14 +153,17 @@ class PagamentoMercadoPagoController extends Controller {
             return view('venda.aguardando_pagamento', compact('aguardando'));
         }
     }
+
     // metodo que aprova o pagamento 
     public function aprovarPagamento($id) {
-        Pagamento::atualizarStatusPagamento($id);
-        
+        Pagamento::atualizarStatusPagamentoAprovado($id);
         return redirect()->route('home');
     }
+
     // cancela pagamento 
     public function cancelarPagamento($id) {
-        
+        Pagamento::atualizarStatusPagamentoCacelado($id);
+        return redirect()->route('home');
     }
+
 }

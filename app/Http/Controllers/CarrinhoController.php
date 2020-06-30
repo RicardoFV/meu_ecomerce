@@ -269,6 +269,10 @@ class CarrinhoController extends Controller {
     public function pendentes() {
         // verifico se tem cadastro de cliente
         $cliente = Cliente::consultarPorUsuario(auth()->user()->id);
+        if(empty($cliente)){
+            // se caso não exista clientes 
+            return redirect()->route('home');
+        }
         if (isset($cliente)) {
             // pesquisa os  itens no carrinho
             $itens = PedidoItem::listarItensPorCliente($cliente['id']);

@@ -39,13 +39,13 @@
 
                 </li>
                 <li class="nav-item dropdown">
-
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Relatorios
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="<?php echo e(route('categoria.listar')); ?>">Categoria</a>
+                        <a class="dropdown-item">Clientes</a>
                         <a class="dropdown-item" href="<?php echo e(route('parceiro.listar')); ?>">Parceiros</a>
                         <a class="dropdown-item" href="<?php echo e(route('produto.listar')); ?>">Produtos</a>
                         <a class="dropdown-item" href="<?php echo e(route('usuario.listar')); ?>">Usuario</a>
@@ -53,6 +53,17 @@
 
                 </li>
                 <?php endif; ?>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dados
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item">Cliente</a>
+                        <a class="dropdown-item">Usuario</a>
+                    </div>
+
+                </li>
 
                 <?php endif; ?>
 
@@ -73,6 +84,7 @@
                 </a>
             </form>
             <ul class="navbar-nav ml-1">
+                
                 <!-- Authentication Links -->
                 <?php if(auth()->guard()->guest()): ?>
                 <li class="nav-item">
@@ -102,6 +114,7 @@
                         </form>
                     </div>
                 </li>
+                
                 <?php endif; ?>
             </ul>
 

@@ -50,7 +50,7 @@
                             <td scope="row"><?php echo e($item->quantidade); ?></td>
                             <td scope="row">R$ <?php echo e($item->valor); ?></td>
                             <td scope="row"> 
-                                <form action="<?php echo e(route('carrinho.deleta_pendente')); ?>" method="post">
+                                <form action="<?php echo e(route('carrinho.deleta_pendente')); ?>" method="post" onclick="MensagemcarregarBoleto()>
                                     <?php echo csrf_field(); ?>
                                     <input type="hidden" name="pedido_id" id="pedido_id" value="<?php echo e($item->pedido_id); ?>"/>
                                     <input type="hidden" name="produto_id" id="produto_id" value="<?php echo e($item->produto_id); ?>"/>
@@ -83,7 +83,7 @@
                         <p class="card-text"> <strong>Total :</strong> R$ <?php echo e(number_format($total,2,',','.' )); ?></p>        
                         <input type="hidden" name="idcliente" id="idcliente" value="<?php echo e($idCliente); ?>">
 
-                        <button class="btn btn-success btn-block">Gerar Boleto</button>
+                        <button onclick="MensagemcarregarBoleto()" class="btn btn-success btn-block">Gerar Boleto</button>
                     </form>                  
                 </div>
             </div>  

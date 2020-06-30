@@ -72,11 +72,47 @@ function deletar(url, nome) {
 }
 
 // metodo que faz o retorno para url, se cancelar ou se aprovar
-function acaoBoleto(url){
-    if(window.confirm("Deseja realmente realizar essa ação ?")){
+function acaoBoleto(url) {
+    if (window.confirm("Deseja realmente cancelar o boleto ?")) {
         window.location = url
     }
 }
+// exibe uma mensagem quando o boleto e gerado 
+function  MensagemcarregarBoleto() {
+    alert("Boleto sendo gerado ")
+    //window.open(url) 
+}
+
+function verfiicaPagamento(url, codigoBoleto) {
+    let tokenProduto = 'APP_USR-5310965525503370-051823-27d7f3b4e439fcd48abfe6e0a77f0a3d-570231747';
+    // token homologação 
+    let tokenHomologacao = 'TEST-5310965525503370-051823-2699a1d4c2e8138abcd476b39c70f433-570231747'
+    // url do mercado pago
+    let siteMercadoPago = 'https://api.mercadopago.com/v1/payments/' + codigoBoleto + '?' + 'access_token=' + tokenHomologacao
+
+    // instancia a requisição 
+    let requisicao = new XMLHttpRequest();
+    // inicia a requisição 
+    requisicao.open('GET', siteMercadoPago, true)
+    // faz a requisição
+    requisicao.onreadystatechange = function () {
+        // veriica se a requisição terminou 
+        if (requisicao.readyState === 4) {
+            if (requisicao.status === 200) {
+                let dados = JSON.parse(requisicao.responseText)
+                if (dados.status_detail === 'pending_waiting_payment') {
+                    alert('Pagamento ainda esta pendente')
+                } else if (dados.status_detail === 'approved' || dados.status_detail === 'authorized') {
+                    window.location = url
+                }
+
+            }
+        }
+    }
+    // finaliza a requisição
+    requisicao.send();
+}
+
 
 
 

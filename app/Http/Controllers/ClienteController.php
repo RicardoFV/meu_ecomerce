@@ -42,5 +42,10 @@ class ClienteController extends Controller {
             return redirect()->back()->withErrors($dadosForm)->withInput();
         }
     }
+    // metodo que lista todos os clientes
+    public function listar() {
+        $clientes = Cliente::where('ativo', 1)->get();
+        return view('lista.cliente_lista')->with('clientes', $clientes);
+    }
 
 }

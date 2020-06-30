@@ -11,7 +11,7 @@ class Pagamento extends Model {
     protected $table = 'pagamentos';
     protected $fillable = [
         'status_pagamento', 'forma_pagamento', 'valor_pago', 'data_vencimento',
-        'pedido_id', 'cliente_id'
+        'pedido_id', 'cliente_id', 'codigo_boleto'
     ];
 
     public static function cadastrarPagamento(array $pagamento) {
@@ -42,9 +42,15 @@ class Pagamento extends Model {
     }
     
     // atualiza o status do pagamento 
-    public static function atualizarStatusPagamento($id) {
+    public static function atualizarStatusPagamentoAprovado($id) {
         $pagamento = self::find($id);
         $pagamento->status_pagamento = "aprovado";
+        $pagamento->push();
+    }
+    // atualiza o status do pagamento 
+    public static function atualizarStatusPagamentoCacelado($id) {
+        $pagamento = self::find($id);
+        $pagamento->status_pagamento = "cancelado";
         $pagamento->push();
     }
 

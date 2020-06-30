@@ -39,23 +39,16 @@
                     <td scope="row"> 
                         <form action="{{ route('gerar_boleto') }}" method="post">
                             @Csrf
-                            <input type="hidden" name="pedidoId" value="{{ $ag->id }}"/>
-                            
-                            <button class="btn btn-sm btn-info">Gerar Boleto</button> 
-                            <a href="#" onclick="acaoBoleto( '{{ action("PagamentoMercadoPagoController@aprovarPagamento", $ag->id) }}' )" class="btn btn-sm btn-success">Aprovar</a>
-                            <a href="#" onclick="acaoBoleto( '{{ action("PagamentoMercadoPagoController@cancelarPagamento", $ag->id) }}' )" class="btn btn-sm btn-danger">Cancelar</a>
-                        </form>
-                        
+                            <input type="hidden" name="pedidoId" value="{{ $ag->pedido_id }}"/>
+
+                            <button onclick="MensagemcarregarBoleto()" class="btn btn-sm btn-info">Gerar Boleto</button> 
+                            <a href="" onclick="verfiicaPagamento('{{ action("PagamentoMercadoPagoController@aprovarPagamento", $ag->codigo_boleto) }}', {{ $ag->codigo_boleto }} )" class="btn btn-sm btn-success">
+                                Verificar Pagamento</a>
+                        </form>               
                     </td>
                 </tr>
                 @endforeach 
-                <tr>
-                    <td colspan="8">
-                        <a href="" class="btn btn-success btn-block col-sm-12 mt-2 mb-2">
-                            Ir para Finalizar Compra
-                        </a>
-                    </td>
-                </tr> 
+
             </tbody>
         </table>
 
