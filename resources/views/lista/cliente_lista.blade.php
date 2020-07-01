@@ -1,6 +1,6 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 
-@section('conteudo')
+@section('content')
 <div class="container">
     
     <div class="row justify-content-center">
@@ -12,20 +12,27 @@
                         <thead class="text-center">
                             <tr>
                                 <th scope="col">Nome</th> 
+                                <th scope="col">E-mail</th> 
+                                <th scope="col">Telefone</th>
+                                <th scope="col">Celular</th>
+                                <th scope="col">Dt. Nascimento</th>
                                 <th scope="col">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($categorias as $categoria)
+                            @foreach($clientes as $cliente)
                             <tr>
-                                <td>{{$categoria->nome}}</td>
-
+                                <td>{{$cliente->nome}}</td>
+                                <td>{{$cliente->email}}</td>
+                                <td>{{$cliente->telefone}}</td>
+                                <td>{{$cliente->celular}}</td>
+                                <td>{{$cliente->data_nascimento}}</td>
                                 <td>
-                                    <a href="{{action('CategoriaController@show',$categoria->id )}}" class="btn btn-info btn-sm mr-2">
+                                    <a href="{{action('CategoriaController@show',$cliente->id )}}" class="btn btn-info btn-sm mr-2">
                                         <i class="fas fa-external-link-alt"></i>
                                     </a>
                                     <a href="#" class="btn btn-danger btn-sm" 
-                                       onclick="deletar('{{ action("CategoriaController@destroy", $categoria->id) }}', 'Categoria');">
+                                       onclick="deletar('{{ action("CategoriaController@destroy", $cliente->id) }}', 'Categoria');">
                                         <i class="far fa-trash-alt"></i>
                                     </a>
                                 </td>

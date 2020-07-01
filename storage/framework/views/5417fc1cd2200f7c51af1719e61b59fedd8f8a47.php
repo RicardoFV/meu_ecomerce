@@ -45,7 +45,7 @@
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="<?php echo e(route('categoria.listar')); ?>">Categoria</a>
-                        <a class="dropdown-item">Clientes</a>
+                        <a class="dropdown-item" href="<?php echo e(route('cliente.listar')); ?>">Clientes</a>
                         <a class="dropdown-item" href="<?php echo e(route('parceiro.listar')); ?>">Parceiros</a>
                         <a class="dropdown-item" href="<?php echo e(route('produto.listar')); ?>">Produtos</a>
                         <a class="dropdown-item" href="<?php echo e(route('usuario.listar')); ?>">Usuario</a>
