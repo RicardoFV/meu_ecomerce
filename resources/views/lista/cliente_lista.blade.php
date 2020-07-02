@@ -28,11 +28,11 @@
                                 <td>{{$cliente->celular}}</td>
                                 <td>{{$cliente->data_nascimento}}</td>
                                 <td>
-                                    <a href="{{action('CategoriaController@show',$cliente->id )}}" class="btn btn-info btn-sm mr-2">
+                                    <a href="{{action('ClienteController@consultar',$cliente->id )}}" class="btn btn-info btn-sm mr-2">
                                         <i class="fas fa-external-link-alt"></i>
                                     </a>
                                     <a href="#" class="btn btn-danger btn-sm" 
-                                       onclick="deletar('{{ action("CategoriaController@destroy", $cliente->id) }}', 'Categoria');">
+                                       onclick="deletar('{{ action("ClienteController@deletar", $cliente->id) }}', 'Categoria');">
                                         <i class="far fa-trash-alt"></i>
                                     </a>
                                 </td>

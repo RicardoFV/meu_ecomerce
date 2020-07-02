@@ -103,6 +103,9 @@ Route::get('carrinho/finalizar', 'CarrinhoController@finalizar')->name('carrinho
 Route::get('cliente','ClienteController@index')->name('cliente');
 Route::post('cliente/cadastrar', 'ClienteController@cadastrar')->name('cliente.cadastrar');
 Route::get('cliente/listar','ClienteController@listar')->name('cliente.listar');
+Route::get('cliente/consultar/{id}','ClienteController@consultar')->name('cliente.consultar');
+Route::post('cliente/atualizar', 'ClienteController@atualizar')->name('cliente.atualizar');
+Route::get('cliente/deletar/{id}','ClienteController@deletar')->name('cliente.deletar');
 
 //****************GERAR BOLETO PARA PAGAMENTO**************************************************
 Route::post('pagamento/boleto', 'PagamentoMercadoPagoController@gerarBoleto')->name('gerar_boleto');
