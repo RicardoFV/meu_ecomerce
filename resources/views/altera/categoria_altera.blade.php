@@ -19,7 +19,7 @@
             <div class="card">
                 <div class="card-header">Alterar Categoria</div>
                 <div class="card-body">
-                    <form method="post" action="{{ action('CategoriaController@update', $categoria->id) }}" method="POST">
+                    <form action="{{ action('CategoriaController@update', $categoria->id) }}" method="POST">
                         @Csrf
                         <div class="form-row">
                             <!-- campo responsavel por dizer que o cadastro esta ativo ou não -->

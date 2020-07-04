@@ -55,7 +55,7 @@ class ClienteController extends Controller {
         if (empty($cliente)) {
             return 'Cliente não existe';
         } else {
-            return view('altera.cliente_altera' . compact('cliente'));
+            return view('altera.cliente_altera' , compact('cliente'));
         }
     }
 

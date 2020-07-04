@@ -3,6 +3,12 @@
 @section('content')
 <div class="container">
     
+    <!-- mensagem de Sucesso-->
+    @include('mensagens.sucesso')
+
+    <!-- mensagem de erro-->
+    @include('mensagens.erro')
+    
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">

@@ -1,17 +1,98 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
-        <?php
-        // put your code here
-        ?>
-    </body>
-</html>
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+
+   <!-- colocando a mensagem de erro -->
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">Cadastro de Cliente</div>
+                <div class="card-body">
+
+                    <form method="post" action="{{ action('ClienteController@atualizar',$cliente->id ) }}">
+                        @Csrf
+                        <div class="form-row">
+                            <!-- campo responsavel por dizer que o cadastro esta ativo ou não -->
+                            <input type="hidden" id="ativo" name="ativo" value="1">
+                            <!-- id do cliente -->
+                            
+                            <!-- pega o usuario logado -->
+                            <input type="hidden" id="usuario_id" name="usuario_id" value="{{$cliente->usuario_id }}">
+                            <!-- carrega a sessao  -->
+                            @if(isset($pedido))
+                            <input type="hidden" id="pedido_id" name="pedido_id" value="{{ $pedido }}">
+                            @endif
+                            <div class="col-3">
+                                <label for="nome">NOME:</label>
+                                <input type="text" class="form-control" id="nome" value="{{ $cliente->nome }}" name="nome" placeholder="Nome">
+                            </div>
+                            <div class="col-3">
+                                <label for="email">E-MAIL:</label>
+                                <input type="email" readonly="readonly" class="form-control" id="email" value="{{ $cliente->email }}" name="email" placeholder="E-mail">
+                            </div>
+                            <div class="col-3">
+                                <label for="data_nascimento">Data de Nascimento:</label>
+                                <input type="date" class="form-control" id="data_nascimento" value="{{$cliente->data_nascimento}}" name="data_nascimento">
+                            </div>
+
+                            <div class="col-3">
+                                <label for="cpf">CPF:</label>
+                                <input type="text" class="form-control" value="{{$cliente->cpf}}" id="cpf" name="cpf" placeholder="CPF">
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="cep">CEP:</label>
+                                <input type="text" class="form-control" value="{{ $cliente->cep }}" id="cep" name="cep" placeholder="Cep">
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="logradouro">LOGRADOURO:</label>
+                                <input type="text" id="logradouro" value="{{$cliente->logradouro }}" name="logradouro" class="form-control" placeholder="logradouro">
+                            </div>
+                            <div class="col-auto">
+                                <label for="complemento">COMPLEMENTO:</label>
+                                <input type="text" id="complemento" name="complemento" value="{{$cliente->complemento}}" class="form-control" placeholder="Complemento">
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="bairro">BAIROO:</label>
+                                <input type="text" id="bairro" name="bairro" value="{{$cliente->bairro}}" class="form-control" placeholder="Bairro">
+                            </div>
+                            <div class="col-auto">
+                                <label for="localidade">LOCALIDADE:</label>
+                                <input type="text" id="localidade" name="localidade" value="{{$cliente->bairro}}" class="form-control" placeholder="Localidade">
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="uf">UF:</label>
+                                <input type="text" id="uf" name="uf" value="{{$cliente->uf}}" class="form-control" placeholder="Uf">
+                            </div>
+                            <div class="col-auto">
+                                <label for="telefone">TELEFONE:</label>
+                                <input type="text" id="telefone" name="telefone" value="{{$cliente->telefone}}" class="form-control" placeholder="Telefone">
+                            </div>
+                            <div class="col-auto">
+                                <label for="celular">CELULAR:</label>
+                                <input type="text" id="celular" name="celular" value="{{$cliente->celular}}" class="form-control" placeholder="Celular">
+                            </div>
+                        </div>
+                        <button class="btn btn-success btn-block mt-3">Atualizar</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

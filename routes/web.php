@@ -104,7 +104,7 @@ Route::get('cliente','ClienteController@index')->name('cliente');
 Route::post('cliente/cadastrar', 'ClienteController@cadastrar')->name('cliente.cadastrar');
 Route::get('cliente/listar','ClienteController@listar')->name('cliente.listar');
 Route::get('cliente/consultar/{id}','ClienteController@consultar')->name('cliente.consultar');
-Route::post('cliente/atualizar', 'ClienteController@atualizar')->name('cliente.atualizar');
+Route::post('cliente/atualizar/{id}', 'ClienteController@atualizar')->name('cliente.atualizar');
 Route::get('cliente/deletar/{id}','ClienteController@deletar')->name('cliente.deletar');
 
 //****************GERAR BOLETO PARA PAGAMENTO**************************************************
