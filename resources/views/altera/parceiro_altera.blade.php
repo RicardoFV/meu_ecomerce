@@ -44,7 +44,7 @@
 
                             <div class="col-3">
                                 <label for="tipo_documento">CPF/CNPJ:</label>
-                                <input type="text" class="form-control" value="{{$parceiro->tipo_documento}}" id="tipo_documento" name="tipo_documento" placeholder="CPF/CNPJ">
+                                <input type="text" maxlength="14" class="form-control" value="{{$parceiro->tipo_documento}}" id="tipo_documento" name="tipo_documento" placeholder="CPF/CNPJ">
                             </div>
 
                             <div class="col-auto">

@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use App\PedidoItem;
 use App\Cliente;
 use App\Http\Requests\ClienteFormRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
+
 
 class ClienteController extends Controller {
+
     private $cliente;
-    
+
     public function __construct() {
         $this->cliente = new Cliente();
     }
@@ -53,10 +58,26 @@ class ClienteController extends Controller {
         $cliente = Cliente::find($id);
         // verifica se existe os dados
         if (empty($cliente)) {
-            return 'Cliente não existe';
+            return view('altera.cliente_altera');
         } else {
-            return view('altera.cliente_altera' , compact('cliente'));
+            return view('altera.cliente_altera', compact('cliente'));
         }
+    }
+
+    public function consultarCpf(Request $request) {
+        $cpf = $request->post('meu_cpf');
+        $cliente = Cliente::consultarCpf($cpf);
+        // verifica se existe os dados
+        if (empty($cliente)) {
+            return redirect()->route('cliente.tela_atualizar')->with('erro', 'Cliente não cadastrado na base dados!');
+        } else {
+            return view('altera.cliente_altera', compact('cliente'));
+        }
+    }
+
+    // clica para entrar na tela de alterar o cliente
+    public function telaAtualizar() {
+        return view('altera.cliente_altera');
     }
 
     // metodo que faz a atualização
@@ -64,16 +85,21 @@ class ClienteController extends Controller {
         // recebe as informações
         $dadosForm = $request->all();
         $this->cliente = $this->cliente->find($id);
-        if($this->cliente){
+        if ($this->cliente) {
             $atualizar = $this->cliente->update($dadosForm);
-            if($atualizar){
-                return redirect()->route('cliente.listar')
-                        ->with('mensagem','Cliente Alterado com Sucesso !');
-            }else{
+            if ($atualizar) {
+                 if (Gate::allows('adm', Auth::user())) {
+                     return redirect()->route('cliente.listar')
+                                ->with('mensagem', 'Cliente Alterado com Sucesso !');
+                 }else{
+                     return redirect()->route('cliente.tela_atualizar')
+                                ->with('mensagem', 'Cliente Alterado com Sucesso !');
+                 }
+                
+            } else {
                 return redirect()->back()->withErrors($dadosForm);
             }
         }
-        
     }
 
     // no deletar vamos usar uma exclusão logica 
@@ -82,15 +108,15 @@ class ClienteController extends Controller {
         //verifica se existe o cliente
         if (empty($cliente)) {
             return 'Cliente não existe';
-        }else{
+        } else {
             $cliente->ativo = 0;
             // passa as informaçoes
             $excluir = $cliente->push();
             // se excluir for verdadeiro
-            if($excluir){
+            if ($excluir) {
                 return redirect()->route('cliente.listar')
-                        ->with('mensagem','Cliente desativado com Sucesso !');
-            }else{
+                                ->with('mensagem', 'Cliente desativado com Sucesso !');
+            } else {
                 return redirect()->back()->with('erro', 'Cliente não pode ser removido !');
             }
         }

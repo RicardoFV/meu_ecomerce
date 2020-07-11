@@ -84,8 +84,6 @@
             </div>
         </div>
     </div>
-
-
 </div>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Projetos\laravel\meu_ecomerce\resources\views/cadastro/cliente.blade.php ENDPATH**/ ?>

@@ -59,8 +59,7 @@
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item">Cliente</a>
-                        <a class="dropdown-item">Usuario</a>
+                        <a href="{{route('cliente.tela_atualizar') }}" class="dropdown-item">Cliente</a>
                     </div>
 
                 </li>
