@@ -30,16 +30,13 @@ class ValidacoesService extends ServiceProvider {
           });
          * 
          */
-        // validaçao de cpf e cnpj, valida os dois campos 
+        // validaçao de cpf e cnpj e cep
         Validator::extend('document', function($attribute, $value, $parameters, $validator) {
             return (new RespectRules\OneOf(
                             new RespectRules\Cnpj(),
-                            new RespectRules\Cpf()
+                            new RespectRules\Cpf(),
+                            new RespectRules\PostalCode('BR')
                     ))->validate($value);
-        });
-        // validaçao de cep
-        Validator::extend('cep', function($attribute, $value, $parameters, $validator) {
-            return (new RespectRules\PostalCode('BR'))->validate($value);
         });
     }
 
