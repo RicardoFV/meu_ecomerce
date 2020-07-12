@@ -5,6 +5,9 @@
 
     <!-- colocando a mensagem de erro -->
     <?php echo $__env->make('mensagens.erro_cadastro', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    
+     <!-- colocando a mensagem de erro -->
+    <?php echo $__env->make('mensagens.erro', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -38,7 +41,7 @@
 
                             <div class="col-3">
                                 <label for="cpf">CPF:</label>
-                                <input type="text" class="form-control" value="<?php echo e(old('cpf')); ?>" id="cpf" name="cpf" placeholder="CPF">
+                                <input type="text" maxlength="11" class="form-control" value="<?php echo e(old('cpf')); ?>" id="cpf" name="cpf" placeholder="CPF">
                             </div>
 
                             <div class="col-auto">

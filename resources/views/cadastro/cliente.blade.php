@@ -5,6 +5,9 @@
 
     <!-- colocando a mensagem de erro -->
     @include('mensagens.erro_cadastro')
+    
+     <!-- colocando a mensagem de erro -->
+    @include('mensagens.erro')
 
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -38,7 +41,7 @@
 
                             <div class="col-3">
                                 <label for="cpf">CPF:</label>
-                                <input type="text" class="form-control" value="{{old('cpf')}}" id="cpf" name="cpf" placeholder="CPF">
+                                <input type="text" maxlength="11" class="form-control" value="{{old('cpf')}}" id="cpf" name="cpf" placeholder="CPF">
                             </div>
 
                             <div class="col-auto">

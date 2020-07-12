@@ -27,4 +27,5 @@ return array(
     '9cdd7b9056abc3081735233ba9dd9c7f' => $vendorDir . '/facade/flare-client-php/src/helpers.php',
     'b6ec61354e97f32c0ae683041c78392a' => $vendorDir . '/scrivo/highlight.php/HighlightUtilities/functions.php',
     'ed962a97bd972bc82007176b647d4e36' => $vendorDir . '/facade/ignition/src/helpers.php',
+    '2df68f9e79c919e2d88506611769ed2e' => $vendorDir . '/respect/stringifier/src/stringify.php',
 );

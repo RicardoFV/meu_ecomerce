@@ -39,6 +39,7 @@ return [
     'digits_between' => 'The :attribute must be between :min and :max digits.',
     'dimensions' => 'The :attribute has invalid image dimensions.',
     'distinct' => 'The :attribute field has a duplicate value.',
+    
     'email' => 'The :attribute must be a valid email address.',
     'ends_with' => 'The :attribute must end with one of the following: :values.',
     'exists' => 'The selected :attribute is invalid.',
@@ -117,6 +118,10 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
+    //campo cep
+    'cep' => 'Invalid CEP format or last two verification digits',
+    // campo que trata do cpf e cnpj
+    'document' => 'Invalid document format or last two verification digits',
 
     /*
     |--------------------------------------------------------------------------

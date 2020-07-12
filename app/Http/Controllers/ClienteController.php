@@ -8,7 +8,7 @@ use App\Http\Requests\ClienteFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
-
+use App\Validacoes;
 
 class ClienteController extends Controller {
 
@@ -86,16 +86,23 @@ class ClienteController extends Controller {
         $dadosForm = $request->all();
         $this->cliente = $this->cliente->find($id);
         if ($this->cliente) {
+            /* valida o cpf
+            if (!Validacoes::validaCPF($dadosForm['cpf'])) {
+                return redirect()->back()->withInput()
+                                ->with('erro', 'É necessário informar um CPF valido');
+            }
+             * 
+             */
+            // se tudo ok valida 
             $atualizar = $this->cliente->update($dadosForm);
             if ($atualizar) {
-                 if (Gate::allows('adm', Auth::user())) {
-                     return redirect()->route('cliente.listar')
-                                ->with('mensagem', 'Cliente Alterado com Sucesso !');
-                 }else{
-                     return redirect()->route('cliente.tela_atualizar')
-                                ->with('mensagem', 'Cliente Alterado com Sucesso !');
-                 }
-                
+                if (Gate::allows('adm', Auth::user())) {
+                    return redirect()->route('cliente.listar')
+                                    ->with('mensagem', 'Cliente Alterado com Sucesso !');
+                } else {
+                    return redirect()->route('cliente.tela_atualizar')
+                                    ->with('mensagem', 'Cliente Alterado com Sucesso !');
+                }
             } else {
                 return redirect()->back()->withErrors($dadosForm);
             }
