@@ -3,17 +3,20 @@ $(document).ready(function () {
     // no momento que sai do campo 
     $('body').on('blur', '#cep', function () {
         let cep = $('#cep').val()
-
+        let msg = ''
         // verifica se o que esta dentro esta vazio, e outras verificações
         if (cep == '') {
-            // coloca a mensagem 
-            alert('não pode ser vazio')
+            // coloca a mensagem
+            msg = 'CEP não pode ser vazio'
+            mensagem(msg)
         }
         if (cep.length < 8) {
-            alert('dados insuficientes ')
+            msg = 'Digitos do CEP incompletos'
+            mensagem(msg)
         }
         if (cep.length > 8) {
-            alert('Cep incorreto ')
+            msg = 'CEP digitado esta incorreto'
+            mensagem(msg)
         } else {
             // faz a requisição 
             $.ajax({
@@ -22,7 +25,10 @@ $(document).ready(function () {
                 dataType: 'json',
                 success: function (resposta) {
                     if (resposta.erro == true) {
-                        alert('Cep incorreto ')
+
+                        msg = 'CEP digitado esta incorreto'
+                        mensagem(msg)
+                        msg = ''
                     } else {
                         // coloca os dados nas variaveis 
                         //$('#meu_cep').val(resposta.cep)
@@ -35,11 +41,28 @@ $(document).ready(function () {
 
                 },
                 error: function (erro) {
-                    console.log(erro)
+                    //console.log(erro)
                 }
             })
         }
 
     })
+
+
+    // campo de mensangem sobre o cep
+    function mensagem(mensagem) {
+        let dados
+        // cria a div
+        dados = '<div class="alert alert-danger alert-dismissible fade show" role="alert">'
+        dados += '<strong></strong>'+mensagem
+        dados += '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
+        dados += '<span aria-hidden="true">&times;</span>'
+        dados += '</button>'
+        dados += '</div>'
+        // adiciona a mesnagem na tela
+        $('#mensagem').append(dados)
+        // limpa o campo
+        dados = ''
+    }
 
 })

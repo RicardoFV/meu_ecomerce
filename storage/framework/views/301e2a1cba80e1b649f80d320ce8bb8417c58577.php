@@ -5,7 +5,9 @@
 
     <!-- colocando a mensagem de erro -->
     <?php echo $__env->make('mensagens.erro_cadastro', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    
+    <!-- mensagem sobre o cep-->
+    <div id="mensagem" role="alert"></div>
+
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">

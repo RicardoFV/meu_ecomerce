@@ -7,6 +7,8 @@
 
     <!-- mensagem de erro-->
     @include('mensagens.erro')
+    <!-- mensagem sobre o cep-->
+    <div id="mensagem" role="alert"></div>
 
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -74,7 +76,7 @@
                             <div class="col-auto">
                                 <label for="cep">CEP:</label>
 
-                                <input type="text" class="form-control" value="{{ $cliente->cep }}" id="cep" name="cep" placeholder="Cep">
+                                <input type="text" maxlength="8" class="form-control" value="{{ $cliente->cep }}" id="cep" name="cep" placeholder="Cep">
 
                             </div>
 

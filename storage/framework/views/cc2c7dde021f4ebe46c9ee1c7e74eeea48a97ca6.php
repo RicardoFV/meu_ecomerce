@@ -8,6 +8,8 @@
     
      <!-- colocando a mensagem de erro -->
     <?php echo $__env->make('mensagens.erro', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <!-- mensagem sobre o cep-->
+    <div id="mensagem" role="alert"></div>
 
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -46,7 +48,7 @@
 
                             <div class="col-auto">
                                 <label for="cep">CEP:</label>
-                                <input type="text" class="form-control" value="<?php echo e(old('cep')); ?>" id="cep" name="cep" placeholder="Cep">
+                                <input type="text" maxlength="8" class="form-control" value="<?php echo e(old('cep')); ?>" id="cep" name="cep" placeholder="Cep">
                             </div>
 
                             <div class="col-auto">
