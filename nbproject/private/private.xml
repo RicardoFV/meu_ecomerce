@@ -4,13 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/resources/views/cadastro/parceiro.blade.php</file>
-            <file>file:/C:/Projetos/laravel/meu_ecomerce/resources/lang/en/validation.php</file>
-            <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Http/Requests/ParceiroFormRequest.php</file>
+            <file>file:/C:/Projetos/laravel/meu_ecomerce/resources/views/cadastro/cliente.blade.php</file>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/routes/web.php</file>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Http/Controllers/ClienteController.php</file>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Http/Controllers/ParceiroController.php</file>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Providers/ValidacoesService.php</file>
-            <file>file:/C:/Projetos/laravel/meu_ecomerce/app/Http/Requests/ClienteFormRequest.php</file>
+            <file>file:/C:/Projetos/laravel/meu_ecomerce/public/js/busca_cep.js</file>
             <file>file:/C:/Projetos/laravel/meu_ecomerce/resources/views/altera/parceiro_altera.blade.php</file>
         </group>
     </open-files>
