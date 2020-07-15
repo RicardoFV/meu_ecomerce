@@ -19,7 +19,7 @@
                                 <th scope="col">Ações</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                             <?php $__currentLoopData = $categorias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $categoria): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr>
                                 <td><?php echo e($categoria->nome); ?></td>

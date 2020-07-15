@@ -5,11 +5,10 @@
     <div class="row">
         <!-- Image -->
         <div class="col-12 col-lg-6">
-            <div class="card bg-light mb-3">
+            <div class="card bg-light mb-2">
                 <div class="card-body text-center">
                     <a href="" data-toggle="modal" data-target="#productModal">
                         <img class="img-fluid" src="{{ url("storage/{$produto->imagem}") }}" />
-                        <p class="text-center">Zoom</p>
                     </a>
                 </div>
             </div>
@@ -17,7 +16,7 @@
 
         <!-- Add to cart -->
         <div class="col-12 col-lg-6 add_to_cart_block">
-            <div class="card bg-light mb-3">
+            <div class="card bg-light mb-5">
                 <div class="card-body">
 
                     <form method="post" action="{{ route('carrinho.cadastrar') }}">
@@ -58,10 +57,11 @@
                             </div>
 
                         </div>
-                        <button  class="btn btn-success btn-lg btn-block text-uppercase">
+                        <button class="btn btn-success btn-lg btn-block text-uppercase">
                             <i class="fa fa-shopping-cart"></i> Adicionar ao Carrinho
                         </button>
                     </form>
+                    <!--
                     <div class="product_rassurance">
                         <ul class="list-inline">
                             <li class="list-inline-item"><i class="fa fa-truck fa-2x"></i><br/>Fast delivery</li>
@@ -69,6 +69,7 @@
                             <li class="list-inline-item"><i class="fa fa-phone fa-2x"></i><br/>+33 1 22 54 65 60</li>
                         </ul>
                     </div>
+                    
                     <div class="reviews_product p-3 mb-2 ">
                         3 reviews
                         <i class="fa fa-star"></i>
@@ -79,7 +80,7 @@
                         (4/5)
                         <a class="pull-right" href="#reviews">View all reviews</a>
                     </div>
-
+                    -->
                 </div>
             </div>
         </div>
@@ -88,8 +89,8 @@
     <div class="row">
         <!-- Description -->
         <div class="col-12">
-            <div class="card border-light mb-3">
-                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-align-justify"></i> Descrição</div>
+            <div class="card border-light mb-5">
+                <div class="card-header bg-secondary text-white text-uppercase"><i class="fa fa-align-justify"></i> Descrição</div>
                 <div class="card-body">
                     <p class="card-text">
                         {{$produto->descricao }}
@@ -98,11 +99,11 @@
                 </div>
             </div>
         </div>
-
-        <!-- Reviews -->
+        
+        <!-- Reviews 
         <div class="col-12" id="reviews">
             <div class="card border-light mb-3">
-                <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-comment"></i> Reviews</div>
+                <div class="card-header bg-secondary text-white text-uppercase"><i class="fa fa-comment"></i> Reviews</div>
                 <div class="card-body">
                     <div class="review">
                         <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
@@ -137,6 +138,7 @@
                 </div>
             </div>
         </div>
+        -->
     </div>
 </div>
 @endsection

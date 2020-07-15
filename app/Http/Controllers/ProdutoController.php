@@ -221,6 +221,12 @@ class ProdutoController extends Controller {
             abort(403, 'Não autorizado');
         }
     }
+    // consutltar por categoria
+    public function consultarPorCategoria($id){
+       $produtos = Produto::where('categoria_id', $id)->get();
+       $categorias = Categoria::where('ativo', 1)->get();
+       return view('venda.produto_categoria', compact('produtos','categorias'));
+    }
 
     // lista os produtos que esta ativo
     public function listar() {

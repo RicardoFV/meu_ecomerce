@@ -34,7 +34,7 @@
                                 @Csrf
                                 <input type="hidden" name="produto_id" id="produto_id" value="{{ $carrinho->produto_id }}"/>
                                 <input type="hidden" name="item_pedido" id="item_pedido" value="{{ $carrinho->id }}"/>
-                                <td><input class="form-control text-center" value="{{$carrinho->quantidade}}" type="text" id="quantidade" name="quantidade" /></td>
+                                <td><input class="form-control text-center" value="{{$carrinho->quantidade}}" min="0" type="number" id="quantidade" name="quantidade" /></td>
                             </form>
                                 <td class="text-right">R$ {{$carrinho->valor }}</td>
                             <form action="{{ route('carrinho.deletar') }}" method="post">

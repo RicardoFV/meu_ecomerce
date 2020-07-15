@@ -25,7 +25,7 @@
                                 <th scope="col">Ações</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                             @foreach($clientes as $cliente)
                             <tr>
                                 <td>{{$cliente->nome}}</td>

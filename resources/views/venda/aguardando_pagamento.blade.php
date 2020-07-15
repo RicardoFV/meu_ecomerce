@@ -27,7 +27,7 @@
                     <th scope="col">Ação</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="text-center">
                 @foreach($aguardando as $ag)
                 <tr class="text-center">
                     <td scope="row">{{ $ag->id }}</td>

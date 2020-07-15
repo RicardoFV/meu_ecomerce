@@ -43,7 +43,7 @@
 
                             <div class="col-auto">
                                 <label for="cep">CEP:</label>
-                                <input type="text" class="form-control" value="<?php echo e(old('cep')); ?>" id="cep" name="cep" placeholder="Cep">
+                                <input type="text" maxlength="8" class="form-control" value="<?php echo e(old('cep')); ?>" id="cep" name="cep" placeholder="Cep">
                             </div>
 
                             <div class="col-auto">

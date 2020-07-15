@@ -32,7 +32,7 @@
                                 <?php echo csrf_field(); ?>
                                 <input type="hidden" name="produto_id" id="produto_id" value="<?php echo e($carrinho->produto_id); ?>"/>
                                 <input type="hidden" name="item_pedido" id="item_pedido" value="<?php echo e($carrinho->id); ?>"/>
-                                <td><input class="form-control text-center" value="<?php echo e($carrinho->quantidade); ?>" type="text" id="quantidade" name="quantidade" /></td>
+                                <td><input class="form-control text-center" value="<?php echo e($carrinho->quantidade); ?>" min="0" type="number" id="quantidade" name="quantidade" /></td>
                             </form>
                                 <td class="text-right">R$ <?php echo e($carrinho->valor); ?></td>
                             <form action="<?php echo e(route('carrinho.deletar')); ?>" method="post">

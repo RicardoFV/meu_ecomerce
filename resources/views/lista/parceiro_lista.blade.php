@@ -15,7 +15,7 @@
                 <div class="card-header">Lista de Parceiros</div>
                 <div class="card-body">
                     <table class="table table-sm table-bordered table-hover">
-                        <thead>
+                        <thead class="text-center">
                             <tr>
                                 <th scope="col">Nome</th>
                                 <th scope="col">E-mail</th>
@@ -25,7 +25,7 @@
                                 <th scope="col">Ações</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                             @foreach($parceiros as $parceiro)
                             <tr>
                                 <td>{{$parceiro->nome}}</td>

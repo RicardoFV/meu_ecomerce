@@ -14,7 +14,7 @@
             <table class="table table-sm table-bordered table-hover">
                 <thead class="text-center text-uppercase">
                     <tr>
-                        <th scope="col" colspan="6" class=""> Cliente : <?php echo e($itens[0]->nomeCliente); ?> </th>
+                        <th scope="col" colspan="6" class=""><strong>Cliente :</strong> <?php echo e($itens[0]->nomeCliente); ?> </th>
                     </tr>
                     <tr>
                         <th scope="col">Imagem</th>
@@ -24,7 +24,7 @@
                         <th scope="col">Ação</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="text-center">
                     <?php if(isset($itens)): ?>
                     <?php $__currentLoopData = $itens; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     

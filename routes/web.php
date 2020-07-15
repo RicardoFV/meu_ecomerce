@@ -49,6 +49,9 @@ Route::get('/produto/listar', 'ProdutoController@listar')->name('produto.listar'
 // rota que fazer a consulta do produto 
 Route::get('/produto/consultar/{id}', 'ProdutoController@consultar')->name('produto.consultar');
 
+// consultar por categoria
+Route::get('/produto/consultar/categoria/{id}', 'ProdutoController@consultarPorCategoria')->name('produto.categoria');
+
 // rota que faz a atualização
 Route::post('/produto/atualizar/{id}', 'ProdutoController@atualizar')->name('produto.atualizar');
 
