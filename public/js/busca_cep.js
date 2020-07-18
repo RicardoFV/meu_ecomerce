@@ -2,8 +2,8 @@
 $(document).ready(function () {
     // no momento que sai do campo 
     $('body').on('blur', '#cep', function () {
-        let cep = $('#cep').val()
-        let msg = ''
+        var cep = $('#cep').val()
+        var msg = ''
         // verifica se o que esta dentro esta vazio, e outras verificações
         if (cep == '') {
             // coloca a mensagem
@@ -51,7 +51,7 @@ $(document).ready(function () {
 
     // campo de mensangem sobre o cep
     function mensagem(mensagem) {
-        let dados
+        var dados
         // cria a div
         dados = '<div class="alert alert-danger alert-dismissible fade show" role="alert">'
         dados += '<strong></strong>'+mensagem

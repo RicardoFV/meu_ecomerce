@@ -12,11 +12,14 @@
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </ul>
             </div>
+            
         </div>
+        
         <div class="col">
+            
             <div class="row">
                 <?php $__currentLoopData = $produtos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $produto): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="col-12 col-md-6 col-lg-4 mb-5">
+                <div class="col-6 col-md-6 col-lg-4 mb-5">
 
                     <div class="text-center mr-2">
                         <img class="card-img-top" src="<?php echo e(url("storage/$produto->imagem")); ?>" width="50px" height="178">
@@ -27,10 +30,13 @@
                             <a href="<?php echo e(route('informacao.venda',$produto->id )); ?>" class="btn btn-secondary btn-block">Comprar</a>
                         </div> 
                     </div>
-              
+                    
                 </div>
+                
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                
             </div>
+            
         </div>
 
     </div>

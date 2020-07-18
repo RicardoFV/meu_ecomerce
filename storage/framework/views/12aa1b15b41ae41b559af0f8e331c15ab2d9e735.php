@@ -78,6 +78,16 @@
                     <h5 class="card-title text-center">Finalizar Compra</h5>
                 </div>
                 <div class="card-body">
+                    
+                    <div class="form-group d-flex">
+                        <label for="calcualr"> <strong>Valor Frete :</strong></label>
+                        <p class="ml-2"> R$ 247 Reais </p>
+                        
+                        <label for="calcualr" class="ml-5"><strong>Prazo de Entrega :</strong></label>
+                        <p class="ml-2"> 10 dias</p>
+                    </div>
+                    
+                    
                     <form method="post" action="<?php echo e(route('gerar_boleto')); ?>">
                         <?php echo csrf_field(); ?>
                         <p class="card-text"> <strong>Total :</strong> R$ <?php echo e(number_format($total,2,',','.' )); ?></p>        

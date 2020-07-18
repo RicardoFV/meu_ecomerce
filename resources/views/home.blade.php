@@ -14,11 +14,14 @@
                     @endforeach
                 </ul>
             </div>
+            
         </div>
+        
         <div class="col">
+            
             <div class="row">
                 @foreach($produtos as $produto)
-                <div class="col-12 col-md-6 col-lg-4 mb-5">
+                <div class="col-6 col-md-6 col-lg-4 mb-5">
 
                     <div class="text-center mr-2">
                         <img class="card-img-top" src="{{url("storage/$produto->imagem") }}" width="50px" height="178">
@@ -29,10 +32,13 @@
                             <a href="{{ route('informacao.venda',$produto->id ) }}" class="btn btn-secondary btn-block">Comprar</a>
                         </div> 
                     </div>
-              
+                    
                 </div>
+                
                 @endforeach
+                
             </div>
+            
         </div>
 
     </div>

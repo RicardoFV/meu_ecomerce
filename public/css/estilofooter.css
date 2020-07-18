@@ -5,13 +5,13 @@
         font-size: 150%;
     }
     .category_block li:hover {
-        background-color: #007bff;
+        background-color: slategray;
     }
     .category_block li:hover a {
         color: #ffffff;
     }
     .category_block li a {
-        color: #343a40;
+        color: #000000;
     }
     .add_to_cart_block .price {
         color: #c01508;
@@ -49,7 +49,7 @@
     }
     footer {
         background: #343a40;
-        padding: 40px;
+        padding: 30px;
     }
     footer a {
         color: #f8f9fa!important
