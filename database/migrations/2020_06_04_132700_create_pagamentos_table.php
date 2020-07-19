@@ -20,6 +20,8 @@ class CreatePagamentosTable extends Migration
             $table->decimal('valor_pago', 10, 2)->default(0);
             $table->date('data_vencimento');
             $table->integer('codigo_boleto');
+            $table->text('valor_frete');
+            $table->integer('prazo_entrega');
             $table->integer('pedido_id')->unsigned();
             $table->foreign('pedido_id')->references('id')->on('pedidos');
             $table->integer('cliente_id')->unsigned();

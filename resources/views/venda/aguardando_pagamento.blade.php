@@ -20,8 +20,10 @@
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Forma Pagamento</th>
+                    <th scope="col">Forma</th>
                     <th scope="col">Valor</th>
+                    <th scope="col">Valor Frete</th>
+                    <th scope="col">Pz. Entrega</th>
                     <th scope="col">DT. Compra</th>
                     <th scope="col">DT. Vencimento</th>
                     <th scope="col">Ação</th>
@@ -34,6 +36,8 @@
                     <td scope="row">{{ $ag->status_pagamento }} </td>
                     <td scope="row">{{ $ag->forma_pagamento }}</td>
                     <td scope="row">{{ $ag->valor_pago }}</td>
+                    <td scope="row">{{ $ag->valor_frete }}</td>
+                    <td scope="row">{{ $ag->prazo_entrega }}</td>
                     <td scope="row">{{ $ag->created_at }}</td>
                     <td scope="row">{{ $ag->data_vencimento }}</td>   
                     <td scope="row"> 

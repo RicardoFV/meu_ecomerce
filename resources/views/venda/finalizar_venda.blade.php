@@ -11,7 +11,7 @@
     <div class="row">
 
         <div class="col-sm-7">
-
+            {{ $frete }}
             @php
             $total =0;
             $idCliente =0;
@@ -41,7 +41,7 @@
                     </tr>
                 </thead>
                 <tbody>
-               
+              
                     @foreach($itens as $item)
                    
                         <tr class="text-center">
@@ -62,7 +62,7 @@
                         </tr>
                  
                     @php
-                    $total += $item->valor;
+                    $total += $item->valor + $frete->cServico->Valor;
                     @endphp
                     @endforeach
 
@@ -81,10 +81,10 @@
                     
                     <div class="form-group d-flex">
                         <label for="calcualr"> <strong>Valor Frete :</strong></label>
-                        <p class="ml-2"> R$ 247 Reais </p>
+                        <p class="ml-2"> {{$frete->cServico->Valor}} </p>
                         
                         <label for="calcualr" class="ml-5"><strong>Prazo de Entrega :</strong></label>
-                        <p class="ml-2"> 10 dias</p>
+                        <p class="ml-2"> {{$frete->cServico->PrazoEntrega}} Dias </p>
                     </div>
                     
                     
@@ -92,6 +92,8 @@
                         @Csrf
                         <p class="card-text"> <strong>Total :</strong> R$ {{ number_format($total,2,',','.' )}}</p>        
                         <input type="hidden" name="idcliente" id="idcliente" value="{{ $idCliente }}">
+                        <input type="hidden" name="valor_frete" id="valor_frete" value="{{$frete->cServico->Valor}}"/>
+                        <input type="hidden" name="prazo_entrega" id="prazo_entrega" value="{{$frete->cServico->PrazoEntrega}}"/>
 
                         <button onclick="MensagemcarregarBoleto()" class="btn btn-success btn-block">Gerar Boleto</button>
                     </form>                  

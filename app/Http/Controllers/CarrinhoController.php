@@ -7,6 +7,8 @@ use App\Pedido;
 use App\PedidoItem;
 use App\Produto;
 use App\Cliente;
+use App\Correios;
+use App\Parceiro;
 
 class CarrinhoController extends Controller {
 
@@ -238,9 +240,24 @@ class CarrinhoController extends Controller {
                 if (sizeof($itens) == 0) {
                     return redirect()->route('home');
                 } else {
+                    $idProduto = null;
+                    $cepCliente = null;
+                    // faz um for para pegar o id do produto
+                    foreach ($itens as $item){
+                        $idProduto = $item->id;
+                        $cepCliente = $item->cep;
+                    }
+                    // consulta o parceiro
+                    $parceiro = Produto::find($idProduto);
+                    // consulta o cep registrado no parceiro (fornecedor)
+                    $cepFornecedor = Parceiro::find($parceiro->parceiro_id);
+                   
+                    // chama a funcçao para calcuclar o frete e prazo
+                    $frete = Correios::pesquisaPrecoPrazo($cepFornecedor->cep, $cepCliente);
                     // retorna pra view
                     return view('venda.finalizar_venda', [
-                        'itens' => $itens
+                        'itens' => $itens,
+                        'frete' => $frete
                     ]);
                 }
             } else {

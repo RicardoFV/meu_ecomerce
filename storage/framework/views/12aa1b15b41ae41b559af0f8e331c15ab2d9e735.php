@@ -11,6 +11,7 @@
     <div class="row">
 
         <div class="col-sm-7">
+            <?php echo e($frete); ?>
 
             <?php
             $total =0;
@@ -41,7 +42,7 @@
                     </tr>
                 </thead>
                 <tbody>
-               
+              
                     <?php $__currentLoopData = $itens; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                    
                         <tr class="text-center">
@@ -62,7 +63,7 @@
                         </tr>
                  
                     <?php
-                    $total += $item->valor;
+                    $total += $item->valor + $frete->cServico->Valor;
                     ?>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
@@ -81,10 +82,10 @@
                     
                     <div class="form-group d-flex">
                         <label for="calcualr"> <strong>Valor Frete :</strong></label>
-                        <p class="ml-2"> R$ 247 Reais </p>
+                        <p class="ml-2"> <?php echo e($frete->cServico->Valor); ?> </p>
                         
                         <label for="calcualr" class="ml-5"><strong>Prazo de Entrega :</strong></label>
-                        <p class="ml-2"> 10 dias</p>
+                        <p class="ml-2"> <?php echo e($frete->cServico->PrazoEntrega); ?> Dias </p>
                     </div>
                     
                     
@@ -92,6 +93,8 @@
                         <?php echo csrf_field(); ?>
                         <p class="card-text"> <strong>Total :</strong> R$ <?php echo e(number_format($total,2,',','.' )); ?></p>        
                         <input type="hidden" name="idcliente" id="idcliente" value="<?php echo e($idCliente); ?>">
+                        <input type="hidden" name="valor_frete" id="valor_frete" value="<?php echo e($frete->cServico->Valor); ?>"/>
+                        <input type="hidden" name="prazo_entrega" id="prazo_entrega" value="<?php echo e($frete->cServico->PrazoEntrega); ?>"/>
 
                         <button onclick="MensagemcarregarBoleto()" class="btn btn-success btn-block">Gerar Boleto</button>
                     </form>                  

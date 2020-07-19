@@ -10,8 +10,15 @@ class Pagamento extends Model {
     //nome da tabela
     protected $table = 'pagamentos';
     protected $fillable = [
-        'status_pagamento', 'forma_pagamento', 'valor_pago', 'data_vencimento',
-        'pedido_id', 'cliente_id', 'codigo_boleto'
+        'status_pagamento', 
+        'forma_pagamento', 
+        'valor_pago', 
+        'data_vencimento',
+        'pedido_id', 
+        'cliente_id', 
+        'valor_frete',
+        'prazo_entrega',
+        'codigo_boleto'
     ];
 
     public static function cadastrarPagamento(array $pagamento) {

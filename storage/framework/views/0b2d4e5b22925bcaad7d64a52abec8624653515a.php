@@ -14,7 +14,7 @@
             <table class="table table-sm table-bordered table-hover">
                 <thead class="text-center text-uppercase">
                     <tr>
-                        <th scope="col" colspan="6" class=""><strong>Cliente :</strong> <?php echo e($itens[0]->nomeCliente); ?> </th>
+                        <th scope="col" colspan="6" class="">Cliente : <?php echo e($itens[0]->nomeCliente); ?> </th>
                     </tr>
                     <tr>
                         <th scope="col">Imagem</th>

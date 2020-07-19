@@ -27,10 +27,16 @@ class PagamentoMercadoPagoController extends Controller {
         $idCliente = null;
         // pedsdioId
         $pedidoId = null;
+        // valor frete
+        $valor_frete = '';
+        // prazo entrega
+        $prazo_entrega = null;
         // se tiver clienteId
         if ($request->post('idcliente')) {
             //recebe o id do cliente 
             $idCliente = $request->post('idcliente');
+            $valor_frete = $request->post('valor_frete');
+            $prazo_entrega = $request->post('prazo_entrega');
             //consulta o pedido pelo idcliente
             $itens = PedidoItem::listarItensPorCliente($idCliente);
         }
@@ -122,7 +128,9 @@ class PagamentoMercadoPagoController extends Controller {
                 'data_vencimento' => $dataVencimento,
                 'pedido_id' => $pedido_id,
                 'cliente_id' => $cliente['idCliente'],
-                'codigo_boleto' => $payment->id
+                'codigo_boleto' => $payment->id,
+                'valor_frete' => $valor_frete,
+                'prazo_entrega' => $prazo_entrega 
             ];
             // salva o pagamento 
             Pagamento::cadastrarPagamento($pagamento);
