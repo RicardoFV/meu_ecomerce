@@ -12,15 +12,15 @@ class Correios extends Model {
          // atributos
     $Peso = 0.900;
     $Formato = 1;
-    $Comprimento = 30;
+    $Comprimento = 20;
     $Altura = 30;
-    $Largura = 30;
+    $Largura = 20;
     $MaoPropria ='N';
     $ValorDeclarado = 0;
     $AvisoRecebimento = 'N';
     $Codigo = 40010;
     $Diametro = 0;
-    $Retorno;    
+    $Retorno = '';    
         
         $Url="http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?nCdEmpresa=&sDsSenha=&sCepOrigem={$CepOrigem}&sCepDestino={$CepDestino}&nVlPeso={$Peso}&nCdFormato={$Formato}&nVlComprimento={$Comprimento}&nVlAltura={$Altura}&nVlLargura={$Largura}&sCdMaoPropria={$MaoPropria}&nVlValorDeclarado={$ValorDeclarado}&sCdAvisoRecebimento={$AvisoRecebimento}&nCdServico={$Codigo}&nVlDiametro={$Diametro}&StrRetorno=xml&nIndicaCalculo=3";
         

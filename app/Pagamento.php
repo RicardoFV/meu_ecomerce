@@ -69,5 +69,9 @@ class Pagamento extends Model {
     public static function formatarData($data) {
         return date("d-m-Y H:i:s", strtotime($data));
     }
+    // formatar a data para salvar no banco 
+    public static function formatarDataBanco($data) {
+        return date("Y-m-d H:i:s", strtotime($data));
+    }
 
 }

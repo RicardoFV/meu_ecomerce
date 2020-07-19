@@ -250,10 +250,18 @@ class CarrinhoController extends Controller {
                     // consulta o parceiro
                     $parceiro = Produto::find($idProduto);
                     // consulta o cep registrado no parceiro (fornecedor)
-                    $cepFornecedor = Parceiro::find($parceiro->parceiro_id);
-                   
+                    $cepFornecedor = Parceiro::find($parceiro->parceiro_id);            
                     // chama a funcçao para calcuclar o frete e prazo
                     $frete = Correios::pesquisaPrecoPrazo($cepFornecedor->cep, $cepCliente);
+                    // formata o campo valor
+                    $formatarValor = str_replace(',', '.', $frete->cServico->Valor);
+                    // passa o novo valor 
+                    $frete->cServico->Valor = $formatarValor;
+                    // monta a data 
+                    $dias = $frete->cServico->PrazoEntrega;
+                    $data_entrega = date('d-m-Y', strtotime("+ $dias days"));
+                    // passa o novo valor em formato de data
+                    $frete->cServico->PrazoEntrega = $data_entrega;
                     // retorna pra view
                     return view('venda.finalizar_venda', [
                         'itens' => $itens,

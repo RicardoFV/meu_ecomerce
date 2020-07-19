@@ -58,8 +58,8 @@ class PagamentoMercadoPagoController extends Controller {
         // carrega as informações 
         foreach ($itens as $iten) {
 
-            $valor_final += $iten->valor;
-            $nome_produto .= $iten->produtoNome . ' | ';
+            $valor_final += $iten->valor + $valor_frete;
+            $nome_produto = 'Produtos Diversos';
             $status = $iten->status;
             $pedido_id = $iten->id;
             // caso já tenha dados , não ira preencher
@@ -120,6 +120,8 @@ class PagamentoMercadoPagoController extends Controller {
             // atualiza o pedido 
             Pedido::atualizarPedido($pedido_id, $status);
             // captura os dados no pagamento
+            // formata a data para salvar no banco 
+            $nova_data_prazo = Pagamento::formatarDataBanco($prazo_entrega);
             // cria o array para salvar no banco
             $pagamento = [
                 'status_pagamento' => 'pendente',
@@ -130,7 +132,7 @@ class PagamentoMercadoPagoController extends Controller {
                 'cliente_id' => $cliente['idCliente'],
                 'codigo_boleto' => $payment->id,
                 'valor_frete' => $valor_frete,
-                'prazo_entrega' => $prazo_entrega 
+                'prazo_entrega' => $nova_data_prazo 
             ];
             // salva o pagamento 
             Pagamento::cadastrarPagamento($pagamento);

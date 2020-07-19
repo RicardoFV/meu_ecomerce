@@ -83,8 +83,8 @@
                         <label for="calcualr"> <strong>Valor Frete :</strong></label>
                         <p class="ml-2"> {{$frete->cServico->Valor}} </p>
                         
-                        <label for="calcualr" class="ml-5"><strong>Prazo de Entrega :</strong></label>
-                        <p class="ml-2"> {{$frete->cServico->PrazoEntrega}} Dias </p>
+                        <label for="calcualr" class="ml-5"><strong>Previsão de Entrega :</strong></label>
+                        <p class="ml-2"> {{$frete->cServico->PrazoEntrega}} </p>
                     </div>
                     
                     
