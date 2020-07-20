@@ -14,9 +14,9 @@
                     @endforeach
                 </ul>
             </div>
-            
+
         </div>
-        
+
         <div class="col">
             
             <div class="row">
@@ -27,18 +27,18 @@
                         <img class="card-img-top" src="{{url("storage/$produto->imagem") }}" width="50px" height="178">
                         <h5 class="mt-3"> R$ {{ number_format($produto->preco,2, ',','.') }}</h5>
                         <h3 class="mt-0">{{$produto->nome}}</h3>
-                        
+
                         <div class="col mt-1">
                             <a href="{{ route('informacao.venda',$produto->id ) }}" class="btn btn-secondary btn-block">Comprar</a>
                         </div> 
                     </div>
-                    
+
                 </div>
-                
+
                 @endforeach
-                
+
             </div>
-            
+
         </div>
 
     </div>

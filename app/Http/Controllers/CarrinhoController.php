@@ -232,6 +232,7 @@ class CarrinhoController extends Controller {
         if (auth()->check()) {
             // verifico se tem cadastro de cliente
             $cliente = Cliente::consultarPorUsuario(auth()->user()->id);
+
             // se existir cliente
             if (isset($cliente)) {
                 // pesquisa os  itens no carrinho
@@ -243,14 +244,16 @@ class CarrinhoController extends Controller {
                     $idProduto = null;
                     $cepCliente = null;
                     // faz um for para pegar o id do produto
-                    foreach ($itens as $item){
-                        $idProduto = $item->id;
+                    foreach ($itens as $item) {
+                        $idProduto = $item->produto_id;
                         $cepCliente = $item->cep;
+                        
                     }
                     // consulta o parceiro
                     $parceiro = Produto::find($idProduto);
+                    
                     // consulta o cep registrado no parceiro (fornecedor)
-                    $cepFornecedor = Parceiro::find($parceiro->parceiro_id);            
+                    $cepFornecedor = Parceiro::find($parceiro->parceiro_id);
                     // chama a funcçao para calcuclar o frete e prazo
                     $frete = Correios::pesquisaPrecoPrazo($cepFornecedor->cep, $cepCliente);
                     // formata o campo valor
@@ -294,7 +297,7 @@ class CarrinhoController extends Controller {
     public function pendentes() {
         // verifico se tem cadastro de cliente
         $cliente = Cliente::consultarPorUsuario(auth()->user()->id);
-        if(empty($cliente)){
+        if (empty($cliente)) {
             // se caso não exista clientes 
             return redirect()->route('home');
         }

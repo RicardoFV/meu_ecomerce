@@ -31,6 +31,7 @@ class PagamentoMercadoPagoController extends Controller {
         $valor_frete = '';
         // prazo entrega
         $prazo_entrega = null;
+        $dados = null;
         // se tiver clienteId
         if ($request->post('idcliente')) {
             //recebe o id do cliente 
@@ -49,6 +50,8 @@ class PagamentoMercadoPagoController extends Controller {
             // lista os pagamentos 
             $dados = Pagamento::listarPagamento($pedidoId);
         }
+        
+        //print_r($dados);        dd();
         // cria as variaveis que serão colocados no boleto     
         $valor_final = null;
         $nome_produto = '';
@@ -57,8 +60,12 @@ class PagamentoMercadoPagoController extends Controller {
         $pedido_id = null;
         // carrega as informações 
         foreach ($itens as $iten) {
-
-            $valor_final += $iten->valor + $valor_frete;
+            if($valor_frete != null){
+                $valor_final += $iten->valor + $valor_frete;
+            }else{
+                $valor_final = $dados[0]->valor_pago;
+            }
+            
             $nome_produto = 'Produtos Diversos';
             $status = $iten->status;
             $pedido_id = $iten->id;
@@ -156,9 +163,14 @@ class PagamentoMercadoPagoController extends Controller {
                 $dataCriacaoSemFormatar = $valor->created_at;
                 // formata a data
                 $dataCriacaoFormatada = Pagamento::formatarData($dataCriacaoSemFormatar);
+                // colocando  a data do prazo de entrega
+                $prazo_entrega = $valor->prazo_entrega;
+                // converte o prazo de entrega
+                $novo_prazo_entrega = Pagamento::formatarData($prazo_entrega);
                 // faz a variavel receber o novo valor 
                 $aguardando[$chave]->data_vencimento = $dataFormatadaVencimento;
                 $aguardando[$chave]->created_at = $dataCriacaoFormatada;
+                $aguardando[$chave]->prazo_entrega = $novo_prazo_entrega;
             }
             return view('venda.aguardando_pagamento', compact('aguardando'));
         }
